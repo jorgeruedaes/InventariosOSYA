@@ -69,34 +69,27 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                             <table id="tablajugadores" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Codigo</th>
+                                        <th>Identificación</th>
                                         <th>Nombre</th>
-                                        <th>Proveedor</th>
-                                        <th width="23%">Opciones</th>
+                                        <th>Tipo</th>
+                                        <th width="15%">Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
                                     <?php
-                                    $consulta = mysql_query("SELECT * FROM tb_productos WHERE estado='Activo' ");
+                                    $consulta = mysql_query("SELECT * FROM tb_usuarios WHERE estado='Activo' and (tipo='Proveedor' or tipo='Cliente')");
                                     while ($listajugadores = mysql_fetch_array($consulta)) {
-                                        $producto = $listajugadores["id_producto"];
+                                        $usuario = $listajugadores["cc"];
                                         ?>
                                         <tr class="default caja">
-                                            <th scope="row"><?php echo $listajugadores["id_producto"] ?></th> 
+                                            <th scope="row"><?php echo $listajugadores["cc"] ?></th> 
                                             <td><?php echo $listajugadores["nombre"]; ?></td>
+                                            <td> <?php echo $listajugadores["tipo"]; ?> </td>
                                             <td>
-
-                                                <?php
-                                                $query = mysql_fetch_array(mysql_query("SELECT tb_usuarios.nombre as nombre FROM `tb_productos`,tb_usuarios Where id_producto=$producto and proveedor=cc"));
-                                                echo $query['nombre'];
-                                                ?>                                                
-
-                                            </td>
-                                            <td>
-                                                <button id="editar" type="button" class="btn btn-success editar" data-id="<?php echo $listajugadores["id_producto"] ?>" 
-                                                        data-toggle="modal" >Editar</button>
-                                                <button class="btn btn-default eliminar" data-id="<?php echo $listajugadores["id_producto"] ?>">Eliminar</button>
+<!--                                                <button id="editar" type="button" class="btn btn-success editar" data-id="<?php echo $listajugadores["cc"] ?>" 
+                                                        data-toggle="modal" >Editar</button>-->
+                                                <button class="btn btn-default eliminar" data-id="<?php echo $listajugadores["cc"] ?>">Eliminar</button>
                                             </td>
 
                                         </tr>
@@ -200,9 +193,9 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
 
             <script>
                 $(document).ready(function () {
-                    editarProductos.inicio();
+                    editarClientes.inicio();
                 });
-                var editarProductos = {
+                var editarClientes = {
                     inicio: function () {
                         $('#tablajugadores').DataTable({
                             "language": {
@@ -224,14 +217,14 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
 
                         });
                         $('.dataTables_paginate').off('click').on('click', function () {
-                            editarProductos.recargarEventos();
+                            editarClientes.recargarEventos();
                         });
-                        editarProductos.recargarEventos();
+                        editarClientes.recargarEventos();
                     },
                     recargarEventos: function () {
-                        editarProductos.EventoConsultarDatos();
-                        editarProductos.EventoEnviarDatos();
-                        editarProductos.EventoEliminarProducto();
+//                        editarClientes.EventoConsultarDatos();
+//                        editarClientes.EventoEnviarDatos();
+                        editarClientes.EventoEliminarUsuario();
                     }, EventoConsultarDatos: function () {
                         $('.editar').off('click').on('click', function () {
                             var id = $(this).data('id');
@@ -260,7 +253,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                     },
                     EventoEnviarDatos: function () {
                         $('.guardar').off('click').on('click', function () {
-                            if (editarProductos.ValidarInformacion()) {
+                            if (editarClientes.ValidarInformacion()) {
                                 $.ajax({
                                     url: 'PeticionesProductos.php',
                                     type: 'POST',
@@ -321,11 +314,11 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                             return false;
                         }
                     },
-                    EventoEliminarProducto: function(){
+                    EventoEliminarUsuario: function(){
                            $('.eliminar').off('click').on('click', function () {
                                 var id = $(this).data('id');
                                   swal({title: "",
-                                                text: "¿El Producto se eliminara esta seguro?",
+                                                text: "¿El usuario se eliminara esta seguro?",
                                                 type: "warning",
                                                 showCancelButton: true,
                                                 confirmButtonColor: "rgb(174, 222, 244)",
@@ -334,17 +327,17 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                             }, function (isConfirm) {
                                                 if (isConfirm) {
                                                      $.ajax({
-                                    url: 'PeticionesProductos.php',
+                                    url: 'PeticionesUsuarios.php',
                                     type: 'POST',
                                     data: {
-                                        Bandera: "EliminarProducto",
+                                        Bandera: "EliminarUsuario",
                                         id: id
                                     },
                                     success: function (resp) {
                                         var resp = $.parseJSON(resp);
                                         if (resp.Salida === true && resp.Mensaje === true) {
                                             swal({title: "",
-                                                text: "El producto se ha eliminado exitosamente!",
+                                                text: "El usuario se ha eliminado exitosamente!",
                                                 type: "success",
                                                 showCancelButton: false,
                                                 confirmButtonColor: "rgb(174, 222, 244)",
@@ -355,7 +348,6 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     window.location.reload();
                                                 }
                                             });
-                                            $('.modal').modal('hide');
                                         } else {
                                             swal("", "Ha habido un error,intenta nuevamente", "error");
                                         }

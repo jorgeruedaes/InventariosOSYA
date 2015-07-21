@@ -39,8 +39,33 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
           $estado=$query1['estado'];
           $valor=$query1['valor'];
         if ($query) {
-                   $resultado.='"producto":{"nombre": "' . $nombre . ' ","descripcion": "' . $descripcion . ' ","estado": "' . $estado . ' ","valor": "'.$valor.'"}';
-            $resultado.='",Mensaje":true';
+                   $resultado.='"producto":{"nombre": "' . $nombre . '","descripcion": "' . $descripcion . '","estado": "' . $estado . '","valor": "'.$valor.'"}';
+            $resultado.=',"Mensaje":true';
+        } else {
+            $resultado.='"Mensaje":false';
+        }
+    }
+     else if ($Bandera === "EditarProducto") {
+        $id = $_POST['id'];
+        $nombre= $_POST['nombre'];
+         $descripcion= $_POST['descripcion'];
+          $estado= $_POST['estado'];
+          $valor= $_POST['valor'];
+          $query=  mysql_query("UPDATE `tb_productos` SET `nombre`='$nombre',`descripcion`='$descripcion',`valor`='$valor',`estado`='$estado' "
+                  . "WHERE `id_producto`='$id'");
+        if ($query) {
+            $resultado.='"Mensaje":true';
+        } else {
+            $resultado.='"Mensaje":false';
+        }
+    }
+    else if ($Bandera === "EliminarProducto") {
+        $id = $_POST['id'];
+
+          $query=  mysql_query("UPDATE `tb_productos` SET `estado`='Inactivo' "
+                  . "WHERE `id_producto`='$id'");
+        if ($query) {
+            $resultado.='"Mensaje":true';
         } else {
             $resultado.='"Mensaje":false';
         }

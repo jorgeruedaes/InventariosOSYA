@@ -28,7 +28,16 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         } else {
             $resultado.='"Mensaje":false';
         }
-    }
+    } else if ($Bandera === "EliminarUsuario") {
+        $id = $_POST['id'];
+        $query = mysql_query("UPDATE `tb_usuarios` SET`estado`='Inactivo' WHERE `cc`=$id");
+if($query){
+            $resultado.='"Mensaje":true';
+        } else {
+            $resultado.='"Mensaje":false';
+        }
+}    
+    
 } else {
     $resultado = '{"Salida":false,';
 }
