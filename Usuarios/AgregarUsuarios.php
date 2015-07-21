@@ -72,7 +72,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                             </div>
                                             <div class="col-md-4 "> 
                                                 <label>Nit ó Cedula:</label>
-                                                <input type="text" class="form-control cc" name="codigobarras">
+                                                <input type="number" class="form-control cc" name="codigobarras">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -82,7 +82,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4 col-md-offset-2"> 
-                                                <label>*Email:</label>
+                                                <label>Email:</label>
                                                 <input type="email" class="form-control email" name="valor" required>
 
                                             </div>
@@ -184,7 +184,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                             }
                                                                         });
                                                                     } else {
-                                                                        swal("", "Ha habido un error,intenta nuevamente.", "error");
+                                                                        swal("", "Ha habido un error, intenta nuevamente.", "error");
                                                                     }
                                                                 }
                                                             });
@@ -208,7 +208,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                 if (resp.Salida === true && resp.Mensaje === true) {
 
                                                                 } else {
-                                                                    swal("Importante!", "El codigo una cedula o un NIT  ya existe,intenta nuevamente.", "error");
+                                                                    swal("Importante!", "El código, la cédula o el NIT  ya existe, intenta nuevamente.", "error");
                                                                 }
                                                             }
                                                         });
@@ -222,13 +222,13 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                     return true;
                                                                 } else {
                                                                     $('.tipo').focus();
-                                                                    swal("", "Debes seleccionar un tipo de usuario,intenta nuevamente.", "error");
+                                                                    swal("", "Debes seleccionar un tipo de usuario, intenta nuevamente.", "error");
                                                                     return false;
                                                                 }
                                                             
                                                         } else {
                                                             $('.cc').focus();
-                                                            swal("", "La cedula o el NIT ingresado no son validos,intenta nuevamente.", "error");
+                                                            swal("", "La cédula o el NIT no son válidos, intenta nuevamente.", "error");
                                                             return false;
                                                         }
                                                     } else {
