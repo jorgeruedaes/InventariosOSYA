@@ -57,64 +57,132 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
             ?>
 
             <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2"><br></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2"><br></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            <table id="tablajugadores" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>Codigo</th>
-                                        <th>Nombre</th>
-                                        <th>Proveedor</th>
-                                        <th width="23%">Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                <div class="col-md-8 col-md-offset-2">
+                    <ul class="nav nav-tabs" role="tablist" id="principal">
+                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Productos Activos</a></li>
+                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Productos Inactivos</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="home">
 
-                                    <?php
-                                    $consulta = mysql_query("SELECT * FROM tb_productos WHERE estado='Activo' ");
-                                    while ($listajugadores = mysql_fetch_array($consulta)) {
-                                        $producto = $listajugadores["id_producto"];
-                                        ?>
-                                        <tr class="default caja">
-                                            <th scope="row"><?php echo $listajugadores["id_producto"] ?></th> 
-                                            <td><?php echo $listajugadores["nombre"]; ?></td>
-                                            <td>
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2"><br></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2"><br></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table id="tablajugadores" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Código</th>
+                                                <th>Nombre</th>
+                                                <th>Proveedor</th>
+                                                <th >Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <?php
+                                            $consulta = mysql_query("SELECT * FROM tb_productos WHERE estado='Activo' ");
+                                            while ($listajugadores = mysql_fetch_array($consulta)) {
+                                                $producto = $listajugadores["id_producto"];
+                                                ?>
+                                                <tr class="default caja">
+                                                    <th scope="row"><?php echo $listajugadores["id_producto"] ?></th> 
+                                                    <td><?php echo $listajugadores["nombre"]; ?></td>
+                                                    <td>
+
+                                                        <?php
+                                                        $query = mysql_fetch_array(mysql_query("SELECT tb_usuarios.nombre as nombre FROM `tb_productos`,tb_usuarios Where id_producto=$producto and proveedor=cc"));
+                                                        echo $query['nombre'];
+                                                        ?>                                                
+
+                                                    </td>
+                                                    <td>
+                                                        <button id="editar" type="button" class="btn btn-success editar" data-id="<?php echo $listajugadores["id_producto"] ?>" 
+                                                                data-toggle="modal" >Editar</button>
+                                                        <button class="btn btn-default eliminar" data-id="<?php echo $listajugadores["id_producto"] ?>">Eliminar</button>
+                                                    </td>
+
+                                                </tr>
 
                                                 <?php
-                                                $query = mysql_fetch_array(mysql_query("SELECT tb_usuarios.nombre as nombre FROM `tb_productos`,tb_usuarios Where id_producto=$producto and proveedor=cc"));
-                                                echo $query['nombre'];
-                                                ?>                                                
+                                            }
+                                            ?>
 
-                                            </td>
-                                            <td>
-                                                <button id="editar" type="button" class="btn btn-success editar" data-id="<?php echo $listajugadores["id_producto"] ?>" 
-                                                        data-toggle="modal" >Editar</button>
-                                                <button class="btn btn-default eliminar" data-id="<?php echo $listajugadores["id_producto"] ?>">Eliminar</button>
-                                            </td>
+                                        </tbody>
+                                    </table>
 
-                                        </tr>
+                                </div></div>
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2"><br></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2"><br></div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="profile">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2"><br></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2"><br></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table id="tablajugadores1" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Código</th>
+                                                <th>Nombre</th>
+                                                <th>Proveedor</th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                                        <?php
-                                    }
-                                    ?>
+                                            <?php
+                                            $consulta = mysql_query("SELECT * FROM tb_productos WHERE estado='Inactivo' ");
+                                            while ($listajugadores = mysql_fetch_array($consulta)) {
+                                                $producto = $listajugadores["id_producto"];
+                                                ?>
+                                                <tr class="default caja">
+                                                    <th scope="row"><?php echo $listajugadores["id_producto"] ?></th> 
+                                                    <td><?php echo $listajugadores["nombre"]; ?></td>
+                                                    <td>
 
-                                </tbody>
-                            </table>
+                                                        <?php
+                                                        $query = mysql_fetch_array(mysql_query("SELECT tb_usuarios.nombre as nombre FROM `tb_productos`,tb_usuarios Where id_producto=$producto and proveedor=cc"));
+                                                        echo $query['nombre'];
+                                                        ?>                                                
 
-                        </div></div>
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2"><br></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2"><br></div>
-                    </div>
+                                                    </td>
+                                                    <td>
+                                                        <button id="editar" type="button" class="btn btn-success editar" data-id="<?php echo $listajugadores["id_producto"] ?>" 
+                                                                data-toggle="modal" >Editar</button>
+                                                        <button class="btn btn-default eliminar" data-id="<?php echo $listajugadores["id_producto"] ?>">Eliminar</button>
+                                                    </td>
+
+                                                </tr>
+
+                                                <?php
+                                            }
+                                            ?>
+
+                                        </tbody>
+                                    </table>
+
+                                </div></div>
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2"><br></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2"><br></div>
+                            </div>
+                        </div>       
+                    </div>       
                 </div></div>
 
 
@@ -141,8 +209,9 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                 <input type="text" class="form-control nombre" name="nombre1" required  id="nombre1">
                                             </div>
                                             <div class="col-md-5 "> 
-                                                <label>Descripción:</label>
-                                                <textarea class="form-control descripcion" rows="3" style="resize: inherit"></textarea>
+                                                <label>Valor Compra:</label>
+                                                <input type="text" class="form-control valor" name="apellido1" required  id="apellido1" >
+
                                             </div>
 
                                         </div>
@@ -152,11 +221,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-5 col-md-offset-1"> 
-                                                <label>Valor Compra:</label>
-                                                <input type="text" class="form-control valor" name="apellido1" required  id="apellido1" >
-                                            </div>
-                                            <div class="col-md-5 "> 
+                                            <div class="col-md-5 col-md-offset-1">
                                                 <label>Estado:</label>
                                                 <select class="form-control estado" style=""  name="estado">
                                                     <option value=""></option>
@@ -164,6 +229,11 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     <option value="Inactivo">Inactivo</option>
 
                                                 </select>
+
+                                            </div>
+                                            <div class="col-md-5 "> 
+                                                <label>Descripción:</label>
+                                                <textarea class="form-control descripcion" rows="3" style="resize: inherit"></textarea>
 
                                             </div>
 
@@ -205,6 +275,25 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                 var editarProductos = {
                     inicio: function () {
                         $('#tablajugadores').DataTable({
+                            "language": {
+                                "lengthMenu": "Mostrar _MENU_",
+                                "search": "Buscar:",
+                                "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                                "loadingRecords": "Cargando...",
+                                "processing": "Procesando...",
+                                "zeroRecords": "No se encontraron resultados",
+                                "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
+                                "infoFiltered": "(filtrado de _MAX_ entradas)",
+                                "paginate": {
+                                    "first": "Primera",
+                                    "last": "Última",
+                                    "next": "Siguiente",
+                                    "previous": "Anterior"
+                                }
+                            }
+
+                        });
+                        $('#tablajugadores1').DataTable({
                             "language": {
                                 "lengthMenu": "Mostrar _MENU_",
                                 "search": "Buscar:",
@@ -302,13 +391,13 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                     ValidarInformacion: function () {
                         if (/\w/gi.test($('.nombre').val())) {
                             if (/[0-9]{1,9}(\.[0-9]{0,10})?$/.test($('.valor').val()) && $('.valor').val() > 0) {
-                                     if (/\w/gi.test($('.estado').val())) {
-                                         return true;
-                                     }else{
-                                           $('.estado').focus();
-                                swal("", "Debes selecionar un estado valido,intenta nuevamente.", "error");
-                                return false;
-                                     }
+                                if (/\w/gi.test($('.estado').val())) {
+                                    return true;
+                                } else {
+                                    $('.estado').focus();
+                                    swal("", "Debes selecionar un estado valido,intenta nuevamente.", "error");
+                                    return false;
+                                }
                             } else {
                                 $('.valor').focus();
                                 swal("", "El valor de compra no es valido,intenta nuevamente.", "error");
@@ -321,51 +410,51 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                             return false;
                         }
                     },
-                    EventoEliminarProducto: function(){
-                           $('.eliminar').off('click').on('click', function () {
-                                var id = $(this).data('id');
-                                  swal({title: "",
-                                                text: "¿El Producto se eliminara esta seguro?",
-                                                type: "warning",
-                                                showCancelButton: true,
-                                                confirmButtonColor: "rgb(174, 222, 244)",
-                                                confirmButtonText: "Ok",
-                                                closeOnConfirm: false
-                                            }, function (isConfirm) {
-                                                if (isConfirm) {
-                                                     $.ajax({
-                                    url: 'PeticionesProductos.php',
-                                    type: 'POST',
-                                    data: {
-                                        Bandera: "EliminarProducto",
-                                        id: id
-                                    },
-                                    success: function (resp) {
-                                        var resp = $.parseJSON(resp);
-                                        if (resp.Salida === true && resp.Mensaje === true) {
-                                            swal({title: "",
-                                                text: "El producto se ha eliminado exitosamente!",
-                                                type: "success",
-                                                showCancelButton: false,
-                                                confirmButtonColor: "rgb(174, 222, 244)",
-                                                confirmButtonText: "Ok",
-                                                closeOnConfirm: false
-                                            }, function (isConfirm) {
-                                                if (isConfirm) {
-                                                    window.location.reload();
-                                                }
-                                            });
-                                            $('.modal').modal('hide');
-                                        } else {
-                                            swal("", "Ha habido un error,intenta nuevamente", "error");
+                    EventoEliminarProducto: function () {
+                        $('.eliminar').off('click').on('click', function () {
+                            var id = $(this).data('id');
+                            swal({title: "",
+                                text: "¿El producto se eliminará, está seguro?",
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "rgb(174, 222, 244)",
+                                confirmButtonText: "Ok",
+                                closeOnConfirm: false
+                            }, function (isConfirm) {
+                                if (isConfirm) {
+                                    $.ajax({
+                                        url: 'PeticionesProductos.php',
+                                        type: 'POST',
+                                        data: {
+                                            Bandera: "EliminarProducto",
+                                            id: id
+                                        },
+                                        success: function (resp) {
+                                            var resp = $.parseJSON(resp);
+                                            if (resp.Salida === true && resp.Mensaje === true) {
+                                                swal({title: "",
+                                                    text: "El producto se ha eliminado exitosamente!",
+                                                    type: "success",
+                                                    showCancelButton: false,
+                                                    confirmButtonColor: "rgb(174, 222, 244)",
+                                                    confirmButtonText: "Ok",
+                                                    closeOnConfirm: false
+                                                }, function (isConfirm) {
+                                                    if (isConfirm) {
+                                                        window.location.reload();
+                                                    }
+                                                });
+                                                $('.modal').modal('hide');
+                                            } else {
+                                                swal("", "Ha habido un error,intenta nuevamente", "error");
+                                            }
                                         }
-                                    }
 
-                                });
-                                                }
-                                            });
-                                 
-                           });
+                                    });
+                                }
+                            });
+
+                        });
                     }
                 };
 

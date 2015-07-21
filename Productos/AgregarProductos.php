@@ -72,7 +72,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                 <input type="text" class="form-control nombre" name="nombre1" required>
                                             </div>
                                             <div class="col-md-4 "> 
-                                                <label>Codigo de Barras:</label>
+                                                <label>Código de Barras:</label>
                                                 <input type="number" class="form-control codigobarras" name="codigobarras">
                                             </div>
                                         </div>
@@ -88,18 +88,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
 
                                             </div>
                                             <div class="col-md-4 "> 
-                                                <label>Descripción:</label>
-                                                <textarea class="form-control descripcion" rows="3" style="  resize: inherit;"></textarea>
-
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-8 col-md-offset-2">
-                                                <br>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 col-md-offset-2"> 
+                                              
                                                 <label>Proveedor:</label>
                                                 <select class="form-control proveedor" required="required" name="proveedor">
                                                     <option value="" selected></option>
@@ -113,6 +102,18 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     }
                                                     ?>
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8 col-md-offset-2">
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 col-md-offset-2"> 
+                                                  <label>Descripción:</label>
+                                                <textarea class="form-control descripcion" rows="3" style="  resize: inherit;"></textarea>
+
                                             </div>
                                         </div>
                                         <div class="row">
@@ -141,7 +142,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                         <div class="row">
                                             <div class="col-md-8 col-md-offset-2 text-right"> 
                                                 <button type="reset" class="btn btn-default limpiar">Limpiar</button>
-                                                <button name="enviar" class="btn btn-success guardar">Guardar</button>
+                                                <button name="enviar" class="btn btn-success guardar">Crear</button>
                                             </div>
                                         </div>
 
@@ -235,22 +236,22 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                     return true;
                                                                 } else {
                                                                     $('.proveedor').focus();
-                                                                    swal("", "Debes seleccionar un proveedor,intenta nuevamente.", "error");
+                                                                    swal("", "Debes seleccionar un proveedor, intenta nuevamente.", "error");
                                                                     return false;
                                                                 }
                                                             } else {
                                                                 $('.valor').focus();
-                                                                swal("", "El valor de compra no es valido,intenta nuevamente.", "error");
+                                                                swal("", "El valor de compra no es válido, intenta nuevamente.", "error");
                                                                 return false;
                                                             }
                                                         } else {
                                                             $('.codigobarras').focus();
-                                                            swal("", "El codigo de barras no es valido,intenta nuevamente.", "error");
+                                                            swal("", "El código de barras no es válido, intenta nuevamente.", "error");
                                                             return false;
                                                         }
                                                     } else {
                                                         $('.nombre').focus();
-                                                        swal("", "El producto debe tener un nombre.", "error");
+                                                        swal("", "Debe digitar un nombre para el producto.", "error");
                                                         return false;
                                                     }
                                                 },
