@@ -61,15 +61,15 @@
                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Productos <span class="caret"></span></a>
                                             <ul class="dropdown-menu" role="menu">
-                                                <li><a href="Jugadores/AgregarJugadores.php">Nuevo </a></li>
-                                                <li><a href="Jugadores/ModificarJugadores.php">Editar</a></li>
+                                                <li><a href="Productos/AgregarProductos.php">Nuevo Producto</a></li>
+                                                <li><a href="Productos/ModificarProductos.php">Editar Productos</a></li>
                                                 <!--<li><a href="Jugadores/Profesion.php">Nueva profesión</a></li>-->
                                             </ul>
                                         </li>
                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Consultas <span class="caret"></span></a>
                                             <ul class="dropdown-menu" role="menu">
-                                                <li><a href="Equipos/AgregarEquipos.php">Inventario</a></li>
+                                                <li><a href="Consultas/Inventario.php">Inventario</a></li>
                                                 <!--<li><a href="Equipos/ModificarEquipos.php"></a></li>-->
                                             </ul>
                                         </li>
@@ -79,14 +79,14 @@
                                                 <li class="dropdown-submenu">
                                                     <a tabindex="-1" href="#">Entradas</a>
                                                     <ul class="dropdown-menu">
-                                                        <li><a href="Amonestaciones/Jugadores/ModificarAmonestaciones.php">Nueva</a></li>
+                                                        <li><a href="Movimientos/Entradas/Entradas.php">Nueva</a></li>
                                                         <!--<li><a href="Amonestaciones/Jugadores/ModificarAmonestacionesDePartidos.php">Por partido</a></li>-->
                                                     </ul>
                                                 </li>
                                                 <li class="dropdown-submenu">
                                                     <a tabindex="-1" href="#">Salidas</a>
                                                     <ul class="dropdown-menu">
-                                                        <li><a href="Amonestaciones/Equipos/ModificarAmonestacionesEquipo.php">Nueva</a></li>
+                                                        <li><a href="Movimientos/Salidas/Salidas.php">Nueva</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -94,7 +94,7 @@
                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informes <span class="caret"></span></a>
                                             <ul class="dropdown-menu" role="menu">
-                                                <li><a href="Noticias/form_noticias.php">Kardex</a></li>
+                                                <li><a href="Informes/Kardex.php">Kardex</a></li>
                                                 <!--<li><a href="Noticias/ModificarNoticias.php">Editar noticia</a></li>-->
                                             </ul>
                                         </li>
@@ -102,8 +102,8 @@
                                          <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Usuarios <span class="caret"></span></a>
                                             <ul class="dropdown-menu" role="menu">
-                                                <li><a href="Partidos/AgregarPartidoAlCalendario.php">Nuevo</a></li>
-                                                <li><a href="Partidos/AgregarResultados.php">Editar</a></li>
+                                                <li><a href="Usuarios/AgregarUsuarios.php">Nuevo Usuario</a></li>
+                                                <li><a href="Usuarios/EditarUsuarios.php">Editar Usuarios</a></li>
 <!--                                                <li><a href="Partidos/ModificarResultados.php">Editar resultado</a></li>
                                                 <li><a href="Partidos/ModificarCalendario.php">Editar calendario</a></li>
                                                 <li><a href="Partidos/ModificarAsistencia.php">Editar asistencia</a></li>-->
