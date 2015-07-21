@@ -44,7 +44,7 @@
                         <div id="header">
                                 <!--<b><p style="color:#3CB371;font-size:16px"id="bienvenido"><?php echo $_SESSION['admin'] ?></p></b>-->
 
-                                <a style="font-size:15px;font-family: sans-serif;color:#27AE60"class="cerrar" href="cerrarsesion.php">Cerrar sesión 
+                                <a style="font-size:15px;font-family: sans-serif;color:#27AE60;text-decoration: none;"class="cerrar" href="cerrarsesion.php">Salir 
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
 
                                 <div><img src="images/osya.png" style="padding-left: 20px;"/></div>
