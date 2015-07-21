@@ -36,20 +36,23 @@
                             clear: right;
                             padding-right:  15px;
                         }
+                      
                     </style>
                     <body>
-
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
                         <div id="header">
-                            <br>
                                 <!--<b><p style="color:#3CB371;font-size:16px"id="bienvenido"><?php echo $_SESSION['admin'] ?></p></b>-->
 
-                                <a style="font-size:15px;font-family: sans-serif"class="cerrar" href="cerrarsesion.php">Cerrar sesión 
+                                <a style="font-size:15px;font-family: sans-serif;color:#27AE60"class="cerrar" href="cerrarsesion.php">Cerrar sesión 
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
 
-                                <div><img src="images/osya.png" style="padding-left: 20px;width: 180px;height: 100px"/></div>
+                                <div><img src="images/osya.png" style="padding-left: 20px;"/></div>
                         </div>
 
-                        <nav class="navbar navbar-default">
+                        <nav class="navbar navbar-default" style="background-image:none;background-color:#27AE60">
+                             <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
                             <div class="container-fluid" style="width: 800px"> 
                                 <div class="navbar-header">
                                     <a class="navbar-brand" href="modulobodega.php">
@@ -128,7 +131,12 @@
                                        
                                     </ul>
                                 </div>
-                            </div>
+                                </div>
+                                </div>
+                                </div>
+                        </nav>
+                                </div>
+                                </div>
                         </nav>
 
                         <script>

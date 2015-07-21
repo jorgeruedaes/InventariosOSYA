@@ -21,11 +21,12 @@ a:hover { text-decoration: underline; cursor: pointer;}
 
 .center {display: block; margin: 0 auto;}
 
-#header {width: auto; background: url("images/header2.png") repeat-x 0 0 ;
+#header {width: auto;
          height: 100%;
 	width: 100%;
 	z-index:-1;       
-         height: 160px; margin: 0 auto;}
+         height: 110px; margin: 0 auto;
+background-color: #F2F1EF;}
 
 #navigation {background: url(images/nav.gif) repeat-x 0 0; height: 50px;}
 
