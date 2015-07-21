@@ -69,7 +69,7 @@ if (isset($_SESSION['admin'])) {
                                 </div>
                                 <div class="form-group last">
                                     <div class="col-sm-offset-3 col-sm-6">
-                                        <button type="submit" name="enviar" class="btn" style="background-color:#3498DB;color:white">Iniciar sesión</button>
+                                        <button type="submit" name="enviar" class="btn btn-info" style="color:white">Iniciar sesión</button>
                                     </div>
                                 </div>
                             </form>
