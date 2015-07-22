@@ -53,7 +53,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                         <body>
 
                             <div class="contenido">
-                                <?php include('../Encabezado.html'); ?>
+                                <?php include('../Encabezado.php'); ?>
                                 <div class="row">
                                     <div class="col-md-10 col-md-offset-1">
 

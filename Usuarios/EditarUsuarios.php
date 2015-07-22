@@ -4,7 +4,6 @@
 session_start();
 $pruebadeinicio = 20;
 include('../Conexion.php');
-include('../Encabezado.html');
 include('../RutinaDeLogueo.php');
 if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
     ?>
@@ -54,6 +53,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
 
             <?php
             $i = 1;
+            include("../Encabezado.php");
             ?>
 
             <div class="row">
@@ -65,112 +65,112 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="home">
 
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2"><br></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2"><br></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <table id="tablajugadores" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>Identificación</th>
-                                        <th>Nombre</th>
-                                        <th>Tipo</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2"><br></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2"><br></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table id="tablajugadores" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Identificación</th>
+                                                <th>Nombre</th>
+                                                <th>Tipo</th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                                    <?php
-                                    $consulta = mysql_query("SELECT * FROM tb_usuarios WHERE estado='Activo' and (tipo='Proveedor' or tipo='Cliente')");
-                                    while ($listajugadores = mysql_fetch_array($consulta)) {
-                                        $usuario = $listajugadores["cc"];
-                                        ?>
-                                        <tr class="default caja">
-                                            <th scope="row"><?php echo $listajugadores["cc"] ?></th> 
-                                            <td><?php echo $listajugadores["nombre"]; ?></td>
-                                            <td> <?php echo $listajugadores["tipo"]; ?> </td>
-                                            <td>
-<!--                                                <button id="editar" type="button" class="btn btn-success editar" data-id="<?php echo $listajugadores["cc"] ?>" 
-                                                        data-toggle="modal" >Editar</button>-->
-                                                <button class="btn btn-default eliminar" data-id="<?php echo $listajugadores["cc"] ?>">Eliminar</button>
-                                            </td>
+                                            <?php
+                                            $consulta = mysql_query("SELECT * FROM tb_usuarios WHERE estado='Activo' and (tipo='Proveedor' or tipo='Cliente')");
+                                            while ($listajugadores = mysql_fetch_array($consulta)) {
+                                                $usuario = $listajugadores["cc"];
+                                                ?>
+                                                <tr class="default caja">
+                                                    <th scope="row"><?php echo $listajugadores["cc"] ?></th> 
+                                                    <td><?php echo $listajugadores["nombre"]; ?></td>
+                                                    <td> <?php echo $listajugadores["tipo"]; ?> </td>
+                                                    <td>
+        <!--                                                <button id="editar" type="button" class="btn btn-success editar" data-id="<?php echo $listajugadores["cc"] ?>" 
+                                                                data-toggle="modal" >Editar</button>-->
+                                                        <button class="btn btn-default eliminar" data-id="<?php echo $listajugadores["cc"] ?>">Eliminar</button>
+                                                    </td>
 
-                                        </tr>
+                                                </tr>
 
-                                        <?php
-                                    }
-                                    ?>
+                                                <?php
+                                            }
+                                            ?>
 
-                                </tbody>
-                            </table>
+                                        </tbody>
+                                    </table>
 
-                        </div></div>
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2"><br></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2"><br></div>
+                                </div></div>
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2"><br></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2"><br></div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="profile">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2"><br></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2"><br></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table id="tablajugadores1" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Identificación</th>
+                                                <th>Nombre</th>
+                                                <th>Tipo</th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <?php
+                                            $consulta = mysql_query("SELECT * FROM tb_usuarios WHERE estado='Inactivo' and (tipo='Proveedor' or tipo='Cliente')");
+                                            while ($listajugadores = mysql_fetch_array($consulta)) {
+                                                $usuario = $listajugadores["cc"];
+                                                ?>
+                                                <tr class="default caja">
+                                                    <th scope="row"><?php echo $listajugadores["cc"] ?></th> 
+                                                    <td><?php echo $listajugadores["nombre"]; ?></td>
+                                                    <td> <?php echo $listajugadores["tipo"]; ?> </td>
+                                                    <td>
+        <!--                                                <button id="editar" type="button" class="btn btn-success editar" data-id="<?php echo $listajugadores["cc"] ?>" 
+                                                                data-toggle="modal" >Editar</button>-->
+                                                        <button class="btn btn-default activar" data-id="<?php echo $listajugadores["cc"] ?>">Activar</button>
+                                                    </td>
+
+                                                </tr>
+
+                                                <?php
+                                            }
+                                            ?>
+
+                                        </tbody>
+                                    </table>
+
+                                </div></div>
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2"><br></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2"><br></div>
+                            </div>
+                        </div>  
                     </div>
                 </div>
-                        <div role="tabpanel" class="tab-pane" id="profile">
-                          <div class="row">
-                        <div class="col-md-8 col-md-offset-2"><br></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2"><br></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <table id="tablajugadores1" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>Identificación</th>
-                                        <th>Nombre</th>
-                                        <th>Tipo</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <?php
-                                    $consulta = mysql_query("SELECT * FROM tb_usuarios WHERE estado='Inactivo' and (tipo='Proveedor' or tipo='Cliente')");
-                                    while ($listajugadores = mysql_fetch_array($consulta)) {
-                                        $usuario = $listajugadores["cc"];
-                                        ?>
-                                        <tr class="default caja">
-                                            <th scope="row"><?php echo $listajugadores["cc"] ?></th> 
-                                            <td><?php echo $listajugadores["nombre"]; ?></td>
-                                            <td> <?php echo $listajugadores["tipo"]; ?> </td>
-                                            <td>
-<!--                                                <button id="editar" type="button" class="btn btn-success editar" data-id="<?php echo $listajugadores["cc"] ?>" 
-                                                        data-toggle="modal" >Editar</button>-->
-                                                <button class="btn btn-default activar" data-id="<?php echo $listajugadores["cc"] ?>">Activar</button>
-                                            </td>
-
-                                        </tr>
-
-                                        <?php
-                                    }
-                                    ?>
-
-                                </tbody>
-                            </table>
-
-                        </div></div>
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2"><br></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2"><br></div>
-                    </div>
-                </div>  
-                        </div>
-                    </div>
-                    </div>
+            </div>
 
 
             <div class="modal fade" id="myModal" tabindex="-1" data-jugador="" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -303,11 +303,11 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                         editarClientes.recargarEventos();
                     },
                     recargarEventos: function () {
-//                        editarClientes.EventoConsultarDatos();
-//                        editarClientes.EventoEnviarDatos();
+    //                        editarClientes.EventoConsultarDatos();
+    //                        editarClientes.EventoEnviarDatos();
                         editarClientes.EventoEliminarUsuario();
                         editarClientes.EventoActivarUsuario();
-                        
+
                     }, EventoConsultarDatos: function () {
                         $('.editar').off('click').on('click', function () {
                             var id = $(this).data('id');
@@ -378,13 +378,13 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                     ValidarInformacion: function () {
                         if (/\w/gi.test($('.nombre').val())) {
                             if (/[0-9]{1,9}(\.[0-9]{0,10})?$/.test($('.valor').val()) && $('.valor').val() > 0) {
-                                     if (/\w/gi.test($('.estado').val())) {
-                                         return true;
-                                     }else{
-                                           $('.estado').focus();
-                                swal("", "Debes seleccionar un estado válido, intenta nuevamente.", "error");
-                                return false;
-                                     }
+                                if (/\w/gi.test($('.estado').val())) {
+                                    return true;
+                                } else {
+                                    $('.estado').focus();
+                                    swal("", "Debes seleccionar un estado válido, intenta nuevamente.", "error");
+                                    return false;
+                                }
                             } else {
                                 $('.valor').focus();
                                 swal("", "El valor de compra no es válido, intenta nuevamente.", "error");
@@ -397,95 +397,95 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                             return false;
                         }
                     },
-                    EventoActivarUsuario: function(){
-                           $('.activar').off('click').on('click', function () {
-                                var id = $(this).data('id');
-                                  swal({title: "",
-                                                text: "¿El usuario se activará, está seguro?",
-                                                type: "warning",
-                                                showCancelButton: true,
-                                                confirmButtonColor: "rgb(174, 222, 244)",
-                                                confirmButtonText: "Ok",
-                                                closeOnConfirm: false
-                                            }, function (isConfirm) {
-                                                if (isConfirm) {
-                                                     $.ajax({
-                                    url: 'PeticionesUsuarios.php',
-                                    type: 'POST',
-                                    data: {
-                                        Bandera: "ActivarUsuario",
-                                        id: id
-                                    },
-                                    success: function (resp) {
-                                        var resp = $.parseJSON(resp);
-                                        if (resp.Salida === true && resp.Mensaje === true) {
-                                            swal({title: "",
-                                                text: "El usuario se ha activado!",
-                                                type: "success",
-                                                showCancelButton: false,
-                                                confirmButtonColor: "rgb(174, 222, 244)",
-                                                confirmButtonText: "Ok",
-                                                closeOnConfirm: false
-                                            }, function (isConfirm) {
-                                                if (isConfirm) {
-                                                    window.location.reload();
-                                                }
-                                            });
-                                        } else {
-                                            swal("", "Ha habido un error, intenta nuevamente", "error");
+                    EventoActivarUsuario: function () {
+                        $('.activar').off('click').on('click', function () {
+                            var id = $(this).data('id');
+                            swal({title: "",
+                                text: "¿El usuario se activará, está seguro?",
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "rgb(174, 222, 244)",
+                                confirmButtonText: "Ok",
+                                closeOnConfirm: false
+                            }, function (isConfirm) {
+                                if (isConfirm) {
+                                    $.ajax({
+                                        url: 'PeticionesUsuarios.php',
+                                        type: 'POST',
+                                        data: {
+                                            Bandera: "ActivarUsuario",
+                                            id: id
+                                        },
+                                        success: function (resp) {
+                                            var resp = $.parseJSON(resp);
+                                            if (resp.Salida === true && resp.Mensaje === true) {
+                                                swal({title: "",
+                                                    text: "El usuario se ha activado!",
+                                                    type: "success",
+                                                    showCancelButton: false,
+                                                    confirmButtonColor: "rgb(174, 222, 244)",
+                                                    confirmButtonText: "Ok",
+                                                    closeOnConfirm: false
+                                                }, function (isConfirm) {
+                                                    if (isConfirm) {
+                                                        window.location.reload();
+                                                    }
+                                                });
+                                            } else {
+                                                swal("", "Ha habido un error, intenta nuevamente", "error");
+                                            }
                                         }
-                                    }
 
-                                });
-                                                }
-                                            });
-                                 
-                           });
+                                    });
+                                }
+                            });
+
+                        });
                     },
-                    EventoEliminarUsuario: function(){
-                           $('.eliminar').off('click').on('click', function () {
-                                var id = $(this).data('id');
-                                  swal({title: "",
-                                                text: "¿El usuario se eliminará, está seguro?",
-                                                type: "warning",
-                                                showCancelButton: true,
-                                                confirmButtonColor: "rgb(174, 222, 244)",
-                                                confirmButtonText: "Ok",
-                                                closeOnConfirm: false
-                                            }, function (isConfirm) {
-                                                if (isConfirm) {
-                                                     $.ajax({
-                                    url: 'PeticionesUsuarios.php',
-                                    type: 'POST',
-                                    data: {
-                                        Bandera: "EliminarUsuario",
-                                        id: id
-                                    },
-                                    success: function (resp) {
-                                        var resp = $.parseJSON(resp);
-                                        if (resp.Salida === true && resp.Mensaje === true) {
-                                            swal({title: "",
-                                                text: "El usuario se ha eliminado exitosamente!",
-                                                type: "success",
-                                                showCancelButton: false,
-                                                confirmButtonColor: "rgb(174, 222, 244)",
-                                                confirmButtonText: "Ok",
-                                                closeOnConfirm: false
-                                            }, function (isConfirm) {
-                                                if (isConfirm) {
-                                                    window.location.reload();
-                                                }
-                                            });
-                                        } else {
-                                            swal("", "Ha habido un error, intenta nuevamente", "error");
+                    EventoEliminarUsuario: function () {
+                        $('.eliminar').off('click').on('click', function () {
+                            var id = $(this).data('id');
+                            swal({title: "",
+                                text: "¿El usuario se eliminará, está seguro?",
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "rgb(174, 222, 244)",
+                                confirmButtonText: "Ok",
+                                closeOnConfirm: false
+                            }, function (isConfirm) {
+                                if (isConfirm) {
+                                    $.ajax({
+                                        url: 'PeticionesUsuarios.php',
+                                        type: 'POST',
+                                        data: {
+                                            Bandera: "EliminarUsuario",
+                                            id: id
+                                        },
+                                        success: function (resp) {
+                                            var resp = $.parseJSON(resp);
+                                            if (resp.Salida === true && resp.Mensaje === true) {
+                                                swal({title: "",
+                                                    text: "El usuario se ha eliminado exitosamente!",
+                                                    type: "success",
+                                                    showCancelButton: false,
+                                                    confirmButtonColor: "rgb(174, 222, 244)",
+                                                    confirmButtonText: "Ok",
+                                                    closeOnConfirm: false
+                                                }, function (isConfirm) {
+                                                    if (isConfirm) {
+                                                        window.location.reload();
+                                                    }
+                                                });
+                                            } else {
+                                                swal("", "Ha habido un error, intenta nuevamente", "error");
+                                            }
                                         }
-                                    }
 
-                                });
-                                                }
-                                            });
-                                 
-                           });
+                                    });
+                                }
+                            });
+
+                        });
                     }
                 };
 

@@ -44,17 +44,14 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                             }
                             .contenido{
 
-                                /*width: 1000px;*/
                                 margin: 0 auto;
                             }
-                            /*                            label{margin-left: 20px;}
-                                                        #datepicker{width:180px; margin: 0 20px 20px 20px;}
-                                                        #datepicker > span:hover{cursor: pointer;}*/
+                        
                         </style>
                         <body>
 
                             <div class="contenido">
-                                <?php include('../Encabezado.html'); ?>
+                                <?php include('../Encabezado.php'); ?>
                                 <div class="row">
                                     <div class="col-md-10 col-md-offset-1">
 

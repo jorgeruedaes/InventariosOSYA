@@ -4,7 +4,6 @@
 session_start();
 $pruebadeinicio = 20;
 include('../Conexion.php');
-include('../Encabezado.html');
 include('../RutinaDeLogueo.php');
 if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
     ?>
@@ -54,6 +53,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
 
             <?php
             $i = 1;
+            include('../Encabezado.php');
             ?>
 
             <div class="row">

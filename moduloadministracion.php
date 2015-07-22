@@ -53,7 +53,7 @@
 
                         <nav class="navbar navbar-default" style="background-image:none;background-color:#27AE60">
                              <div class="row">
-                            <div class="col-md-6 col-md-offset-3">
+                            <div class="col-md-8 col-md-offset-2">
                             <div class="container-fluid" style="width: 800px"> 
                                 <div class="navbar-header">
                                     <a class="navbar-brand" href="moduloadministracion.php">
@@ -103,16 +103,16 @@
                                             </ul>
                                         </li>-->
                                         
-<!--                                         <li class="dropdown">
+                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Usuarios <span class="caret"></span></a>
                                             <ul class="dropdown-menu" role="menu">
                                                 <li><a href="Usuarios/AgregarUsuarios.php">Nuevo Usuario</a></li>
-                                                <li><a href="Usuarios/EditarUsuarios.php">Editar Usuarios</a></li>
+                                                <li><a href="Usuarios/EditarUsuarios.php">Editar Usuarios</a></li><!--
                                                 <li><a href="Partidos/ModificarResultados.php">Editar resultado</a></li>
                                                 <li><a href="Partidos/ModificarCalendario.php">Editar calendario</a></li>
                                                 <li><a href="Partidos/ModificarAsistencia.php">Editar asistencia</a></li>
-                                            </ul>
-                                        </li>-->
+-->                                            </ul>
+                                        </li>
                                         <!--                                        <li class="dropdown disabled">
                                                                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Estadísticas</a>
                                                                                     <ul class="dropdown-menu" role="menu">
