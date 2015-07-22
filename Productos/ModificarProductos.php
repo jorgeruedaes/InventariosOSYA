@@ -160,9 +160,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
 
                                                     </td>
                                                     <td>
-                                                        <button id="editar" type="button" class="btn btn-success editar" data-id="<?php echo $listajugadores["id_producto"] ?>" 
-                                                                data-toggle="modal" >Editar</button>
-                                                        <button class="btn btn-default eliminar" data-id="<?php echo $listajugadores["id_producto"] ?>">Eliminar</button>
+                                                        <button class="btn btn-default activar" data-id="<?php echo $listajugadores["id_producto"] ?>">Activar</button>
                                                     </td>
 
                                                 </tr>
@@ -321,6 +319,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                         editarProductos.EventoConsultarDatos();
                         editarProductos.EventoEnviarDatos();
                         editarProductos.EventoEliminarProducto();
+                        editarProductos.EventoActivarProducto();
                     }, EventoConsultarDatos: function () {
                         $('.editar').off('click').on('click', function () {
                             var id = $(this).data('id');
@@ -346,6 +345,51 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                 }
                             });
                         });
+                    },
+                    EventoActivarProducto: function(){
+                           $('.activar').off('click').on('click', function () {
+                                var id = $(this).data('id');
+                                  swal({title: "",
+                                                text: "¿El producto se activará, está seguro?",
+                                                type: "warning",
+                                                showCancelButton: true,
+                                                confirmButtonColor: "rgb(174, 222, 244)",
+                                                confirmButtonText: "Ok",
+                                                closeOnConfirm: false
+                                            }, function (isConfirm) {
+                                                if (isConfirm) {
+                                                     $.ajax({
+                                    url: 'PeticionesProductos.php',
+                                    type: 'POST',
+                                    data: {
+                                        Bandera: "ActivarProducto",
+                                        id: id
+                                    },
+                                    success: function (resp) {
+                                        var resp = $.parseJSON(resp);
+                                        if (resp.Salida === true && resp.Mensaje === true) {
+                                            swal({title: "",
+                                                text: "El producto se ha activado!",
+                                                type: "success",
+                                                showCancelButton: false,
+                                                confirmButtonColor: "rgb(174, 222, 244)",
+                                                confirmButtonText: "Ok",
+                                                closeOnConfirm: false
+                                            }, function (isConfirm) {
+                                                if (isConfirm) {
+                                                    window.location.reload();
+                                                }
+                                            });
+                                        } else {
+                                            swal("", "Ha habido un error, intenta nuevamente", "error");
+                                        }
+                                    }
+
+                                });
+                                                }
+                                            });
+                                 
+                           });
                     },
                     EventoEnviarDatos: function () {
                         $('.guardar').off('click').on('click', function () {

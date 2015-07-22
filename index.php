@@ -1,4 +1,3 @@
-
 <?php
 
 session_start();
@@ -7,7 +6,8 @@ if (isset($_SESSION['admin'])) {
     include('RutinaDeLogueo.php');
     if ($_SESSION['tipo_usuario'] == "Administrador") {
         header("location:moduloadministracion.php");
-    } if ($_SESSION['tipo_usuario'] == "Bodega") {
+    }
+     if ($_SESSION['tipo_usuario'] == "Bodega") {
         header("location:modulobodega.php");
     } else {
         echo "Usted no está autorizado para ingresar";
@@ -74,7 +74,7 @@ if (isset($_SESSION['admin'])) {
                                 </div>
                             </form>
                         </div>
-                        <div style="font-size:13px"class="panel-footer"><strong>¿Olvidaste tu contraseña? <a href="#" class="">Click aquí</a></strong>
+                        <div style="font-size:13px"class="panel-footer"><strong>¿Olvidaste tu contraseña? <a href="RestaurarContraseña.php">Click aquí</a></strong>
                         </div>
                     </div></center>
 
