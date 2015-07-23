@@ -10,10 +10,18 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
     if ($Bandera === "AgregarEntrada") {
         $creador = $_POST['creador'];
         $datos=$_POST['datos'];
-        json_decode($datos);
+      $datos=  json_decode($datos); 
+$factura= $datos['factura'];
+$tipo= $datos['tipo'];
+$fecha= $datos['fecha'];
+$query=  mysql_query("INSERT INTO `tb_entradas`(`id_entrada`, `fecha`, `tipo`, `encargado`, `factura`)"
+        . " VALUES (NULL,'$fecha','$tipo','$creador',$factura)");
+$producto= $datos['productos'];
+foreach ($producto as $cosa){
+    echo $cosa['id']." ";
+    echo $cosa['cantidad']." ";
+}
         
-        $query = mysql_query("INSERT INTO `tb_usuarios`(`cc`, `nombre`, `apellido`, `usuario`, `contrasena`, `email`, `pregunta`, `respuesta`, `estado`, `tipo`)"
-                . " VALUES ('$cc','$nombre',NULL,NULL,NULL,'$email',NULL,NULL,'Activo','$tipo')");
         if ($query) {
             $resultado.='"Mensaje":true';
         } else {
