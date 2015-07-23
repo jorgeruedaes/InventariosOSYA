@@ -324,6 +324,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                     Entrada.EventoDate();
                                                                                                     Entrada.EventoParaTipoDeEntrada();
                                                                                                     Entrada.EnviarDatos();
+                                                                                                    Entrada.EventosProbarFactura();
                                                                                                     $('.facturas').css({display: "none"});
                                                                                                 },
                                                                                                 EventoSeleccionarProvedoor: function () {
@@ -511,9 +512,13 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                     });
                                                                                                 },
                                                                                                 ValidacionGeneral: function () {
+                                                                                                    if($('.factura').val()!== ""){
                                                                                                     if ($('#fechaInicio').val() !== "") {
+                                                                                                        
+                                                                                                          
                                                                                                         if ($('.tipoentrada').val() !== "") {
                                                                                                             if ($('.nit').val() !== "") {
+                                                                                                                
                                                                                                                 if ($('.tablaproductos tbody tr').size() > 0) {
                                                                                                                     var valor = true;
                                                                                                                     $('.tablaproductos tbody tr').each(function () {
@@ -541,49 +546,76 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                         swal("", "Debes seleccionar un fecha para el ingreso", "error");
                                                                                                         return false;
                                                                                                     }
+                                                                                                }else{
+                                                                                                     $('.factura').focus();
+                                                                                                        swal("", "Debes ingresar una factura", "error");
+                                                                                                        return false;
+                                                                                                }
                                                                                                 },
                                                                                                 EnviarDatos: function () {
-                                                                                                    $('.guardar').off('click').on('click',function(){
-                                                                                                          if (Entrada.ValidacionGeneral()) {
-                                                                                                        $.ajax({
-                                                                                                            url: 'PeticionesMovimientos.php',
-                                                                                                            type: 'POST',
-                                                                                                            data: {
-                                                                                                                Bandera: "AgregarEntrada",
-                                                                                                                datos: JSON.stringify(Entrada.TomarDatos()),
-                                                                                                                creador:Creador
-                                                                                                                
-                                                                                                            },
-                                                                                                            success: function (resp) {
+                                                                                                    $('.guardar').off('click').on('click', function () {
+                                                                                                        if (Entrada.ValidacionGeneral()) {
+                                                                                                            $.ajax({
+                                                                                                                url: 'PeticionesMovimientos.php',
+                                                                                                                type: 'POST',
+                                                                                                                data: {
+                                                                                                                    Bandera: "AgregarEntrada",
+                                                                                                                    datos: JSON.stringify(Entrada.TomarDatos()),
+                                                                                                                    creador: Creador
 
-                                                                                                                var resp = $.parseJSON(resp);
-                                                                                                                if (resp.Salida === true && resp.Mensaje === true) {
-                                                                                                                     swal("", "Se ha agregado la entrada exitosamente", "success");
-                                                                                                                } else {
-                                                                                                                    swal("Importante!", "Se ha producido un error al intentar guardar la entrada, intenta nuevamente..", "error");
+                                                                                                                },
+                                                                                                                success: function (resp) {
+
+                                                                                                                    var resp = $.parseJSON(resp);
+                                                                                                                    if (resp.Salida === true && resp.Mensaje === true) {
+                                                                                                                        swal("", "Se ha agregado la entrada exitosamente", "success");
+                                                                                                                    } else {
+                                                                                                                        swal("Importante!", "Se ha producido un error al intentar guardar la entrada, intenta nuevamente..", "error");
+                                                                                                                    }
                                                                                                                 }
+                                                                                                            });
+                                                                                                        }
+                                                                                                    });
+
+                                                                                                },
+                                                                                                TomarDatos: function () {
+                                                                                                    var Entrada = new Object();
+
+                                                                                                    var productos = new Array();
+                                                                                                    Entrada.proveedor = $('.nit').val();
+                                                                                                    Entrada.factura = $('.factura').val();
+                                                                                                    Entrada.tipo = $('.tipoentrada').val();
+                                                                                                    Entrada.fecha = $('#fechaInicio').val();
+                                                                                                    $('.tablaproductos tbody tr').each(function () {
+                                                                                                        var unidad = new Object();
+                                                                                                        unidad.id = $(this).children('.nit').text();
+                                                                                                        unidad.cantidad = $(this).children().children('.cantidad').val();
+                                                                                                        productos.push(unidad);
+                                                                                                    });
+                                                                                                    Entrada.productos = productos;
+                                                                                                    return Entrada;
+                                                                                                },
+                                                                                                EventosProbarFactura: function () {
+                                                                                                    $('.factura').off('keyup').on('keyup',function(){
+                                                                                                          $.ajax({
+                                                                                                        url: 'PeticionesMovimientos.php',
+                                                                                                        type: 'POST',
+                                                                                                        data: {
+                                                                                                            Bandera: "PruebaExistencia",
+                                                                                                            id: $('.factura').val(),
+                                                                                                        },
+                                                                                                        success: function (resp) {
+
+                                                                                                            var resp = $.parseJSON(resp);
+                                                                                                            if (resp.Salida === true && resp.Mensaje === true) {
+
+                                                                                                            } else {
+                                                                                                                swal("Importante!", "El la factura que haz introducido ya existe.", "warning");
                                                                                                             }
-                                                                                                        });
-                                                                                                    }
+                                                                                                        }
+                                                                                                    });
                                                                                                     });
                                                                                                   
-                                                                                                },
-                                                                                                TomarDatos:function(){
-                                                                                                 var Entrada = new Object();
-                                                                                                
-                                                                                                 var productos = new Array();
-                                                                                                 Entrada.proveedor= $('.nit').val();
-                                                                                                 Entrada.factura=$('.factura').val();
-                                                                                                 Entrada.tipo=$('.tipoentrada').val();
-                                                                                                 Entrada.fecha=$('#fechaInicio').val();
-                                                                                                     $('.tablaproductos tbody tr').each(function () {
-                                                                                                          var unidad = new Object();
-                                                                                                          unidad.id=$(this).children('.nit').text();
-                                                                                                          unidad.cantidad=$(this).children().children('.cantidad').val();
-                                                                                                          productos.push(unidad);
-                                                                                                     });
-                                                                                                     Entrada.productos=productos;
-                                                                                                     return Entrada;
                                                                                                 }
                                                                                             };
                                                                                             $(document).ready(function () {
