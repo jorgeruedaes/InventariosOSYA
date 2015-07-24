@@ -543,7 +543,18 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
 
                                                                                                                     var resp = $.parseJSON(resp);
                                                                                                                     if (resp.Salida === true && resp.Mensaje === true) {
-                                                                                                                        swal("", "Se ha agregado la salida exitosamente", "success");
+                                                                                                                           swal({title: "",
+                                                                                                                            text: "La salida se ha realizado exitosamente!",
+                                                                                                                            type: "success",
+                                                                                                                            showCancelButton: false,
+                                                                                                                            confirmButtonColor: "rgb(174, 222, 244)",
+                                                                                                                            confirmButtonText: "Ok",
+                                                                                                                            closeOnConfirm: false
+                                                                                                                        }, function (isConfirm) {
+                                                                                                                            if (isConfirm) {
+                                                                                                                                window.location.reload();
+                                                                                                                            }
+                                                                                                                        });
                                                                                                                     } else {
                                                                                                                         swal("Importante!", "Se ha producido un error al intentar guardar la salida, intenta nuevamente.", "error");
                                                                                                                     }

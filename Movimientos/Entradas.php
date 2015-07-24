@@ -512,45 +512,45 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                     });
                                                                                                 },
                                                                                                 ValidacionGeneral: function () {
-                                                                                                    if($('.factura').val()!== ""){
-                                                                                                    if ($('#fechaInicio').val() !== "") {
-                                                                                                        
-                                                                                                          
-                                                                                                        if ($('.tipoentrada').val() !== "") {
-                                                                                                            if ($('.nit').val() !== "") {
-                                                                                                                
-                                                                                                                if ($('.tablaproductos tbody tr').size() > 0) {
-                                                                                                                    var valor = true;
-                                                                                                                    $('.tablaproductos tbody tr').each(function () {
-                                                                                                                        $(this).children().children('.cantidad').val();
-                                                                                                                        if ($(this).children().children('.cantidad').val() <= 0) {
-                                                                                                                            valor = false;
-                                                                                                                        }
-                                                                                                                    });
-                                                                                                                    return valor;
+                                                                                                    if ($('.factura').val() !== "") {
+                                                                                                        if ($('#fechaInicio').val() !== "") {
+
+
+                                                                                                            if ($('.tipoentrada').val() !== "") {
+                                                                                                                if ($('.nit').val() !== "") {
+
+                                                                                                                    if ($('.tablaproductos tbody tr').size() > 0) {
+                                                                                                                        var valor = true;
+                                                                                                                        $('.tablaproductos tbody tr').each(function () {
+                                                                                                                            $(this).children().children('.cantidad').val();
+                                                                                                                            if ($(this).children().children('.cantidad').val() <= 0) {
+                                                                                                                                valor = false;
+                                                                                                                            }
+                                                                                                                        });
+                                                                                                                        return valor;
+                                                                                                                    } else {
+                                                                                                                        swal("", "Debes agregar al menos un producto para que pueda ser guardado el ingreso.", "error");
+                                                                                                                        return false;
+                                                                                                                    }
                                                                                                                 } else {
-                                                                                                                    swal("", "Debes agregar al menos un producto para que pueda ser guardado el ingreso.", "error");
+                                                                                                                    swal("", "Debes seleccionar un proveedor para el ingreso", "error");
                                                                                                                     return false;
                                                                                                                 }
                                                                                                             } else {
-                                                                                                                swal("", "Debes seleccionar un proveedor para el ingreso", "error");
+                                                                                                                $('.tipoentrada').focus();
+                                                                                                                swal("", "Debes seleccionar tipo  para el ingreso", "error");
                                                                                                                 return false;
                                                                                                             }
                                                                                                         } else {
-                                                                                                            $('.tipoentrada').focus();
-                                                                                                            swal("", "Debes seleccionar tipo  para el ingreso", "error");
+                                                                                                            $('#fechaInicio').focus();
+                                                                                                            swal("", "Debes seleccionar un fecha para el ingreso", "error");
                                                                                                             return false;
                                                                                                         }
                                                                                                     } else {
-                                                                                                        $('#fechaInicio').focus();
-                                                                                                        swal("", "Debes seleccionar un fecha para el ingreso", "error");
-                                                                                                        return false;
-                                                                                                    }
-                                                                                                }else{
-                                                                                                     $('.factura').focus();
+                                                                                                        $('.factura').focus();
                                                                                                         swal("", "Debes ingresar una factura", "error");
                                                                                                         return false;
-                                                                                                }
+                                                                                                    }
                                                                                                 },
                                                                                                 EnviarDatos: function () {
                                                                                                     $('.guardar').off('click').on('click', function () {
@@ -568,7 +568,18 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
 
                                                                                                                     var resp = $.parseJSON(resp);
                                                                                                                     if (resp.Salida === true && resp.Mensaje === true) {
-                                                                                                                        swal("", "Se ha agregado la entrada exitosamente", "success");
+                                                                                                                        swal({title: "",
+                                                                                                                            text: "Se ha agregado la entrada exitosamente!",
+                                                                                                                            type: "success",
+                                                                                                                            showCancelButton: false,
+                                                                                                                            confirmButtonColor: "rgb(174, 222, 244)",
+                                                                                                                            confirmButtonText: "Ok",
+                                                                                                                            closeOnConfirm: false
+                                                                                                                        }, function (isConfirm) {
+                                                                                                                            if (isConfirm) {
+                                                                                                                                window.location.reload();
+                                                                                                                            }
+                                                                                                                        });
                                                                                                                     } else {
                                                                                                                         swal("Importante!", "Se ha producido un error al intentar guardar la entrada, intenta nuevamente..", "error");
                                                                                                                     }
@@ -596,26 +607,26 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                     return Entrada;
                                                                                                 },
                                                                                                 EventosProbarFactura: function () {
-                                                                                                    $('.factura').off('keyup').on('keyup',function(){
-                                                                                                          $.ajax({
-                                                                                                        url: 'PeticionesMovimientos.php',
-                                                                                                        type: 'POST',
-                                                                                                        data: {
-                                                                                                            Bandera: "PruebaExistencia",
-                                                                                                            id: $('.factura').val(),
-                                                                                                        },
-                                                                                                        success: function (resp) {
+                                                                                                    $('.factura').off('keyup').on('keyup', function () {
+                                                                                                        $.ajax({
+                                                                                                            url: 'PeticionesMovimientos.php',
+                                                                                                            type: 'POST',
+                                                                                                            data: {
+                                                                                                                Bandera: "PruebaExistencia",
+                                                                                                                id: $('.factura').val(),
+                                                                                                            },
+                                                                                                            success: function (resp) {
 
-                                                                                                            var resp = $.parseJSON(resp);
-                                                                                                            if (resp.Salida === true && resp.Mensaje === true) {
+                                                                                                                var resp = $.parseJSON(resp);
+                                                                                                                if (resp.Salida === true && resp.Mensaje === true) {
 
-                                                                                                            } else {
-                                                                                                                swal("Importante!", "El la factura que haz introducido ya existe.", "warning");
+                                                                                                                } else {
+                                                                                                                    swal("Importante!", "El la factura que haz introducido ya existe.", "warning");
+                                                                                                                }
                                                                                                             }
-                                                                                                        }
+                                                                                                        });
                                                                                                     });
-                                                                                                    });
-                                                                                                  
+
                                                                                                 }
                                                                                             };
                                                                                             $(document).ready(function () {
