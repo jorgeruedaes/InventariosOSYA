@@ -2,7 +2,7 @@
 <?php
 
 session_start();
-include '../Conexion.php';
+include ('../Conexion.php');
 include('../RutinaDeLogueo.php');
 if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
     $resultado = '{"Salida":true,';
@@ -38,7 +38,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         }
     } else if ($Bandera === "TraerProductos") {
         $valor = $_POST['id'];
-        $query = mysql_query("SELECT * FROM `tb_productos` WHERE proveedor='$valor' and Estado='Activo'");
+        $query = mysql_query("SELECT * FROM `tb_productos` WHERE  Estado='Activo'");
         $productos = new stdClass();
         $array = array();
         while ($query1 = mysql_fetch_array($query)) {
@@ -64,10 +64,48 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         } else {
             $resultado.='"Mensaje":false';
         }
-    } else if ($Bandera === "ActivarUsuario") {
+    } else if ($Bandera === "PruebaCantidades") {
         $id = $_POST['id'];
-        $query = mysql_query("UPDATE `tb_usuarios` SET`estado`='Activo' WHERE `cc`=$id");
+        $cantidad=$_POST['cantidad'];
+        $query1= mysql_fetch_array(mysql_query("SELECT Sum(cantidad) as cantidad FROM `tr_productos_salidas` WHERE id_producto=$id group by id_producto "));
+     $salidas= $query1['cantidad'];
+     $query2= mysql_fetch_array(mysql_query("SELECT Sum(cantidad) as cantidad FROM `tr_productos_entradas` WHERE id_producto=$id group by id_producto "));
+     $entradas= $query2['cantidad'];
+     $totalreal=$entradas-$salidas;
+        if ($totalreal>=$cantidad) {
+            $resultado.='"Mensaje":true';
+        } else {
+            $resultado.='"Mensaje":false';
+            $resultado.=',"Numero":  "'.$totalreal.'" ';
+        }
+     }else if ($Bandera === "AgregarSalida") {
+        $creador = $_POST['creador'];
+        $datos = $_POST['datos'];
+        $datos = json_decode($datos,true);
+        $factura = $datos['factura'];
+        $tipo = $datos['tipo'];
+        $fecha = $datos['fecha'];
+        $cliente=$datos['proveedor'];
+        $query = mysql_query("INSERT INTO `tb_salidas`(`id_salida`, `fecha`, `tipo`, `encargado`,cliente)"
+                . " VALUES ($factura,'$fecha','$tipo','$creador',$cliente)");
+        $producto = $datos['productos'];
         if ($query) {
+                foreach ($producto as $cosa) {
+                    $id = $cosa['id'];
+                    $cantidad = $cosa['cantidad'];
+                    $query3 = mysql_query("INSERT INTO `tr_productos_salidas`( `id_producto`, `cantidad`, `id_salida`)"
+                            . " VALUES ($id,$cantidad,$factura)");
+                }
+                $resultado.='"Mensaje":true';
+            
+        } else {
+            $resultado.='"Mensaje":false';
+        }
+    } else if ($Bandera === "PruebaExistenciaSalida") {
+        $valor = $_POST['id'];
+        $query = mysql_query("SELECT COUNT(*)as cantidad FROM `tb_salidas` WHERE id_salida='$valor'");
+        $query1=  mysql_fetch_array($query);
+        if ($query && $query1['cantidad']==0) {
             $resultado.='"Mensaje":true';
         } else {
             $resultado.='"Mensaje":false';
