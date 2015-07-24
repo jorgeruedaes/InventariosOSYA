@@ -61,9 +61,9 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         $id = $_POST["id"];
         $consultaproductos = mysql_query("SELECT * FROM tr_productos_entradas WHERE id_entrada = '$id'");
         $bandera = true;
-        while ($resultado = mysql_fetch_array($consultaproductos)) {
-            $idproducto = $resultado["id_producto"];
-            $cantidad = $resultado["cantidad"];
+        while ($resultado1 = mysql_fetch_array($consultaproductos)) {
+            $idproducto = $resultado1["id_producto"];
+            $cantidad = $resultado1["cantidad"];
             $query1 = mysql_fetch_array(mysql_query("SELECT Sum(cantidad) as cantidad FROM `tr_productos_salidas` WHERE id_producto=$idproducto group by id_producto "));
             $salidas = $query1['cantidad'];
             $query2 = mysql_fetch_array(mysql_query("SELECT Sum(cantidad) as cantidad FROM `tr_productos_entradas` WHERE id_producto=$idproducto group by id_producto "));
@@ -76,8 +76,8 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
             }
         }
         if ($bandera == true) {
-            $query2 = mysql_query("DELETE * FROM tr_productos_entradas WHERE id_entrada = '$id'");
-            $query = mysql_query("DELETE * FROM tb_entradas WHERE id_entrada = '$id'");
+            $query2 = mysql_query("DELETE  FROM tr_productos_entradas WHERE id_entrada = '$id'");
+            $query = mysql_query("DELETE  FROM tb_entradas WHERE id_entrada = '$id'");
             if($query2 &&$query){
                  $resultado.='"Mensaje":true';
             }else{
