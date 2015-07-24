@@ -107,9 +107,9 @@
                                             <ul class="dropdown-menu" role="menu">
                                                 <li><a href="Usuarios/AgregarUsuarios.php">Nuevo Usuario</a></li>
                                                 <li><a href="Usuarios/EditarUsuarios.php">Editar Usuarios</a></li>
-<!--                                                <li><a href="Partidos/ModificarResultados.php">Editar resultado</a></li>
-                                                <li><a href="Partidos/ModificarCalendario.php">Editar calendario</a></li>
-                                                <li><a href="Partidos/ModificarAsistencia.php">Editar asistencia</a></li>-->
+                                        <li><a href="Usuarios/CrearPerfil.php">Crear Perfil</a></li>
+                                                <li><a href="Usuarios/EditarPerfil.php">Ver Perfiles</a></li>
+                           <!--                             <li><a href="Partidos/ModificarAsistencia.php">Editar asistencia</a></li>-->
                                             </ul>
                                         </li>
                                         <!--                                        <li class="dropdown disabled">
