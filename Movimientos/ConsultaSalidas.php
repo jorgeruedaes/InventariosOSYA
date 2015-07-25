@@ -42,13 +42,13 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
             </div>
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <table id="tablaentradas" class="table table-striped table-bordered" cellspacing="0" width="100%" style="font-size:14px">
+                    <table id="tablasalidas" class="table table-striped table-bordered" cellspacing="0" width="100%" style="font-size:14px">
                         <thead>
                             <tr>
-                                <th>No. Entrada</th>
+                                <th>No. Salida</th>
                                 <th>Fecha</th>
                                 <th>Encargado</th>
-                                <th>Proveedor</th>
+                                <th>Cliente</th>
                                 <th>Tipo</th>
                                 <th>Opciones</th>
                             </tr>
@@ -56,47 +56,40 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                         <tbody>
 
                             <?php
-                            $consulta = mysql_query("SELECT * FROM tb_entradas");
+                            $consulta = mysql_query("SELECT * FROM tb_salidas");
 
-                            while ($listaentradas = mysql_fetch_array($consulta)) {
-                                $idencargado = $listaentradas["encargado"];
-                                $identrada = $listaentradas["id_entrada"];
-
-
-                                //para consultar el proveedor
-                                $consultae = mysql_query("SELECT  * FROM tr_productos_entradas WHERE id_entrada = '$identrada'");
-                                if ($consultaedatos = mysql_fetch_array($consultae)) {
-
-                                    $idproducto = $consultaedatos["id_producto"];
-
-                                    $consultaproveedor = mysql_query("SELECT * FROM tb_productos WHERE id_producto = '$idproducto'");
-                                    $proveedor = mysql_fetch_array($consultaproveedor);
-                                    $idproveedor = $proveedor["proveedor"];
-
-                                    $consultanombreproveedor = mysql_query("SELECT * FROM tb_usuarios WHERE cc = '$idproveedor'");
-                                    $cons = mysql_fetch_array($consultanombreproveedor);
-
+                            while ($listasalidas = mysql_fetch_array($consulta)) {
+                                $idencargado = $listasalidas["encargado"];
+                                $idsalida = $listasalidas["id_salida"];
+                                $idcliente = $listasalidas["cliente"];
+                                $fecha = $listasalidas["fecha"];
+                                $tipo = $listasalidas["tipo"];
+                                    
                                     $consultanombreencargado = mysql_query("SELECT * FROM tb_usuarios WHERE cc =$idencargado");
                                     $resultado = mysql_fetch_array($consultanombreencargado);
+                                    
+                                    $consultanombrecliente = mysql_query("SELECT * FROM tb_usuarios WHERE cc =$idcliente");
+                                    $resultados = mysql_fetch_array($consultanombrecliente);
+                                    
                                     ?>
                                     <tr class="default caja">
-                                        <th scope="row"><?php echo $listaentradas["factura"] ?></th> 
-                                        <td><?php echo $listaentradas["fecha"]; ?></td>
+                                        <th scope="row"><?php echo $idsalida; ?></th> 
+                                        <td><?php echo $fecha; ?></td>
                                         <td><?php echo $resultado["nombre"]; ?></td>
-                                        <td><?php echo $cons["nombre"]; ?></td>
-                                        <td><?php echo $listaentradas["tipo"]; ?></td>
+                                        <td><?php echo $resultados["nombre"]; ?></td>
+                                        <td><?php echo $tipo; ?></td>
                                         <td>
-                                            <button data-id="<?php echo $listaentradas["id_entrada"] ?>" class="btn btn-default consultar" data-toggle="modal">
+                                            <button data-id="<?php echo $listasalidas["id_salida"] ?>" class="btn btn-default consultar" data-toggle="modal">
                                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                       
-                                            <button data-id="<?php echo $listaentradas["id_entrada"] ?>" class="btn btn-default eliminar">
+
+                                            <button data-id="<?php echo $listasalidas["id_salida"] ?>" class="btn btn-default eliminar">
                                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                                         </td>
 
                                     </tr>
 
                                     <?php
-                                }
+                                
                             }
                             ?>
 
@@ -116,7 +109,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Consulta de entrada</h4>
+                            <h4 class="modal-title" id="myModalLabel">Consulta de salida</h4>
 
                         </div>
                         <div class="modal-body">
@@ -129,7 +122,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                     </div>
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <label>Nro. Entrada:</label>
+                                            <label>Nro. Salida:</label>
                                             <label class="info" id="entrada"></label>
 
                                         </div>
@@ -162,7 +155,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                             <label class="info" id="encargado"></label>
                                         </div>
                                         <div class="col-md-4 col-md-offset-3">
-                                            <label>Proveedor:</label>
+                                            <label>Cliente:</label>
                                             <label class="info" id="proveedor"></label>
                                         </div>
                                     </div>
@@ -222,14 +215,15 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
 
             <script>
 
-                $(document).ready(function () {
+                 $(document).ready(function () {
 
-                    Entradas.inicio();
+                    Salidas.inicio();
 
                 });
-                var Entradas = {
+                var Salidas = {
+                    
                     inicio: function () {
-                        $('#tablaentradas').DataTable({
+                        $('#tablasalidas').DataTable({
                             "language": {
                                 "lengthMenu": "Mostrar _MENU_",
                                 "search": "Buscar:",
@@ -248,17 +242,17 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                             }
 
                         });
-                        Entradas.recargarEventos();
+                        Salidas.recargarEventos();
                     }, recargarEventos: function () {
-                        Entradas.EventoConsultarFra();
-                        Entradas.EventoEliminarFra();
+                        Salidas.EventoConsultarFra();
+                        Salidas.EventoEliminarFra();
 
                     },
                     EventoConsultarFra: function () {
                         $('.consultar').off('click').on('click', function () {
                             var id = $(this).data('id');
                             $.ajax({
-                                url: 'PeticionesEntradas.php',
+                                url: 'PeticionesSalidas.php',
                                 type: 'POST',
                                 data: {
                                     Bandera: "ConsultarFra",
@@ -267,25 +261,26 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                 success: function (resp) {
                                     $('.modal').modal('show');
                                     var resp = $.parseJSON(resp);
+                                    console.log(resp);
                                     if (resp.Salida === true && resp.Mensaje === true) {
                                     $('.tablaproductos tbody').html("");
-                                    $.each(resp.Entradas, function (i, item) {
+                                    $.each(resp.Salidas, function (i, item) {
                                         var fecha = item.fecha;
                                         var tipo = item.tipo;
                                         var factura = item.factura;
                                         var encargado = item.encargado;
-                                        var proveedor = item.proveedor;
+                                        var cliente = item.cliente;
 
 
                                         $('#fecha').text(fecha);
                                         $('#tipo').text(tipo);
                                         $('#entrada').text(factura);
                                         $('#encargado').text(encargado);
-                                        $('#proveedor').text(proveedor);
+                                        $('#proveedor').text(cliente);
 
                                     });
                                     $.each(resp.Productos, function (i, item) {
-                                        var nombre = item.nombre;
+                                        var nombre = item.producto;
                                         var id = item.id;
                                         var cantidad = item.cantidad;
                                         var valor = item.valor;
@@ -295,7 +290,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                         <td>' + cantidad + '</td><td>' + valor + '</td><td class="total">' + total + '</td></tr>');
 
                                     });
-                                    Entradas.CargarTotales();
+                                    Salidas.CargarTotales();
 
                                     }else{
                                          swal("", "Ha habido un error,intenta nuevamente", "error");
@@ -304,8 +299,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                 }
                             });
                         });
-                    },
-                    CargarTotales: function () {
+                    },CargarTotales: function () {
 
                         var totales = 0;
                         var totaliva = 0;
@@ -326,7 +320,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                         $('.eliminar').off('click').on('click', function () {
                             var id = $(this).data('id');
                             swal({title: "",
-                                text: "¿La entrada se eliminará, está seguro?",
+                                text: "¿La salida se eliminará, está seguro?",
                                 type: "warning",
                                 showCancelButton: true,
                                 confirmButtonColor: "rgb(174, 222, 244)",
@@ -335,10 +329,10 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                             }, function (isConfirm) {
                                 if (isConfirm) {
                                     $.ajax({
-                                        url: 'PeticionesEntradas.php',
+                                        url: 'PeticionesSalidas.php',
                                         type: 'POST',
                                         data: {
-                                            Bandera: "EliminarEntrada",
+                                            Bandera: "EliminarSalida",
                                             id: id
                                         },
                                         success: function (resp) {
@@ -346,7 +340,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                             console.log(resp);
                                             if (resp.Salida === true && resp.Mensaje === true) {
                                                 swal({title: "",
-                                                    text: "La entrada se ha eliminado exitosamente!",
+                                                    text: "La salida se ha eliminado exitosamente!",
                                                     type: "success",
                                                     showCancelButton: false,
                                                     confirmButtonColor: "rgb(174, 222, 244)",
@@ -368,8 +362,8 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
 
                         });
                     }
-
                 }
+            
 
             </script>
             <?php

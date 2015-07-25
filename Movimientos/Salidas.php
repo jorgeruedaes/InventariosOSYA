@@ -628,7 +628,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                             if (resp.Salida === true && resp.Mensaje === true) {
                                                                                                                    
                                                                                                             } else {
-                                                                                                                swal("Importante!", "La cantidad en stock de ese producto son menores a las ingresadas. En el stock hay  "+resp.Numero+" unidades. ", "error");
+                                                                                                                swal("Importante!", "La cantidad en stock del producto es menor a la ingresada. En el stock hay  "+resp.Numero+" unidades. ", "error");
                                                                                                             }
                                                                                                         }
                                                                                                     });

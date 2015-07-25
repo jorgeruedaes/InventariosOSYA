@@ -58,14 +58,16 @@
                                                     <li class="dropdown-submenu">
                                                         <a tabindex="-1" href="#">Entradas</a>
                                                         <ul class="dropdown-menu">
-                                                            <li><a href="../Movimientos/Entradas.php">Nueva</a></li>
+                                                            <li><a href="../Movimientos/Entradas.php">Nueva entrada</a></li>
+                                                             <li><a href="../Movimientos/ConsultaEntradas.php">Consultar</a></li>
                                                             <!--<li><a href="Amonestaciones/Jugadores/ModificarAmonestacionesDePartidos.php">Por partido</a></li>-->
                                                         </ul>
                                                     </li>
                                                     <li class="dropdown-submenu">
                                                         <a tabindex="-1" href="#">Salidas</a>
                                                         <ul class="dropdown-menu">
-                                                            <li><a href="../Movimientos/Salidas.php">Nueva</a></li>
+                                                            <li><a href="../Movimientos/Salidas.php">Nueva salida</a></li>
+                                                             <li><a href="../Movimientos/ConsultaSalidas.php">Consultar</a></li>
                                                         </ul>
                                                     </li>
                                                 </ul>
