@@ -70,7 +70,6 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
             $entradas = $query2['cantidad'];
             $stock = $entradas - $salidas;
             if ($stock >= $cantidad) {
-                
             } else {
                 $bandera = false;
             }
