@@ -45,12 +45,12 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                     <table id="tablaentradas" class="table table-striped table-bordered" cellspacing="0" width="100%" style="font-size:14px">
                         <thead>
                             <tr>
-                                <th>No. Entrada</th>
-                                <th>Fecha</th>
-                                <th>Encargado</th>
+                                <th width="5%">No. Entrada</th>
+                                <th width="10%">Fecha</th>
+                                <th width="12%">Encargado</th>
                                 <th>Proveedor</th>
-                                <th>Tipo</th>
-                                <th>Opciones</th>
+                                <th width="10%">Tipo</th>
+                                <th width="10%">Opciones</th>
                             </tr>
                         </thead>
                         <tbody>

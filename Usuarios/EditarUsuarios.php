@@ -76,9 +76,9 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                     <table id="tablajugadores" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>Identificación</th>
+                                                <th width="12%">Identificación</th>
                                                 <th>Nombre</th>
-                                                <th>Tipo</th>
+                                                <th width="12%">Tipo</th>
                                                 <th width="10%">Opciones</th>
                                             </tr>
                                         </thead>
@@ -128,10 +128,10 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                     <table id="tablajugadores1" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>Identificación</th>
+                                                <th width="12%">Identificación</th>
                                                 <th>Nombre</th>
-                                                <th>Tipo</th>
-                                                <th>Opciones</th>
+                                                <th width="10%">Tipo</th>
+                                                <th width="10%">Opciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
