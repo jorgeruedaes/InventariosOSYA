@@ -79,7 +79,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                 <th>Identificación</th>
                                                 <th>Nombre</th>
                                                 <th>Tipo</th>
-                                                <th>Opciones</th>
+                                                <th width="10%">Opciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -96,7 +96,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     <td>
         <!--                                                <button id="editar" type="button" class="btn btn-success editar" data-id="<?php echo $listajugadores["cc"] ?>" 
                                                                 data-toggle="modal" >Editar</button>-->
-                                                        <button class="btn btn-default eliminar" data-id="<?php echo $listajugadores["cc"] ?>">Eliminar</button>
+                                                        <button class="btn btn-default eliminar"style="margin-left: 25%;" data-id="<?php echo $listajugadores["cc"] ?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                                                     </td>
 
                                                 </tr>
@@ -148,7 +148,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     <td>
         <!--                                                <button id="editar" type="button" class="btn btn-success editar" data-id="<?php echo $listajugadores["cc"] ?>" 
                                                                 data-toggle="modal" >Editar</button>-->
-                                                        <button class="btn btn-default activar" data-id="<?php echo $listajugadores["cc"] ?>">Activar</button>
+                                                        <button class="btn btn-default activar" style="margin-left: 25%;" data-id="<?php echo $listajugadores["cc"] ?>"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></button>
                                                     </td>
 
                                                 </tr>

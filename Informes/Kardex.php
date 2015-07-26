@@ -301,6 +301,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                 RecargarEventos: function () {
                                                     Kardex.EventoCambioTipo();
                                                     Kardex.EventoCambioUsarFechas();
+                                                    Kardex.AgregarTabla();
                                                 },
                                                 EventoCambioTipo:function(){
                                                     $('.tipo').off('change').on('change',function(){
@@ -355,14 +356,15 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     });
                                                 },
                                                 CargarArticulos:function(){
-                                                    
+                                                    $('.modal-body').html('<table id="productos" class="table table-striped table-bordered" cellspacing="0" width="100%"><thead><tr><th>Codigo</th><th>Nombre</th></tr></thead><tbody></tbody></table>');
                                                 },
                                                 CargarProveedores:function(){
-                                                    
+                                                         $('.modal-body').html('<table id="proveedores" class="table table-striped table-bordered" cellspacing="0" width="100%"><thead><tr><th>Nit</th><th>Nombre</th></tr></thead><tbody></tbody></table>');
                                                 },
                                                 CargarClientes:function(){
-                                                    
-                                                },
+                                                         $('.modal-body').html('<table id="clientes" class="table table-striped table-bordered" cellspacing="0" width="100%"><thead><tr><th>Nit</th><th>Nombre</th></tr></thead><tbody></tbody></table>');
+                                               
+                                               },
                                                 CargasCasoTodos:function(){
                                                     
                                                 },
@@ -376,7 +378,20 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                              $('.fechafinalmostrar').css({display:"none"});
                                                          }
                                                      });
-                                                }
+                                                },
+                              AgregarTabla:function(){
+                               $('.agregar').off('click').on('click',function(){
+                                 $('.modal').modal('show');
+                                 $('.modal').children().children().children('.modal-body').html('');
+                                        if($('.tipo').val()==="Proveedor"){
+                                            Kardex.CargarProveedores();
+                                        } else if($('.tipo').val()==="Cliente"){
+                                            Kardex.CargarClientes();
+                                        } else if($('.tipo').val()==="Productos"){
+                                            Kardex.CargarArticulos();
+                                        }
+    });
+                    }
                                                 
                                             };
                                             $(document).ready(function () {

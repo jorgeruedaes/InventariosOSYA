@@ -78,8 +78,12 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                         <tbody>
 
                                             <?php
+                                            
                                             $mio=$_SESSION['identificacion'];
-                                            $consulta = mysql_query("SELECT * FROM tb_usuarios WHERE estado='Activo' and (tipo='Bodega' or tipo='Administrador') and cc!=$mio ");
+                                             $tipousuario=  $_SESSION['tipo_usuario'];
+                                           
+                                             $consulta = mysql_query("SELECT * FROM tb_usuarios WHERE estado='Activo' and (tipo='Bodega' or tipo='Administrador') and cc!=$mio ");
+                                            
                                             while ($listajugadores = mysql_fetch_array($consulta)) {
                                                 $producto = $listajugadores["cc"];
                                                 ?>
@@ -125,7 +129,10 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                             </div>
                 </div></div>
 
-
+                                            <!--            MODAL PARA MANEJAR AGREGAR LAS COSAS-->
+                                            <!--            MODAL PARA MANEJAR AGREGAR LAS COSAS-->
+                                                      <!--            MODAL PARA MANEJAR AGREGAR LAS COSAS-->
+                                                                                       
             <div class="modal fade" id="myModal" tabindex="-1" data-jugador="" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -137,8 +144,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <form > 
-                                        <div class="row">
+                                 <div class="row">
                                             <div class="col-md-5 col-md-offset-1">
                                                 <br>
                                             </div>
@@ -194,22 +200,21 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
+                                    
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <input type="hidden" id="identificador"/>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-success guardar">Guardar cambios</button>
+                            <button type="button" class="btn btn-info guardar">Agregar</button>
                         </div>
                     </div>
                 </div>
             </div>
-
-
+        
             <script>
-
+             
                 $(document).ready(function () {
                     editarProductos.inicio();
                 });
@@ -260,6 +265,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                     },
                     recargarEventos: function () {
                        editarProductos.EventoDesactivarUsuario();
+                   
                     },
                     EventoDesactivarUsuario: function () {
                         $('.desactivar').off('click').on('click', function () {

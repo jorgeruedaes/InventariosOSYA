@@ -38,7 +38,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         }
     } else if ($Bandera === "TraerProductos") {
         $valor = $_POST['id'];
-        $query = mysql_query("SELECT * FROM `tb_productos` WHERE  Estado='Activo'");
+        $query = mysql_query("SELECT * FROM `tb_productos` WHERE  Estado='Activo' and proveedor=$valor");
         $productos = new stdClass();
         $array = array();
         while ($query1 = mysql_fetch_array($query)) {
@@ -87,7 +87,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         $fecha = $datos['fecha'];
         $cliente=$datos['proveedor'];
         $query = mysql_query("INSERT INTO `tb_salidas`(`id_salida`, `fecha`, `tipo`, `encargado`,cliente)"
-                . " VALUES ($factura,'$fecha','$tipo','$creador',$cliente)");
+                . " VALUES ($factura,'$fecha','$tipo','$creador','$cliente')");
         $producto = $datos['productos'];
         if ($query) {
                 foreach ($producto as $cosa) {
@@ -110,7 +110,25 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         } else {
             $resultado.='"Mensaje":false';
         }
-    }
+    } else if ($Bandera === "TraerTodosProductos") {
+        $query = mysql_query("SELECT * FROM `tb_productos` WHERE  Estado='Activo' ");
+        $productos = new stdClass();
+        $array = array();
+        while ($query1 = mysql_fetch_array($query)) {
+            $id = $query1['id_producto'];
+            $nombre = $query1['nombre'];
+            $valor = $query1['valor'];
+            $productos = array("id" => $id, "nombre" => $nombre, "valor" => $valor);
+            array_push($array, $productos);
+        }
+        $json = json_encode($array);
+        if ($query) {
+            $resultado.='"Mensaje":true';
+            $resultado.=',"Productos":' . $json . '';
+        } else {
+            $resultado.='"Mensaje":false';
+        }
+    } 
 } else {
     $resultado = '{"Salida":false,';
 }

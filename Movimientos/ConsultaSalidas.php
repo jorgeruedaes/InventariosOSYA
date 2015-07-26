@@ -65,10 +65,10 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                 $fecha = $listasalidas["fecha"];
                                 $tipo = $listasalidas["tipo"];
                                     
-                                    $consultanombreencargado = mysql_query("SELECT * FROM tb_usuarios WHERE cc =$idencargado");
+                                    $consultanombreencargado = mysql_query("SELECT * FROM tb_usuarios WHERE cc ='$idencargado'");
                                     $resultado = mysql_fetch_array($consultanombreencargado);
                                     
-                                    $consultanombrecliente = mysql_query("SELECT * FROM tb_usuarios WHERE cc =$idcliente");
+                                    $consultanombrecliente = mysql_query("SELECT * FROM tb_usuarios WHERE cc ='$idcliente'");
                                     $resultados = mysql_fetch_array($consultanombrecliente);
                                     
                                     ?>

@@ -282,7 +282,6 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                                         <table id="tabla" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                                                                                                             <thead>
                                                                                                                                 <tr>
-
                                                                                                                                     <th>Codigo</th>
                                                                                                                                     <th>Nombre</th>
                                                                                                                                 </tr>
@@ -308,7 +307,9 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                         <script>
 
                                                                                             var Creador = '<?php echo $_SESSION['identificacion']; ?>'  // creador del producto o quien lo agrega
-                                                                                            var Salida = {
+                                                                                            var Prueba=false;
+                                                                                            var pruebafactura=false;
+                                                                                               var Salida = {
                                                                                                 Inicio: function () {
                                                                                                     Salida.EventoSeleccionarProvedoor();
                                                                                                     Salida.EventoAgregarProducto();
@@ -380,7 +381,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                             type: 'POST',
                                                                                                             async: true,
                                                                                                             data: {
-                                                                                                                Bandera: "TraerProductos",
+                                                                                                                Bandera: "TraerTodosProductos",
                                                                                                                 id: nit
                                                                                                             },
                                                                                                             success: function (resp) {
@@ -495,15 +496,16 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                     });
                                                                                                 },
                                                                                                 ValidacionGeneral: function () {
-                                                                                                    if($('.factura').val()!== ""){
+                                                                                                    if($('.factura').val()!== "" && /[0-9]{1,9}(\.[0-9]{0,10})?$/.test($('.factura').val())){
                                                                                                         if ($('.tipoentrada').val() !== "") {
                                                                                                             if ($('.nit').val() !== "") {
                                                                                                                 if ($('.tablaproductos tbody tr').size() > 0) {
                                                                                                                     var valor = true;
                                                                                                                     $('.tablaproductos tbody tr').each(function () {
                                                                                                                         $(this).children().children('.cantidad').val();
-                                                                                                                        if ($(this).children().children('.cantidad').val() <= 0) {
+                                                                                                                        if ($(this).children().children('.cantidad').val() <= 0 && !/[0-9]{1,9}(\.[0-9]{0,10})?$/.test($(this).children().children('.cantidad').val())) {
                                                                                                                             valor = false;
+                                                                                                                            swal("", "Un valor ingresado en el campo de cantidad no es valido,intenta nuevamente.", "error");
                                                                                                                         }
                                                                                                                     });
                                                                                                                     return valor;
@@ -529,7 +531,10 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                 },
                                                                                                 EnviarDatos: function () {
                                                                                                     $('.guardar').off('click').on('click', function () {
+                                                                                                        Salida.ValidacionFinalSalidasCantidades();
                                                                                                         if (Salida.ValidacionGeneral()) {
+                                                                                                            if(Prueba){
+                                                                                                                if(pruebafactura){
                                                                                                             $.ajax({
                                                                                                                 url: 'PeticionesMovimientos.php',
                                                                                                                 type: 'POST',
@@ -560,13 +565,19 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                                     }
                                                                                                                 }
                                                                                                             });
+                                                                                                        }else{
+                                                                                                               swal("Importante!", "En numero de la factura no es valido.", "error");
+                                                                                                        }
+                                                                                                        }else{
+                                                                                                             swal("Importante!", "Alguna cantidad de un producto de los que estan incluidos en la salida no tiene un valor valido.", "error");
+                                                                                                        }
                                                                                                         }
                                                                                                     });
 
                                                                                                 },
                                                                                                 TomarDatos: function () {
                                                                                                        var date = new Date();
-                                                                                                    var fecha = date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate();
+                                                                                                    var fecha = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
                                                                                                     var Salida = new Object();
 
                                                                                                     var productos = new Array();
@@ -596,7 +607,9 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
 
                                                                                                             var resp = $.parseJSON(resp);
                                                                                                             if (resp.Salida === true && resp.Mensaje === true) {
+                                                                                                                pruebafactura=true;
                                                                                                             } else {
+                                                                                                                pruebafactura=false;
                                                                                                                 swal("Importante!", "El la salida que haz introducido ya existe,ingresa una diferente.", "warning");
                                                                                                             }
                                                                                                         }
@@ -617,6 +630,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                     $.ajax({
                                                                                                         url: 'PeticionesMovimientos.php',
                                                                                                         type: 'POST',
+                                                                                                        async:false,
                                                                                                         data: {
                                                                                                             Bandera: "PruebaCantidades",
                                                                                                             id: productos,
@@ -626,8 +640,9 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
 
                                                                                                             var resp = $.parseJSON(resp);
                                                                                                             if (resp.Salida === true && resp.Mensaje === true) {
-                                                                                                                   
+                                                                                              
                                                                                                             } else {
+                                                                                                            
                                                                                                                 swal("Importante!", "La cantidad en stock del producto es menor a la ingresada. En el stock hay  "+resp.Numero+" unidades. ", "error");
                                                                                                             }
                                                                                                         }
@@ -638,6 +653,31 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                 HallarFecha:function(){
                                                                                                     var date = new Date();
                                                                                                     return date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate();
+                                                                                                },
+                                                                                                ValidacionFinalSalidasCantidades:function(){
+                                                                                                    $('.tablaproductos tbody tr').each(function () {
+                                                                                                     var  productos= $(this).children('.nit').text();
+                                                                                                     var valores =$(this).children().children('.cantidad').val();
+                                                                                                          $.ajax({
+                                                                                                        url: 'PeticionesMovimientos.php',
+                                                                                                        type: 'POST',
+                                                                                                    
+                                                                                                        data: {
+                                                                                                            Bandera: "PruebaCantidades",
+                                                                                                            id: productos,
+                                                                                                            cantidad:valores
+                                                                                                        },
+                                                                                                        success: function (resp) {
+
+                                                                                                            var resp = $.parseJSON(resp);
+                                                                                                            if (resp.Salida === true && resp.Mensaje === true) {
+                                                                                                           Prueba=true;
+                                                                                                            } else {
+                                                                                                             Prueba=false;
+                                                                                                            }
+                                                                                                        }
+                                                                                                    });
+                                                                                                    });
                                                                                                 }
                                                                                             };
                                                                                             $(document).ready(function () {
