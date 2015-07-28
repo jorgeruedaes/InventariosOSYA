@@ -1,8 +1,9 @@
+
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <?php
     session_start();
-    $pruebadeinicio=20;
+    $pruebadeinicio=22;
     include('Conexion.php');
     include('RutinaDeLogueo.php');
     if ($pruebadeinicio == 2) {
@@ -96,23 +97,23 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li class="dropdown">
+<!--                                        <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informes <span class="caret"></span></a>
                                             <ul class="dropdown-menu" role="menu">
                                                 <li><a href="Informes/Kardex.php">Kardex</a></li>
-                                                <!--<li><a href="Noticias/ModificarNoticias.php">Editar noticia</a></li>-->
+                                                <li><a href="Noticias/ModificarNoticias.php">Editar noticia</a></li>
                                             </ul>
-                                        </li>
+                                        </li>-->
                                         
                                          <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Usuarios <span class="caret"></span></a>
                                             <ul class="dropdown-menu" role="menu">
                                                 <li><a href="Usuarios/AgregarUsuarios.php">Nuevo Usuario</a></li>
-                                                <li><a href="Usuarios/EditarUsuarios.php">Editar Usuarios</a></li>
-                                        <li><a href="Usuarios/CrearPerfil.php">Crear Perfil</a></li>
-                                                <li><a href="Usuarios/EditarPerfil.php">Ver Perfiles</a></li>
-                           <!--                             <li><a href="Partidos/ModificarAsistencia.php">Editar asistencia</a></li>-->
-                                            </ul>
+                                                <li><a href="Usuarios/EditarUsuarios.php">Editar Usuarios</a></li><!--
+                                                <li><a href="Partidos/ModificarResultados.php">Editar resultado</a></li>
+                                                <li><a href="Partidos/ModificarCalendario.php">Editar calendario</a></li>
+                                                <li><a href="Partidos/ModificarAsistencia.php">Editar asistencia</a></li>
+-->                                            </ul>
                                         </li>
                                         <!--                                        <li class="dropdown disabled">
                                                                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Estadísticas</a>

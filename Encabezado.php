@@ -16,7 +16,7 @@
 
     <body>
         <?php
-        if ($pruebadeinicio == 2) {
+        if ($pruebadeinicio == 1) {
             ?>
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
@@ -32,7 +32,7 @@
                             <div class="col-md-8 col-md-offset-2">
                                 <div class="container-fluid" style="width: 800px">   
                                     <div class="navbar-header">
-                                        <a class="navbar-brand" href="../modulobodega.php">
+                                        <a class="navbar-brand" href="../moduloadministracion.php">
                                             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                         </a>
                                     </div>
@@ -116,20 +116,20 @@
             </div>
 
             <?php
-        } else if ($pruebadeinicio == 1) {
+        } else if ($pruebadeinicio == 2) {
             ?>
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div id="header">
-                        <div><img src="../images/osya.png" style="padding-left: 20px"/></div>
+                        <div><img src="../images/aseo.png" style="width: 400px;height: 100px"/></div>
                     </div>
 
-                    <nav class="navbar navbar-default"  style="background-image:none;background-color:#27AE60">
+                    <nav class="navbar navbar-default"  style="background-image:none;background-color:#2980B9">
                         <div class="row">
                             <div class="col-md-8 col-md-offset-2">
                                 <div class="container-fluid" style="width: 800px">   
                                     <div class="navbar-header">
-                                        <a class="navbar-brand" href="../moduloadministracion.php">
+                                        <a class="navbar-brand" href="../modulobodega.php">
                                             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                         </a>
                                     </div>
@@ -156,14 +156,16 @@
                                                     <li class="dropdown-submenu">
                                                         <a tabindex="-1" href="#">Entradas</a>
                                                         <ul class="dropdown-menu">
-                                                            <li><a href="../Movimientos/Entradas.php">Nueva</a></li>
+                                                            <li><a href="../Movimientos/Entradas.php">Nueva entrada</a></li>
+                                                             <li><a href="../Movimientos/ConsultaEntradas.php">Consultar</a></li>
                                                             <!--<li><a href="Amonestaciones/Jugadores/ModificarAmonestacionesDePartidos.php">Por partido</a></li>-->
                                                         </ul>
                                                     </li>
                                                     <li class="dropdown-submenu">
                                                         <a tabindex="-1" href="#">Salidas</a>
                                                         <ul class="dropdown-menu">
-                                                            <li><a href="../Movimientos/Salidas.php">Nueva</a></li>
+                                                            <li><a href="../Movimientos/Salidas.php">Nueva salida</a></li>
+                                                             <li><a href="../Movimientos/ConsultaEntradas.php">Consultar</a></li>
                                                         </ul>
                                                     </li>
                                                 </ul>
