@@ -91,6 +91,12 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     <label>Factura:</label>
                                                     <input type="text" class="form-control factura" name="codigobarras">
                                                 </div>
+                                                <div class="col-md-2 botonderemision" style="display:none ;  margin-top: 27px;">
+                                                <button type="button" class="btn btn-default botonremision" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                               </button>    
+                                                </div>
+                                                
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-3 col-md-offset-2"> 
@@ -545,11 +551,13 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                             $('.proveedor').val('');
                                                                                                             $('.nit').val('');
                                                                                                             $('.seleccionar').css({display: ""});
+                                                                                                            $('.botonderemision').css({display: "none"});
                                                                                                         } else if ($(this).val() === "") {
                                                                                                             $('.facturas').css({display: "none"});
                                                                                                             $('.proveedor').val('');
                                                                                                             $('.nit').val('');
                                                                                                             $('.seleccionar').css({display: "none"});
+                                                                                                             $('.botonderemision').css({display: "none"});
                                                                                                         } else {
                                                                                                             $('.factura').val('');
                                                                                                             $('.facturas').css({display: ""});
@@ -557,6 +565,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                             $('#textoproveedor').text('Ciente');
                                                                                                             $('#myModalLabel1').text('Selecionar cliente');
                                                                                                             $('.seleccionar').css({display: "none"});
+                                                                                                             $('.botonderemision').css({display: ""});
                                                                                                         }
 
 
@@ -661,26 +670,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                     return Entrada;
                                                                                                 },
                                                                                                 EventosProbarFactura: function () {
-                                                                                                    $('.factura').off('keyup').on('keyup', function () {
-                                                                                                        if ($('.tipoentrada').val() === "Factura") {
-                                                                                                            $.ajax({
-                                                                                                                url: 'PeticionesMovimientos.php',
-                                                                                                                type: 'POST',
-                                                                                                                data: {
-                                                                                                                    Bandera: "PruebaExistencia",
-                                                                                                                    id: $('.factura').val(),
-                                                                                                                },
-                                                                                                                success: function (resp) {
-
-                                                                                                                    var resp = $.parseJSON(resp);
-                                                                                                                    if (resp.Salida === true && resp.Mensaje === true) {
-
-                                                                                                                    } else {
-                                                                                                                        swal("Importante!", "La factura que has introducido ya existe.", "warning");
-                                                                                                                    }
-                                                                                                                }
-                                                                                                            });
-                                                                                                        } else {
+                                                                                                    $('.botonremision').off('click').on('click', function () {
                                                                                                             $.ajax({
                                                                                                                 url: 'PeticionesMovimientos.php',
                                                                                                                 type: 'POST',
@@ -700,7 +690,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                                     }
                                                                                                                 }
                                                                                                             });
-                                                                                                        }
+                                                                                                        
                                                                                                     });
 
                                                                                                 },
