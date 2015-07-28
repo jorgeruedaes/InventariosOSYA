@@ -11,7 +11,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
     <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
             <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-            <title>Inventario OSYA</title>
+            <title>Inventarios ASEO</title>
             <link rel="stylesheet" href="../css/styler.css" type="text/css" media="all" />
             <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
             <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
@@ -46,7 +46,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
 
                                 margin: 0 auto;
                             }
-                        
+
                         </style>
                         <body>
 
@@ -85,7 +85,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
 
                                             </div>
                                             <div class="col-md-4 "> 
-                                              
+
                                                 <label>Proveedor:</label>
                                                 <select class="form-control proveedor" required="required" name="proveedor">
                                                     <option value="" selected></option>
@@ -108,7 +108,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4 col-md-offset-2"> 
-                                                  <label>Descripción:</label>
+                                                <label>Descripción:</label>
                                                 <textarea class="form-control descripcion" rows="3" style="  resize: inherit;"></textarea>
 
                                             </div>
@@ -256,7 +256,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     $('.limpiar').off('click').on('click', function () {
                                                         $('.codigobarras').val('');
                                                         $('.nombre').val('');
-                                                                $('.valor').val('');
+                                                        $('.valor').val('');
                                                         $('.proveedor').val('');
                                                         $('.descripcion').val('');
                                                     });

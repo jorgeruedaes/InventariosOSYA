@@ -10,7 +10,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
     <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
             <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-            <title>Inventario OSYA</title>
+            <title>Inventarios ASEO</title>
             <link rel="stylesheet" href="../css/styler.css" type="text/css" media="all" />
             <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
             <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
@@ -86,13 +86,13 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                 <input type="email" class="form-control email" name="valor" required>
 
                                             </div>
-                                              <div class="col-md-4 "> 
+                                            <div class="col-md-4 "> 
                                                 <label>Tipo:</label>
                                                 <select class="form-control tipo" required="required" name="proveedor">
                                                     <option value="" selected></option>
                                                     <option value="Cliente" >Cliente</option>
-                                                   <option value="Proveedor" >Proveedor</option>
-                                                   
+                                                    <option value="Proveedor" >Proveedor</option>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -102,7 +102,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                             </div>
                                         </div>
                                         <div class="row">
-                                          
+
                                         </div>
                                         <div class="row">
                                             <div class="col-md-8 col-md-offset-2">
@@ -163,7 +163,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                     codigo: $('.cc').val(),
                                                                     nombre: $('.nombre').val(),
                                                                     tipo: $('.tipo').val(),
-                                                                     email: $('.email').val(),
+                                                                    email: $('.email').val(),
                                                                     creador: Creador
 
                                                                 },
@@ -217,15 +217,15 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                 },
                                                 ValidarGeneral: function () {
                                                     if (/\w/gi.test($('.nombre').val())) {
-                                                        if ($('.cc').val().length>5) {
-                                                                if (/\w/gi.test($('.tipo').val())) {
-                                                                    return true;
-                                                                } else {
-                                                                    $('.tipo').focus();
-                                                                    swal("", "Debes seleccionar un tipo de usuario, intenta nuevamente.", "error");
-                                                                    return false;
-                                                                }
-                                                            
+                                                        if ($('.cc').val().length > 5) {
+                                                            if (/\w/gi.test($('.tipo').val())) {
+                                                                return true;
+                                                            } else {
+                                                                $('.tipo').focus();
+                                                                swal("", "Debes seleccionar un tipo de usuario, intenta nuevamente.", "error");
+                                                                return false;
+                                                            }
+
                                                         } else {
                                                             $('.cc').focus();
                                                             swal("", "La cédula o el NIT no son válidos, intenta nuevamente.", "error");

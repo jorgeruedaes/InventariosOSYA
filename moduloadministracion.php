@@ -10,7 +10,7 @@
         ?>
         <head>
             <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-            <title>Inventarios OSYA</title>
+            <title>Inventarios ASEO</title>
             <link rel="stylesheet" href="css/styler.css" type="text/css" media="all" />
             <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
             <script type="text/javascript" src="js/jquery-1.11.2.js"></script>
@@ -45,13 +45,13 @@
                         <div id="header">
                                 <!--<b><p style="color:#3CB371;font-size:16px"id="bienvenido"><?php echo $_SESSION['admin'] ?></p></b>-->
 
-                                <a style="font-size:15px;font-family: sans-serif;color:#27AE60;text-decoration: none;"class="cerrar" href="cerrarsesion.php">Salir 
+                                <a style="font-size:15px;font-family: sans-serif;color:#E74C3C;text-decoration: none;"class="cerrar" href="cerrarsesion.php">Salir 
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
 
-                                <div><img src="images/osya.png" style="padding-left: 20px;"/></div>
+                                <div><img src="images/aseo.png" style="width: 400px;height: 100px"/></div>
                         </div>
 
-                        <nav class="navbar navbar-default" style="background-image:none;background-color:#27AE60">
+                        <nav class="navbar navbar-default" style="background-image:none;background-color:#2980B9">
                              <div class="row">
                             <div class="col-md-8 col-md-offset-2">
                             <div class="container-fluid" style="width: 800px"> 

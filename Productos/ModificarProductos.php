@@ -11,7 +11,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
     <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
             <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-            <title>Inventarios OSYA</title>
+            <title>Inventarios ASEO</title>
             <link rel="stylesheet" href="../css/styler.css" type="text/css" media="all" />
             <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
             <!--<link rel="stylesheet" type="text/css" href="../../DataTables-1.10.7/media/css/jquery.dataTables.css">-->
@@ -161,7 +161,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     </td>
                                                     <td>
                                                         <button tiitle="Activar" class="btn btn-default activar" data-id="<?php echo $listajugadores["id_producto"] ?>">
-                                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Activar</button>
+                                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Activar</button>
                                                     </td>
 
                                                 </tr>
@@ -347,50 +347,50 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                             });
                         });
                     },
-                    EventoActivarProducto: function(){
-                           $('.activar').off('click').on('click', function () {
-                                var id = $(this).data('id');
-                                  swal({title: "",
-                                                text: "¿El producto se activará, está seguro?",
-                                                type: "warning",
-                                                showCancelButton: true,
-                                                confirmButtonColor: "rgb(174, 222, 244)",
-                                                confirmButtonText: "Ok",
-                                                closeOnConfirm: false
-                                            }, function (isConfirm) {
-                                                if (isConfirm) {
-                                                     $.ajax({
-                                    url: 'PeticionesProductos.php',
-                                    type: 'POST',
-                                    data: {
-                                        Bandera: "ActivarProducto",
-                                        id: id
-                                    },
-                                    success: function (resp) {
-                                        var resp = $.parseJSON(resp);
-                                        if (resp.Salida === true && resp.Mensaje === true) {
-                                            swal({title: "",
-                                                text: "El producto se ha activado!",
-                                                type: "success",
-                                                showCancelButton: false,
-                                                confirmButtonColor: "rgb(174, 222, 244)",
-                                                confirmButtonText: "Ok",
-                                                closeOnConfirm: false
-                                            }, function (isConfirm) {
-                                                if (isConfirm) {
-                                                    window.location.reload();
-                                                }
-                                            });
-                                        } else {
-                                            swal("", "Ha habido un error, intenta nuevamente", "error");
+                    EventoActivarProducto: function () {
+                        $('.activar').off('click').on('click', function () {
+                            var id = $(this).data('id');
+                            swal({title: "",
+                                text: "¿El producto se activará, está seguro?",
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "rgb(174, 222, 244)",
+                                confirmButtonText: "Ok",
+                                closeOnConfirm: false
+                            }, function (isConfirm) {
+                                if (isConfirm) {
+                                    $.ajax({
+                                        url: 'PeticionesProductos.php',
+                                        type: 'POST',
+                                        data: {
+                                            Bandera: "ActivarProducto",
+                                            id: id
+                                        },
+                                        success: function (resp) {
+                                            var resp = $.parseJSON(resp);
+                                            if (resp.Salida === true && resp.Mensaje === true) {
+                                                swal({title: "",
+                                                    text: "El producto se ha activado!",
+                                                    type: "success",
+                                                    showCancelButton: false,
+                                                    confirmButtonColor: "rgb(174, 222, 244)",
+                                                    confirmButtonText: "Ok",
+                                                    closeOnConfirm: false
+                                                }, function (isConfirm) {
+                                                    if (isConfirm) {
+                                                        window.location.reload();
+                                                    }
+                                                });
+                                            } else {
+                                                swal("", "Ha habido un error, intenta nuevamente", "error");
+                                            }
                                         }
-                                    }
 
-                                });
-                                                }
-                                            });
-                                 
-                           });
+                                    });
+                                }
+                            });
+
+                        });
                     },
                     EventoEnviarDatos: function () {
                         $('.guardar').off('click').on('click', function () {

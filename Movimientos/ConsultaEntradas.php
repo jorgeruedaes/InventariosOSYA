@@ -9,7 +9,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
     <html>
         <head>
             <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-            <title>Inventario OSYA</title>
+            <title>Inventarios ASEO</title>            
             <link rel="stylesheet" href="../css/styler.css" type="text/css" media="all" />
             <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
             <script type="text/javascript" charset="utf8" src="../DataTables-1.10.7/media/js/jquery.js"></script>
@@ -88,7 +88,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                         <td>
                                             <button data-id="<?php echo $listaentradas["id_entrada"] ?>" class="btn btn-default consultar" data-toggle="modal">
                                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                       
+
                                             <button data-id="<?php echo $listaentradas["id_entrada"] ?>" class="btn btn-default eliminar">
                                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                                         </td>
@@ -268,39 +268,39 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                     $('.modal').modal('show');
                                     var resp = $.parseJSON(resp);
                                     if (resp.Salida === true && resp.Mensaje === true) {
-                                    $('.tablaproductos tbody').html("");
-                                    $.each(resp.Entradas, function (i, item) {
-                                        var fecha = item.fecha;
-                                        var tipo = item.tipo;
-                                        var factura = item.factura;
-                                        var encargado = item.encargado;
-                                        var proveedor = item.proveedor;
+                                        $('.tablaproductos tbody').html("");
+                                        $.each(resp.Entradas, function (i, item) {
+                                            var fecha = item.fecha;
+                                            var tipo = item.tipo;
+                                            var factura = item.factura;
+                                            var encargado = item.encargado;
+                                            var proveedor = item.proveedor;
 
 
-                                        $('#fecha').text(fecha);
-                                        $('#tipo').text(tipo);
-                                        $('#entrada').text(factura);
-                                        $('#encargado').text(encargado);
-                                        $('#proveedor').text(proveedor);
+                                            $('#fecha').text(fecha);
+                                            $('#tipo').text(tipo);
+                                            $('#entrada').text(factura);
+                                            $('#encargado').text(encargado);
+                                            $('#proveedor').text(proveedor);
 
-                                    });
-                                    $.each(resp.Productos, function (i, item) {
-                                        var nombre = item.nombre;
-                                        var id = item.id;
-                                        var cantidad = item.cantidad;
-                                        var valor = item.valor;
-                                        var total = cantidad * valor;
-                                        $('.tablaproductos tbody').append('<tr class="cajaproductos">\n\
+                                        });
+                                        $.each(resp.Productos, function (i, item) {
+                                            var nombre = item.nombre;
+                                            var id = item.id;
+                                            var cantidad = item.cantidad;
+                                            var valor = item.valor;
+                                            var total = cantidad * valor;
+                                            $('.tablaproductos tbody').append('<tr class="cajaproductos">\n\
                                         <td scope="row" class="id">' + id + '</td><td>' + nombre + '</td>\n\
                                         <td>' + cantidad + '</td><td>' + valor + '</td><td class="total">' + total + '</td></tr>');
 
-                                    });
-                                    Entradas.CargarTotales();
+                                        });
+                                        Entradas.CargarTotales();
 
-                                    }else{
-                                         swal("", "Ha habido un error,intenta nuevamente", "error");
-                                        
-                                        }                         
+                                    } else {
+                                        swal("", "Ha habido un error,intenta nuevamente", "error");
+
+                                    }
                                 }
                             });
                         });

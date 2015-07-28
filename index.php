@@ -34,7 +34,7 @@ if (isset($_SESSION['admin'])) {
     <html>
         <head>
             <meta charset="utf-8" />
-            <title>Inventarios OSYA</title>
+            <title>Inventarios ASEO</title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
             <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
@@ -45,8 +45,13 @@ if (isset($_SESSION['admin'])) {
 
         <body>
             <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <br>
+                    </div>
+                </div>
                 <center>                                
-                    <img src="images/osya.png">
+                    <img style="width:400px;height:100px"src="images/aseoblanco.jpg">
                 </center>
 
                 <center> <div class="panel panel-default" style="width:410px">

@@ -11,7 +11,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
     <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
             <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-            <title>Inventarios OSYA</title>
+            <title>Inventarios ASEO</title>
             <link rel="stylesheet" href="../css/styler.css" type="text/css" media="all" />
             <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
             <!--<link rel="stylesheet" type="text/css" href="../../DataTables-1.10.7/media/css/jquery.dataTables.css">-->
@@ -58,81 +58,80 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
 
-                            <div class="row">
-                                <div class="col-md-8 col-md-offset-2"><br></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-8 col-md-offset-2"><br></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table id="tablajugadores" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                        <thead>
-                                            <tr>
-                                                <th width="6%">Identificación</th>
-                                                <th>Nombre</th>
-                                                <th width="15%">Tipo</th>
-                                                <th width="10%">Opciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2"><br></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2"><br></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table id="tablajugadores" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th width="6%">Identificación</th>
+                                        <th>Nombre</th>
+                                        <th width="15%">Tipo</th>
+                                        <th width="10%">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                                            <?php
-                                            
-                                            $mio=$_SESSION['identificacion'];
-                                             $tipousuario=  $_SESSION['tipo_usuario'];
-                                           
-                                             $consulta = mysql_query("SELECT * FROM tb_usuarios WHERE estado='Activo' and (tipo='Bodega' or tipo='Administrador') and cc!=$mio ");
-                                            
-                                            while ($listajugadores = mysql_fetch_array($consulta)) {
-                                                $producto = $listajugadores["cc"];
-                                                ?>
-                                                <tr class="default caja">
-                                                    <th scope="row"><?php echo $listajugadores["cc"] ?></th> 
-                                                    <td><?php echo $listajugadores["nombre"]." ".$listajugadores["apellido"]; ?></td>
-                                                    <td>
-                                          <?php echo $listajugadores["tipo"]; ?>
+                                    <?php
+                                    $mio = $_SESSION['identificacion'];
+                                    $tipousuario = $_SESSION['tipo_usuario'];
 
-                                                    </td>
-                                                    <td>
-                                                         <button type="button" data-id="<?php echo $listajugadores["cc"] ?>" class="btn btn-info desactivar" data-dismiss="modal">Desactivar</button>
-                                                    </td>
+                                    $consulta = mysql_query("SELECT * FROM tb_usuarios WHERE estado='Activo' and (tipo='Bodega' or tipo='Administrador') and cc!=$mio ");
 
-                                                </tr>
+                                    while ($listajugadores = mysql_fetch_array($consulta)) {
+                                        $producto = $listajugadores["cc"];
+                                        ?>
+                                        <tr class="default caja">
+                                            <th scope="row"><?php echo $listajugadores["cc"] ?></th> 
+                                            <td><?php echo $listajugadores["nombre"] . " " . $listajugadores["apellido"]; ?></td>
+                                            <td>
+                                                <?php echo $listajugadores["tipo"]; ?>
 
-                                                <?php
-                                            }
-                                            ?>
+                                            </td>
+                                            <td>
+                                                <button type="button" data-id="<?php echo $listajugadores["cc"] ?>" class="btn btn-info desactivar" data-dismiss="modal">Desactivar</button>
+                                            </td>
 
-                                        </tbody>
-                                    </table>
+                                        </tr>
 
-                                </div></div>
-                            <div class="row">
-                                <div class="col-md-8 col-md-offset-2"><br></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-8 col-md-offset-2"><br></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-8 col-md-offset-2"><br></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-8 col-md-offset-2"><br></div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-md-8 col-md-offset-2"><br></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-8 col-md-offset-2"><br></div>
-                            </div>
+                                        <?php
+                                    }
+                                    ?>
+
+                                </tbody>
+                            </table>
+
+                        </div></div>
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2"><br></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2"><br></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2"><br></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2"><br></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2"><br></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2"><br></div>
+                    </div>
                 </div></div>
 
-                                            <!--            MODAL PARA MANEJAR AGREGAR LAS COSAS-->
-                                            <!--            MODAL PARA MANEJAR AGREGAR LAS COSAS-->
-                                                      <!--            MODAL PARA MANEJAR AGREGAR LAS COSAS-->
-                                                                                       
+            <!--            MODAL PARA MANEJAR AGREGAR LAS COSAS-->
+            <!--            MODAL PARA MANEJAR AGREGAR LAS COSAS-->
+            <!--            MODAL PARA MANEJAR AGREGAR LAS COSAS-->
+
             <div class="modal fade" id="myModal" tabindex="-1" data-jugador="" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -144,63 +143,63 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                 <div class="row">
+                                    <div class="row">
+                                        <div class="col-md-5 col-md-offset-1">
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 col-md-offset-1"> 
+                                            <label>Nombre:</label>
+                                            <input type="text" class="form-control nombre" name="nombre1" required  id="nombre1">
+                                        </div>
+                                        <div class="col-md-5 "> 
+                                            <label>Valor Compra:</label>
+                                            <input type="text" class="form-control valor" name="apellido1" required  id="apellido1" >
+
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 col-md-offset-1">
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 col-md-offset-1">
+                                            <label>Estado:</label>
+                                            <select class="form-control estado" style=""  name="estado">
+                                                <option value=""></option>
+                                                <option value="Activo" selected>Activo</option>
+                                                <option value="Inactivo">Inactivo</option>
+
+                                            </select>
+
+                                        </div>
+                                        <div class="col-md-5 "> 
+                                            <label>Descripción:</label>
+                                            <textarea class="form-control descripcion" rows="3" style="resize: inherit"></textarea>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-md-5 col-md-offset-1">
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+
+                                        <div class="row">
                                             <div class="col-md-5 col-md-offset-1">
                                                 <br>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-5 col-md-offset-1"> 
-                                                <label>Nombre:</label>
-                                                <input type="text" class="form-control nombre" name="nombre1" required  id="nombre1">
-                                            </div>
-                                            <div class="col-md-5 "> 
-                                                <label>Valor Compra:</label>
-                                                <input type="text" class="form-control valor" name="apellido1" required  id="apellido1" >
+                                    </div>
 
-                                            </div>
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5 col-md-offset-1">
-                                                <br>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5 col-md-offset-1">
-                                                <label>Estado:</label>
-                                                <select class="form-control estado" style=""  name="estado">
-                                                    <option value=""></option>
-                                                    <option value="Activo" selected>Activo</option>
-                                                    <option value="Inactivo">Inactivo</option>
-
-                                                </select>
-
-                                            </div>
-                                            <div class="col-md-5 "> 
-                                                <label>Descripción:</label>
-                                                <textarea class="form-control descripcion" rows="3" style="resize: inherit"></textarea>
-
-                                            </div>
-
-                                        </div>
-
-
-                                        <div class="row">
-                                            <div class="col-md-5 col-md-offset-1">
-                                                <br>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-
-
-                                            <div class="row">
-                                                <div class="col-md-5 col-md-offset-1">
-                                                    <br>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    
                                 </div>
                             </div>
                         </div>
@@ -212,9 +211,9 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                     </div>
                 </div>
             </div>
-        
+
             <script>
-             
+
                 $(document).ready(function () {
                     editarProductos.inicio();
                 });
@@ -264,8 +263,8 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                         editarProductos.recargarEventos();
                     },
                     recargarEventos: function () {
-                       editarProductos.EventoDesactivarUsuario();
-                   
+                        editarProductos.EventoDesactivarUsuario();
+
                     },
                     EventoDesactivarUsuario: function () {
                         $('.desactivar').off('click').on('click', function () {
@@ -285,7 +284,6 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                         data: {
                                             Bandera: "DesactivarUsuario",
                                             id: id,
-                             
                                         },
                                         success: function (resp) {
                                             var resp = $.parseJSON(resp);

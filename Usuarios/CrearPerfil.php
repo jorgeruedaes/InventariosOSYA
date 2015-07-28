@@ -10,7 +10,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
     <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
             <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-            <title>Inventario OSYA</title>
+            <title>Inventarios ASEO</title>
             <link rel="stylesheet" href="../css/styler.css" type="text/css" media="all" />
             <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
             <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
@@ -225,55 +225,55 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
 
                                                             }
                                                         });
-                                                            perfil.ComprobarUsuario();
+                                                        perfil.ComprobarUsuario();
                                                     });
 
-                                                
+
 
                                                 },
                                                 ProbarContraseña: function () {
-                                                        if ($('.contrasena1').val() === $('.contrasena2').val()) {
-                                                            return true;
-                                                        } else {
-                                                            swal("Importante!", "Las contraseñas no coinciden,intenta nuevamente.", "error");
-                                                            return false;
-                                                        }
-                                                   
+                                                    if ($('.contrasena1').val() === $('.contrasena2').val()) {
+                                                        return true;
+                                                    } else {
+                                                        swal("Importante!", "Las contraseñas no coinciden,intenta nuevamente.", "error");
+                                                        return false;
+                                                    }
+
 
                                                 },
                                                 EnviarDatos: function () {
                                                     $('.guardar').off('click').on('click', function () {
                                                         if (perfil.ValidarGeneral()) {
                                                             if (perfil.ProbarContraseña()) {
-                                                                        $.ajax({
-                                                                            url: 'PeticionesUsuarios.php',
-                                                                            type: 'POST',
-                                                                            data: {
-                                                                                Bandera: "CrearPerfil",
-                                                                                nombre: $('.nombre').val(),
-                                                                                apellido: $('.apellido').val(),
-                                                                                usuario: $('.usuario').val(),
-                                                                                pass: $('.contrasena1').val(),
-                                                                                email: $('.email').val(),
-                                                                                cc: $('.cc').val(),
-                                                                                pregunta: $('.pregunta').val(),
-                                                                                respuesta: $('.respuesta').val(),
-                                                                                tipo: $('.tipo').val(),
-                                                                            },
-                                                                            success: function (resp) {
-                                                                                var resp = $.parseJSON(resp);
-                                                                                if (resp.Salida === true && resp.Mensaje === true) {
-                                                                                      swal("", "El usuario se ha creado exitosamente.", "success");
-                                                                                } else {
-                                                                                    swal("Importante!", "Ha ocurrido un error y el usuario no se ha podido crear,intenta nuevamente", "error");
-                                                                                  
-                                                                                }
+                                                                $.ajax({
+                                                                    url: 'PeticionesUsuarios.php',
+                                                                    type: 'POST',
+                                                                    data: {
+                                                                        Bandera: "CrearPerfil",
+                                                                        nombre: $('.nombre').val(),
+                                                                        apellido: $('.apellido').val(),
+                                                                        usuario: $('.usuario').val(),
+                                                                        pass: $('.contrasena1').val(),
+                                                                        email: $('.email').val(),
+                                                                        cc: $('.cc').val(),
+                                                                        pregunta: $('.pregunta').val(),
+                                                                        respuesta: $('.respuesta').val(),
+                                                                        tipo: $('.tipo').val(),
+                                                                    },
+                                                                    success: function (resp) {
+                                                                        var resp = $.parseJSON(resp);
+                                                                        if (resp.Salida === true && resp.Mensaje === true) {
+                                                                            swal("", "El usuario se ha creado exitosamente.", "success");
+                                                                        } else {
+                                                                            swal("Importante!", "Ha ocurrido un error y el usuario no se ha podido crear,intenta nuevamente", "error");
 
-                                                                            }
-                                                                        });
+                                                                        }
+
                                                                     }
-                                                                
-                                                            
+                                                                });
+                                                            }
+
+
                                                         }
                                                     });
 
@@ -325,29 +325,29 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     }
                                                 },
                                                 ProbarCedula: function () {
-                                                    $('.cc').off('keyup').on('keyup',function(){
-                                                         $.ajax({
-                                                        url: 'PeticionesUsuarios.php',
-                                                        type: 'POST',
-                                                        data: {
-                                                            Bandera: "PruebaExistencia",
-                                                            valor: $(this).val(),
-                                                            async: true
-                                                        },
-                                                        success: function (resp) {
+                                                    $('.cc').off('keyup').on('keyup', function () {
+                                                        $.ajax({
+                                                            url: 'PeticionesUsuarios.php',
+                                                            type: 'POST',
+                                                            data: {
+                                                                Bandera: "PruebaExistencia",
+                                                                valor: $(this).val(),
+                                                                async: true
+                                                            },
+                                                            success: function (resp) {
 
-                                                            var resp = $.parseJSON(resp);
-                                                            if (resp.Salida === true && resp.Mensaje === true) {
-                                                            
-                                                            } else {
-                                                                swal("", "La cedula que intentas ingresar ya existe,intenta nuevamente.", "error");
-                                                                
+                                                                var resp = $.parseJSON(resp);
+                                                                if (resp.Salida === true && resp.Mensaje === true) {
+
+                                                                } else {
+                                                                    swal("", "La cedula que intentas ingresar ya existe,intenta nuevamente.", "error");
+
+                                                                }
+
                                                             }
+                                                        });
+                                                    });
 
-                                                        }
-                                                    });
-                                                    });
-                                                   
 
                                                 },
                                                 ValidacionDeLogueo: function () {

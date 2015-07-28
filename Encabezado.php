@@ -1,6 +1,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../css/styler.css" type="text/css" media="all" />
         <script type="text/javascript"  src="../DataTables-1.10.7/media/js/jquery.js"></script>
@@ -22,11 +23,11 @@
                     <div id="header">
 
 
-                        <div><img src="../images/osya.png" style="padding-left: 20px"/></div>
+                        <div><img src="../images/aseo.png" style="width: 400px;height: 100px"/></div>
 
                     </div>
 
-                    <nav class="navbar navbar-default"  style="background-image:none;background-color:#27AE60">
+                    <nav class="navbar navbar-default"  style="background-image:none;background-color:#2980B9">
                         <div class="row">
                             <div class="col-md-8 col-md-offset-2">
                                 <div class="container-fluid" style="width: 800px">   

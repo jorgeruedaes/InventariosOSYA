@@ -9,7 +9,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
     <html>
         <head>
             <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-            <title>Inventario OSYA</title>
+            <title>Inventarios ASEO</title>
             <link rel="stylesheet" href="../css/styler.css" type="text/css" media="all" />
             <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
             <script type="text/javascript" charset="utf8" src="../DataTables-1.10.7/media/js/jquery.js"></script>
@@ -64,32 +64,30 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                 $idcliente = $listasalidas["cliente"];
                                 $fecha = $listasalidas["fecha"];
                                 $tipo = $listasalidas["tipo"];
-                                    
-                                    $consultanombreencargado = mysql_query("SELECT * FROM tb_usuarios WHERE cc ='$idencargado'");
-                                    $resultado = mysql_fetch_array($consultanombreencargado);
-                                    
-                                    $consultanombrecliente = mysql_query("SELECT * FROM tb_usuarios WHERE cc ='$idcliente'");
-                                    $resultados = mysql_fetch_array($consultanombrecliente);
-                                    
-                                    ?>
-                                    <tr class="default caja">
-                                        <th scope="row"><?php echo $idsalida; ?></th> 
-                                        <td><?php echo $fecha; ?></td>
-                                        <td><?php echo $resultado["nombre"]; ?></td>
-                                        <td><?php echo $resultados["nombre"]; ?></td>
-                                        <td><?php echo $tipo; ?></td>
-                                        <td>
-                                            <button data-id="<?php echo $listasalidas["id_salida"] ?>" class="btn btn-default consultar" data-toggle="modal">
-                                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 
-                                            <button data-id="<?php echo $listasalidas["id_salida"] ?>" class="btn btn-default eliminar">
-                                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                                        </td>
+                                $consultanombreencargado = mysql_query("SELECT * FROM tb_usuarios WHERE cc ='$idencargado'");
+                                $resultado = mysql_fetch_array($consultanombreencargado);
 
-                                    </tr>
+                                $consultanombrecliente = mysql_query("SELECT * FROM tb_usuarios WHERE cc ='$idcliente'");
+                                $resultados = mysql_fetch_array($consultanombrecliente);
+                                ?>
+                                <tr class="default caja">
+                                    <th scope="row"><?php echo $idsalida; ?></th> 
+                                    <td><?php echo $fecha; ?></td>
+                                    <td><?php echo $resultado["nombre"]; ?></td>
+                                    <td><?php echo $resultados["nombre"]; ?></td>
+                                    <td><?php echo $tipo; ?></td>
+                                    <td>
+                                        <button data-id="<?php echo $listasalidas["id_salida"] ?>" class="btn btn-default consultar" data-toggle="modal">
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 
-                                    <?php
-                                
+                                        <button data-id="<?php echo $listasalidas["id_salida"] ?>" class="btn btn-default eliminar">
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                                    </td>
+
+                                </tr>
+
+                                <?php
                             }
                             ?>
 
@@ -215,13 +213,12 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
 
             <script>
 
-                 $(document).ready(function () {
+                $(document).ready(function () {
 
                     Salidas.inicio();
 
                 });
                 var Salidas = {
-                    
                     inicio: function () {
                         $('#tablasalidas').DataTable({
                             "language": {
@@ -263,43 +260,43 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                     var resp = $.parseJSON(resp);
                                     console.log(resp);
                                     if (resp.Salida === true && resp.Mensaje === true) {
-                                    $('.tablaproductos tbody').html("");
-                                    $.each(resp.Salidas, function (i, item) {
-                                        var fecha = item.fecha;
-                                        var tipo = item.tipo;
-                                        var factura = item.factura;
-                                        var encargado = item.encargado;
-                                        var cliente = item.cliente;
+                                        $('.tablaproductos tbody').html("");
+                                        $.each(resp.Salidas, function (i, item) {
+                                            var fecha = item.fecha;
+                                            var tipo = item.tipo;
+                                            var factura = item.factura;
+                                            var encargado = item.encargado;
+                                            var cliente = item.cliente;
 
 
-                                        $('#fecha').text(fecha);
-                                        $('#tipo').text(tipo);
-                                        $('#entrada').text(factura);
-                                        $('#encargado').text(encargado);
-                                        $('#proveedor').text(cliente);
+                                            $('#fecha').text(fecha);
+                                            $('#tipo').text(tipo);
+                                            $('#entrada').text(factura);
+                                            $('#encargado').text(encargado);
+                                            $('#proveedor').text(cliente);
 
-                                    });
-                                    $.each(resp.Productos, function (i, item) {
-                                        var nombre = item.producto;
-                                        var id = item.id;
-                                        var cantidad = item.cantidad;
-                                        var valor = item.valor;
-                                        var total = cantidad * valor;
-                                        $('.tablaproductos tbody').append('<tr class="cajaproductos">\n\
+                                        });
+                                        $.each(resp.Productos, function (i, item) {
+                                            var nombre = item.producto;
+                                            var id = item.id;
+                                            var cantidad = item.cantidad;
+                                            var valor = item.valor;
+                                            var total = cantidad * valor;
+                                            $('.tablaproductos tbody').append('<tr class="cajaproductos">\n\
                                         <td scope="row" class="id">' + id + '</td><td>' + nombre + '</td>\n\
                                         <td>' + cantidad + '</td><td>' + valor + '</td><td class="total">' + total + '</td></tr>');
 
-                                    });
-                                    Salidas.CargarTotales();
+                                        });
+                                        Salidas.CargarTotales();
 
-                                    }else{
-                                         swal("", "Ha habido un error,intenta nuevamente", "error");
-                                        
-                                        }                         
+                                    } else {
+                                        swal("", "Ha habido un error,intenta nuevamente", "error");
+
+                                    }
                                 }
                             });
                         });
-                    },CargarTotales: function () {
+                    }, CargarTotales: function () {
 
                         var totales = 0;
                         var totaliva = 0;
@@ -363,12 +360,12 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                         });
                     }
                 }
-            
+
 
             </script>
-            <?php
-        } else {
-            ?>
+    <?php
+} else {
+    ?>
             <!-- CUANDO EL PERSONAJE NO ESTA AUTORIZADO PARA EL INGRESO-->
             <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
             <link rel="stylesheet" href="../bootstrap/css/bootstrap-theme.css">
@@ -386,9 +383,9 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         </center>
         <center>
             <button type="button" class="btn btn-success"><a href="index.php" style="color: white">Volver</a></button></center>
-            <?php
-        }
-        ?>
+    <?php
+}
+?>
 </body>
 
 </html>
