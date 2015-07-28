@@ -318,7 +318,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                     $('.estado  option[value="' + resp.producto.estado + '"]').attr('selected', 'selected');
                                     $('#identificador').val(id);
                                 } else {
-                                    swal("", "Ha habido un error,intenta nuevamente", "error");
+                                    swal("", "Ha ocurrido un error, intenta nuevamente", "error");
                                 }
                             }
                         });
@@ -359,7 +359,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                 }
                                             });
                                         } else {
-                                            swal("", "Ha habido un error, intenta nuevamente", "error");
+                                            swal("", "Ha ocurrido un error, intenta nuevamente", "error");
                                         }
                                     }
 
@@ -400,7 +400,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                         });
                                         $('.modal').modal('hide');
                                     } else {
-                                        swal("", "Ha habido un error,intenta nuevamente", "error");
+                                        swal("", "Ha ocurrido un error, intenta nuevamente", "error");
                                     }
                                 }
 
@@ -417,12 +417,12 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                 return true;
                             } else {
                                 $('.estado').focus();
-                                swal("", "Debes selecionar un estado valido,intenta nuevamente.", "error");
+                                swal("", "Debes selecionar un estado válido, intenta nuevamente.", "error");
                                 return false;
                             }
                         } else {
                             $('.valor').focus();
-                            swal("", "El valor de compra no es valido,intenta nuevamente.", "error");
+                            swal("", "El valor de compra no es válido, intenta nuevamente.", "error");
                             return false;
                         }
 
@@ -468,7 +468,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                             });
                                             $('.modal').modal('hide');
                                         } else {
-                                            swal("", "Ha habido un error,intenta nuevamente", "error");
+                                            swal("", "Ha ocurrido un error,intenta nuevamente", "error");
                                         }
                                     }
 
