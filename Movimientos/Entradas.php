@@ -413,7 +413,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                                     });
                                                                                                                     Entrada.EventoTablaProductos();
                                                                                                                 } else {
-                                                                                                                    swal("", "Ha habido un error,intenta nuevamente", "error");
+                                                                                                                    swal("", "Ha ocurrido un error, intenta nuevamente", "error");
                                                                                                                 }
                                                                                                             }
 
@@ -435,7 +435,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                     if (/\w/gi.test($('.proveedor').val())) {
                                                                                                         return true;
                                                                                                     } else {
-                                                                                                        swal("", "Debes seleccionar un proveedor primero", "error");
+                                                                                                        swal("", "Debes seleccionar un proveedor.", "error");
                                                                                                         return false;
                                                                                                     }
                                                                                                 },
@@ -448,7 +448,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                             $('.tablaproductos tbody').append('<tr class="cajaproductos" ><td scope="row" style="  padding-top: 16px;" class="nit">' + $(this).children('.seleccionarnit').text() + '</td><td style="  padding-top: 16px;" class="nombre">' + $(this).children('.seleccionarnombre').text() + '</td><td><input  type="text" class="form-control  cantidad" ></td><td scope="row" style="  padding-top: 16px;" class="valor">' + $(this).children('input').val() + '</td><td><input type="text" class="form-control total" value="0" style="  text-align: end;" disabled="disabled"></td><td><center><div class="btn-group"><button type="button" title="Eliminar producto" class="btn btn-default eliminarproducto" aria-label="Left Align"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></div></center></td></tr>');
                                                                                                             Entrada.ValidarCantidad();
                                                                                                         } else {
-                                                                                                            swal("Importante!", "El producto que intentas ingresar ya esta en la lista, selecciona uno diferente porfavor", "error");
+                                                                                                            swal("Importante!", "El producto que intentas ingresar ya está en la lista, selecciona uno diferente.", "error");
                                                                                                         }
                                                                                                         $('.eliminarproducto').off('click').on('click', function () {
                                                                                                             $(this).parent().parent().parent().parent().remove();
@@ -503,7 +503,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                               
                                                                                                             } else {
                                                                                                             
-                                                                                                                swal("Importante!", "La cantidad que intenta entrar con corresponde a la salida, en esta  solo hay :  "+resp.Numero+" unidades. ", "error");
+                                                                                                                swal("Importante!", "La cantidad que intenta ingresar no corresponde a la salida, en esta solo hay :  "+resp.Numero+" unidades. ", "error");
                                                                                                             }
                                                                                                         }
                                                                                                     });
@@ -587,26 +587,26 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                                         });
                                                                                                                         return valor;
                                                                                                                     } else {
-                                                                                                                        swal("", "Debes agregar al menos un producto para que pueda ser guardado el ingreso.", "error");
+                                                                                                                        swal("", "Debes agregar al menos un producto.", "error");
                                                                                                                         return false;
                                                                                                                     }
                                                                                                                 } else {
-                                                                                                                    swal("", "Debes seleccionar un proveedor para el ingreso", "error");
+                                                                                                                    swal("", "Debes seleccionar un proveedor para el ingreso.", "error");
                                                                                                                     return false;
                                                                                                                 }
                                                                                                             } else {
                                                                                                                 $('.tipoentrada').focus();
-                                                                                                                swal("", "Debes seleccionar tipo  para el ingreso", "error");
+                                                                                                                swal("", "Debes seleccionar un tipo.", "error");
                                                                                                                 return false;
                                                                                                             }
                                                                                                         } else {
                                                                                                             $('#fechaInicio').focus();
-                                                                                                            swal("", "Debes seleccionar un fecha para el ingreso", "error");
+                                                                                                            swal("", "Debes seleccionar una fecha para el ingreso", "error");
                                                                                                             return false;
                                                                                                         }
                                                                                                     } else {
                                                                                                         $('.factura').focus();
-                                                                                                        swal("", "Debes ingresar un numero para el documento", "error");
+                                                                                                        swal("", "Debes ingresar un número para el documento", "error");
                                                                                                         return false;
                                                                                                     }
                                                                                                 },
@@ -641,13 +641,13 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                                             }
                                                                                                                         });
                                                                                                                     } else {
-                                                                                                                        swal("Importante!", "Se ha producido un error al intentar guardar la entrada, intenta nuevamente..", "error");
+                                                                                                                        swal("Importante!", "Se ha producido un error al intentar guardar la entrada, intenta nuevamente.", "error");
                                                                                                                     }
                                                                                                                 }
                                                                                                             });
                                                                                                         }
                                                                                                     }else{
-                                                                                                        swal("Importante!", "Alguna de las cantidades de la entrada no es valilda.", "error");
+                                                                                                        swal("Importante!", "Alguna de las cantidades de la entrada no es válida.", "error");
                                                                                                     }
                                                                                                     });
 
@@ -686,7 +686,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                                         $('.nit').val(resp.Nit);
                                                                                                                         Entrada.EventoAgregarProductosdelCliente();
                                                                                                                     } else {
-                                                                                                                        swal("Importante!", "La remisión que has introducido no existe.", "warning");
+                                                                                                                        swal("Importante!", "La remisión que has ingresado no existe.", "warning");
                                                                                                                     }
                                                                                                                 }
                                                                                                             });
@@ -717,7 +717,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                                     Entrada.EventoTablaProductos();
                                                                                                                     Entrada.EventoAgregarProductos();
                                                                                                                 } else {
-                                                                                                                    swal("", "Ha habido un error,intenta nuevamente", "error");
+                                                                                                                    swal("", "Ha ocurrido un error, intenta nuevamente", "error");
                                                                                                                 }
                                                                                                             }
 
