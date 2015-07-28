@@ -83,7 +83,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4 col-md-offset-2"> 
-                                                <label>Cedula:</label>
+                                                <label>Cédula:</label>
                                                 <input type="number" class="form-control cc" name="codigobarras">
                                             </div>
                                             <div class="col-md-4 "> 

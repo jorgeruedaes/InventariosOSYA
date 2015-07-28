@@ -79,9 +79,15 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                         <option value="Devolucion">Devolución</option>
                                                     </select>
                                                 </div>
+                                              
                                                 <div class="col-md-1 facturas">      
                                                     <label>Factura:</label>
                                                     <input type="text" class="form-control factura" name="codigobarras">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-8 col-md-offset-2">
+                                                    <br>
                                                 </div>
                                             </div>
                                             <div class="row">

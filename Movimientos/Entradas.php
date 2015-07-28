@@ -676,7 +676,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                                     if (resp.Salida === true && resp.Mensaje === true) {
 
                                                                                                                     } else {
-                                                                                                                        swal("Importante!", "El la factura que haz introducido ya existe.", "warning");
+                                                                                                                        swal("Importante!", "La factura que has introducido ya existe.", "warning");
                                                                                                                     }
                                                                                                                 }
                                                                                                             });
@@ -696,7 +696,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                                         $('.nit').val(resp.Nit);
                                                                                                                         Entrada.EventoAgregarProductosdelCliente();
                                                                                                                     } else {
-                                                                                                                        swal("Importante!", "La remisión que haz introducido no existe.", "warning");
+                                                                                                                        swal("Importante!", "La remisión que has introducido no existe.", "warning");
                                                                                                                     }
                                                                                                                 }
                                                                                                             });

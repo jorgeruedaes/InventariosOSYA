@@ -271,7 +271,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                         $('.desactivar').off('click').on('click', function () {
                             var id = $(this).data('id');
                             swal({title: "",
-                                text: "¿El usuario se desactivara, está seguro?",
+                                text: "¿El usuario se desactivará, está seguro?",
                                 type: "warning",
                                 showCancelButton: true,
                                 confirmButtonColor: "rgb(174, 222, 244)",

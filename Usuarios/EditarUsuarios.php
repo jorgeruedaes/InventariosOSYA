@@ -76,10 +76,10 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                     <table id="tablajugadores" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th width="12%">Identificación</th>
+                                                <th>Identificación</th>
                                                 <th>Nombre</th>
-                                                <th width="12%">Tipo</th>
-                                                <th width="10%">Opciones</th>
+                                                <th>Tipo</th>
+                                                <th>Opciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -96,7 +96,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     <td>
         <!--                                                <button id="editar" type="button" class="btn btn-success editar" data-id="<?php echo $listajugadores["cc"] ?>" 
                                                                 data-toggle="modal" >Editar</button>-->
-                                                        <button class="btn btn-default eliminar"style="margin-left: 25%;" data-id="<?php echo $listajugadores["cc"] ?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                                                        <button class="btn btn-default eliminar" data-id="<?php echo $listajugadores["cc"] ?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                                                     </td>
 
                                                 </tr>
@@ -128,10 +128,10 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                     <table id="tablajugadores1" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th width="12%">Identificación</th>
+                                                <th>Identificación</th>
                                                 <th>Nombre</th>
-                                                <th width="10%">Tipo</th>
-                                                <th width="10%">Opciones</th>
+                                                <th>Tipo</th>
+                                                <th>Opciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -148,7 +148,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     <td>
         <!--                                                <button id="editar" type="button" class="btn btn-success editar" data-id="<?php echo $listajugadores["cc"] ?>" 
                                                                 data-toggle="modal" >Editar</button>-->
-                                                        <button class="btn btn-default activar" style="margin-left: 25%;" data-id="<?php echo $listajugadores["cc"] ?>"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></button>
+                                                        <button class="btn btn-default activar"  data-id="<?php echo $listajugadores["cc"] ?>"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
                                                     </td>
 
                                                 </tr>

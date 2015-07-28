@@ -103,7 +103,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     <td>
                                                         <button id="editar"  tiitle="Editar" type="button" class="btn btn-default editar" data-id="<?php echo $listajugadores["id_producto"] ?>" 
                                                                 data-toggle="modal" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-                                                        <button tiitle="Eliminar" class="btn btn-default eliminar" data-id="<?php echo $listajugadores["id_producto"] ?>"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></button>
+                                                        <button title="Eliminar" class="btn btn-default eliminar" data-id="<?php echo $listajugadores["id_producto"] ?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                                                     </td>
 
                                                 </tr>
@@ -161,7 +161,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     </td>
                                                     <td>
                                                         <button tiitle="Activar" class="btn btn-default activar" data-id="<?php echo $listajugadores["id_producto"] ?>">
-                                                        <span class="glyphicon glyphicon-ok-circlel" aria-hidden="true"></span></button>
+                                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Activar</button>
                                                     </td>
 
                                                 </tr>
