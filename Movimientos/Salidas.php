@@ -307,7 +307,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                         <script>
 
                                                                                             var Creador = '<?php echo $_SESSION['identificacion']; ?>'  // creador del producto o quien lo agrega
-                                                                                            var Prueba=false;
+                                                                                            var Prueba=true;
                                                                                             var pruebafactura=false;
                                                                                                var Salida = {
                                                                                                 Inicio: function () {
@@ -634,7 +634,8 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                         data: {
                                                                                                             Bandera: "PruebaCantidades",
                                                                                                             id: productos,
-                                                                                                            cantidad:valores
+                                                                                                            cantidad:valores,
+                                                                                                           
                                                                                                         },
                                                                                                         success: function (resp) {
 
@@ -661,17 +662,19 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                           $.ajax({
                                                                                                         url: 'PeticionesMovimientos.php',
                                                                                                         type: 'POST',
-                                                                                                    
+                                                                                                    async:false,
                                                                                                         data: {
                                                                                                             Bandera: "PruebaCantidades",
                                                                                                             id: productos,
-                                                                                                            cantidad:valores
+                                                                                                            cantidad:valores,
+                                                                                                            
                                                                                                         },
                                                                                                         success: function (resp) {
 
                                                                                                             var resp = $.parseJSON(resp);
                                                                                                             if (resp.Salida === true && resp.Mensaje === true) {
-                                                                                                           Prueba=true;
+                                                                                                      
+                                                                                                      
                                                                                                             } else {
                                                                                                              Prueba=false;
                                                                                                             }
