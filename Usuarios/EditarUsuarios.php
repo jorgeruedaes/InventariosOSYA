@@ -328,7 +328,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                         $('.estado  option[value="' + resp.producto.estado + '"]').attr('selected', 'selected');
                                         $('#identificador').val(id);
                                     } else {
-                                        swal("", "Ha habido un error, intenta nuevamente", "error");
+                                        swal("", "Ha ocurrido un error, intenta nuevamente", "error");
                                     }
                                 }
                             });
@@ -365,7 +365,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                             });
                                             $('.modal').modal('hide');
                                         } else {
-                                            swal("", "Ha habido un error, intenta nuevamente", "error");
+                                            swal("", "Ha ocurrido un error, intenta nuevamente", "error");
                                         }
                                     }
 
@@ -432,7 +432,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     }
                                                 });
                                             } else {
-                                                swal("", "Ha habido un error, intenta nuevamente", "error");
+                                                swal("", "Ha ocurrido un error, intenta nuevamente", "error");
                                             }
                                         }
 
@@ -477,7 +477,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     }
                                                 });
                                             } else {
-                                                swal("", "Ha habido un error, intenta nuevamente", "error");
+                                                swal("", "Ha ocurrido un error, intenta nuevamente", "error");
                                             }
                                         }
 

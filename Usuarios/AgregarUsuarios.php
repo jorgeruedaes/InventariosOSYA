@@ -184,7 +184,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                             }
                                                                         });
                                                                     } else {
-                                                                        swal("", "Ha habido un error, intenta nuevamente.", "error");
+                                                                        swal("", "Ha ocurrido un error, intenta nuevamente.", "error");
                                                                     }
                                                                 }
                                                             });
@@ -208,7 +208,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                 if (resp.Salida === true && resp.Mensaje === true) {
 
                                                                 } else {
-                                                                    swal("Importante!", "El código, la cédula o el NIT  ya existe, intenta nuevamente.", "error");
+                                                                    swal("Importante!", "El código, la cédula o el NIT ya existen, intenta nuevamente.", "error");
                                                                 }
                                                             }
                                                         });

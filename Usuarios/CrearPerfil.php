@@ -219,7 +219,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                     $('.validado').css({display: ""});
                                                                     $('.valido').css({display: "none"});
                                                                     $('.novalido').css({display: ""});
-                                                                    swal("Importante!", "El usuario  ya existe, ingresa uno diferente.", "error");
+                                                                    swal("Importante!", "El usuario ya existe, ingresa uno diferente.", "error");
                                                                     return false;
                                                                 }
 
@@ -235,7 +235,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     if ($('.contrasena1').val() === $('.contrasena2').val()) {
                                                         return true;
                                                     } else {
-                                                        swal("Importante!", "Las contraseñas no coinciden,intenta nuevamente.", "error");
+                                                        swal("Importante!", "Las contraseñas no coinciden, intenta nuevamente.", "error");
                                                         return false;
                                                     }
 
@@ -265,7 +265,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                         if (resp.Salida === true && resp.Mensaje === true) {
                                                                             swal("", "El usuario se ha creado exitosamente.", "success");
                                                                         } else {
-                                                                            swal("Importante!", "Ha ocurrido un error y el usuario no se ha podido crear,intenta nuevamente", "error");
+                                                                            swal("Importante!", "Ha ocurrido un error y el usuario no se ha podido crear, intenta nuevamente", "error");
 
                                                                         }
 
@@ -295,7 +295,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                         }
                                                                     } else {
                                                                         $('.apellido').focus();
-                                                                        swal("", "El perfil debe tener un email valido.", "error");
+                                                                        swal("", "El perfil debe tener un email válido.", "error");
                                                                         return false;
                                                                     }
                                                                 } else {
@@ -309,18 +309,18 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                 }
                                                             } else {
                                                                 $('.apellido').focus();
-                                                                swal("", "El perfil debe tener una cedula valida.", "error");
+                                                                swal("", "El perfil debe tener una cedula válida.", "error");
                                                                 return false;
                                                             }
 
                                                         } else {
                                                             $('.apellido').focus();
-                                                            swal("", "El perfil debe tener un apellido valido.", "error");
+                                                            swal("", "El perfil debe tener un apellido válido.", "error");
                                                             return false;
                                                         }
                                                     } else {
                                                         $('.nombre').focus();
-                                                        swal("", "El perfil debe tener un nombre valido.", "error");
+                                                        swal("", "El perfil debe tener un nombre válido.", "error");
                                                         return false;
                                                     }
                                                 },
@@ -340,7 +340,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                 if (resp.Salida === true && resp.Mensaje === true) {
 
                                                                 } else {
-                                                                    swal("", "La cedula que intentas ingresar ya existe,intenta nuevamente.", "error");
+                                                                    swal("", "La cédula que intentas ingresar ya existe, intenta nuevamente.", "error");
 
                                                                 }
 
@@ -370,12 +370,12 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                 }
                                                             } else {
                                                                 $('.contrasena2').focus();
-                                                                swal("", "Las contraseñas deben coincidir,intenta nuevamente  .", "error");
+                                                                swal("", "Las contraseñas deben coincidir, intenta nuevamente  .", "error");
                                                                 return false;
                                                             }
                                                         } else {
                                                             $('.contrasena1').focus();
-                                                            swal("", "Ingresa una contraseña valida.", "error");
+                                                            swal("", "Ingresa una contraseña válida.", "error");
                                                             return false;
                                                         }
                                                     } else {

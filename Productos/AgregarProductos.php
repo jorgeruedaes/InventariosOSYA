@@ -182,7 +182,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                     var resp = $.parseJSON(resp);
                                                                     if (resp.Salida === true && resp.Mensaje === true) {
                                                                         swal({title: "",
-                                                                            text: "El producto se ha agregado  exitosamente!",
+                                                                            text: "El producto se ha agregado exitosamente!",
                                                                             type: "success",
                                                                             showCancelButton: false,
                                                                             confirmButtonColor: "rgb(174, 222, 244)",
@@ -194,7 +194,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                             }
                                                                         });
                                                                     } else {
-                                                                        swal("", "Ha habido un error,intenta nuevamente.", "error");
+                                                                        swal("", "Ha ocurrido un error, intenta nuevamente.", "error");
                                                                     }
                                                                 }
                                                             });
@@ -218,7 +218,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                 if (resp.Salida === true && resp.Mensaje === true) {
 
                                                                 } else {
-                                                                    swal("Importante!", "El codigo de barras que has introducido ya existe,intenta nuevamente.", "error");
+                                                                    swal("Importante!", "El código de barras que has ingresado ya existe, intenta nuevamente.", "error");
                                                                 }
                                                             }
                                                         });

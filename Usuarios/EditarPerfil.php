@@ -301,7 +301,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     }
                                                 });
                                             } else {
-                                                swal("", "Ha habido un error,intenta nuevamente", "error");
+                                                swal("", "Ha ocurrido un error,intenta nuevamente", "error");
                                             }
                                         }
 
