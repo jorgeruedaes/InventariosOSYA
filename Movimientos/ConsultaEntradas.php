@@ -133,14 +133,14 @@ include('../RutinaDeLogueo.php');
                     </div>
                     <div class="modal-footer">
                         <?php
-                        if ($pruebadeinicio== 1){
-                        ?>
-                        <input type="hidden" id="identificador"/>
-                        <button type="button" class="btn btn-default">
-                            <span class="glyphicon glyphicon-file" aria-hidden="true"></span>  Pdf
-                        </button>
-                        <?php
-                        }else  if ($pruebadeinicio== 2){
+                        if ($pruebadeinicio == 1) {
+                            ?>
+                            <input type="hidden" id="identificador"/>
+                            <button type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>  Pdf
+                            </button>
+                            <?php
+                        } else if ($pruebadeinicio == 2) {
                             
                         }
                         ?>
@@ -154,8 +154,11 @@ include('../RutinaDeLogueo.php');
         if ($pruebadeinicio == 1) {
             ?>
 
+          
             <div class="row">
-                <div class="col-md-8 col-md-offset-2"><br></div>
+                <div class="col-md-8 col-md-offset-2">
+                    <h2 style="color:#27AE60;">Listado de entradas</h2><hr>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-8 col-md-offset-2"><br></div>
@@ -234,8 +237,11 @@ include('../RutinaDeLogueo.php');
         } else if ($pruebadeinicio == 2) {
             ?>
 
+            
             <div class="row">
-                <div class="col-md-8 col-md-offset-2"><br></div>
+                <div class="col-md-8 col-md-offset-2">
+                    <h2 style="color:#27AE60;">Listado de entradas</h2><hr>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-8 col-md-offset-2"><br></div>
@@ -309,7 +315,7 @@ include('../RutinaDeLogueo.php');
                 <div class="col-md-8 col-md-offset-2"><br></div>
             </div>
 
-              <?php
+            <?php
         } else {
             ?>
             <!-- CUANDO EL PERSONAJE NO ESTA AUTORIZADO PARA EL INGRESO-->
@@ -338,175 +344,174 @@ include('../RutinaDeLogueo.php');
 
 
 
-            <script>
+<script>
 
-                $(document).ready(function () {
+    $(document).ready(function () {
 
-                    Entradas.inicio();
+        Entradas.inicio();
 
+    });
+    var Entradas = {
+        inicio: function () {
+            $('#tablaentradas').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_",
+                    "search": "Buscar:",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "zeroRecords": "No se encontraron resultados",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
+                    "infoFiltered": "(filtrado de _MAX_ entradas)",
+                    "paginate": {
+                        "first": "Primera",
+                        "last": "Última",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+
+            });
+            $('#tablaentradas1').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_",
+                    "search": "Buscar:",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "zeroRecords": "No se encontraron resultados",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
+                    "infoFiltered": "(filtrado de _MAX_ entradas)",
+                    "paginate": {
+                        "first": "Primera",
+                        "last": "Última",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+
+            });
+            Entradas.recargarEventos();
+        }, recargarEventos: function () {
+            Entradas.EventoConsultarFra();
+            Entradas.EventoEliminarFra();
+
+        },
+        EventoConsultarFra: function () {
+            $('.consultar').off('click').on('click', function () {
+                var id = $(this).data('id');
+                $.ajax({
+                    url: 'PeticionesEntradas.php',
+                    type: 'POST',
+                    data: {
+                        Bandera: "ConsultarFra",
+                        id: id
+                    },
+                    success: function (resp) {
+                        $('.modal').modal('show');
+                        var resp = $.parseJSON(resp);
+                        if (resp.Salida === true && resp.Mensaje === true) {
+                            $('.tablaproductos tbody').html("");
+                            $.each(resp.Entradas, function (i, item) {
+                                var fecha = item.fecha;
+                                var tipo = item.tipo;
+                                var factura = item.factura;
+                                var encargado = item.encargado;
+                                var proveedor = item.proveedor;
+
+
+                                $('#fecha').text(fecha);
+                                $('#tipo').text(tipo);
+                                $('#entrada').text(factura);
+                                $('#encargado').text(encargado);
+                                $('#proveedor').text(proveedor);
+
+                            });
+                            $.each(resp.Productos, function (i, item) {
+                                var nombre = item.nombre;
+                                var id = item.id;
+                                var cantidad = item.cantidad;
+                                var valor = item.valor;
+                                var total = cantidad * valor;
+                                $('.tablaproductos tbody').append('<tr class="cajaproductos">\n\
+                            <td scope="row" class="id">' + id + '</td><td>' + nombre + '</td>\n\
+                            <td>' + cantidad + '</td><td>' + valor + '</td><td class="total">' + total + '</td></tr>');
+
+                            });
+                            Entradas.CargarTotales();
+
+                        } else {
+                            swal("", "Ha ocurrido un error, intenta nuevamente", "error");
+
+                        }
+                    }
                 });
-                var Entradas = {
-                    inicio: function () {
-                        $('#tablaentradas').DataTable({
-                            "language": {
-                                "lengthMenu": "Mostrar _MENU_",
-                                "search": "Buscar:",
-                                "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-                                "loadingRecords": "Cargando...",
-                                "processing": "Procesando...",
-                                "zeroRecords": "No se encontraron resultados",
-                                "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
-                                "infoFiltered": "(filtrado de _MAX_ entradas)",
-                                "paginate": {
-                                    "first": "Primera",
-                                    "last": "Última",
-                                    "next": "Siguiente",
-                                    "previous": "Anterior"
-                                }
-                            }
+            });
+        },
+        CargarTotales: function () {
 
-                        });
-                        $('#tablaentradas1').DataTable({
-                            "language": {
-                                "lengthMenu": "Mostrar _MENU_",
-                                "search": "Buscar:",
-                                "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-                                "loadingRecords": "Cargando...",
-                                "processing": "Procesando...",
-                                "zeroRecords": "No se encontraron resultados",
-                                "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
-                                "infoFiltered": "(filtrado de _MAX_ entradas)",
-                                "paginate": {
-                                    "first": "Primera",
-                                    "last": "Última",
-                                    "next": "Siguiente",
-                                    "previous": "Anterior"
-                                }
-                            }
-
-                        });
-                        Entradas.recargarEventos();
-                    }, recargarEventos: function () {
-                        Entradas.EventoConsultarFra();
-                        Entradas.EventoEliminarFra();
-
-                    },
-                    EventoConsultarFra: function () {
-                        $('.consultar').off('click').on('click', function () {
-                            var id = $(this).data('id');
-                            $.ajax({
-                                url: 'PeticionesEntradas.php',
-                                type: 'POST',
-                                data: {
-                                    Bandera: "ConsultarFra",
-                                    id: id
-                                },
-                                success: function (resp) {
-                                    $('.modal').modal('show');
-                                    var resp = $.parseJSON(resp);
-                                    if (resp.Salida === true && resp.Mensaje === true) {
-                                        $('.tablaproductos tbody').html("");
-                                        $.each(resp.Entradas, function (i, item) {
-                                            var fecha = item.fecha;
-                                            var tipo = item.tipo;
-                                            var factura = item.factura;
-                                            var encargado = item.encargado;
-                                            var proveedor = item.proveedor;
-
-
-                                            $('#fecha').text(fecha);
-                                            $('#tipo').text(tipo);
-                                            $('#entrada').text(factura);
-                                            $('#encargado').text(encargado);
-                                            $('#proveedor').text(proveedor);
-
-                                        });
-                                        $.each(resp.Productos, function (i, item) {
-                                            var nombre = item.nombre;
-                                            var id = item.id;
-                                            var cantidad = item.cantidad;
-                                            var valor = item.valor;
-                                            var total = cantidad * valor;
-                                            $('.tablaproductos tbody').append('<tr class="cajaproductos">\n\
-                                        <td scope="row" class="id">' + id + '</td><td>' + nombre + '</td>\n\
-                                        <td>' + cantidad + '</td><td>' + valor + '</td><td class="total">' + total + '</td></tr>');
-
-                                        });
-                                        Entradas.CargarTotales();
-
-                                    } else {
-                                        swal("", "Ha ocurrido un error, intenta nuevamente", "error");
-
-                                    }
-                                }
-                            });
-                        });
-                    },
-                    CargarTotales: function () {
-
-                        var totales = 0;
-                        var totaliva = 0;
-                        var totalreal = 0;
-                        $('.cajaproductos').each(function () {
-                            var total = $(this).children('.total').text();
-                            total = parseInt(total);
-                            totales = totales + total;
-                        });
-                        totales = parseInt(totales);
-                        $('.totales').text('$' + ' ' + totales);
-                        var iva = totales * 0.16;
-                        $('.ivatotales').text('$' + ' ' + iva);
-                        var total = parseInt(totales) + parseInt(iva)
-                        $('.totalesreales').text('$' + ' ' + total);
-                    },
-                    EventoEliminarFra: function () {
-                        $('.eliminar').off('click').on('click', function () {
-                            var id = $(this).data('id');
-                            swal({title: "",
-                                text: "¿La entrada se eliminará, está seguro?",
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "rgb(174, 222, 244)",
-                                confirmButtonText: "Ok",
-                                closeOnConfirm: false
-                            }, function (isConfirm) {
-                                if (isConfirm) {
-                                    $.ajax({
-                                        url: 'PeticionesEntradas.php',
-                                        type: 'POST',
-                                        data: {
-                                            Bandera: "EliminarEntrada",
-                                            id: id
-                                        },
-                                        success: function (resp) {
-                                            var resp = $.parseJSON(resp);
-                                            console.log(resp);
-                                            if (resp.Salida === true && resp.Mensaje === true) {
-                                                swal({title: "",
-                                                    text: "La entrada se ha eliminado exitosamente!",
-                                                    type: "success",
-                                                    showCancelButton: false,
-                                                    confirmButtonColor: "rgb(174, 222, 244)",
-                                                    confirmButtonText: "Ok",
-                                                    closeOnConfirm: false
-                                                }, function (isConfirm) {
-                                                    if (isConfirm) {
-                                                        window.location.reload();
-                                                    }
-                                                });
-                                            } else {
-                                                swal("", "Ha ocurrido un error, intenta nuevamente", "error");
-                                            }
+            var totales = 0;
+            var totaliva = 0;
+            var totalreal = 0;
+            $('.cajaproductos').each(function () {
+                var total = $(this).children('.total').text();
+                total = parseInt(total);
+                totales = totales + total;
+            });
+            totales = parseInt(totales);
+            $('.totales').text('$' + ' ' + totales);
+            var iva = totales * 0.16;
+            $('.ivatotales').text('$' + ' ' + iva);
+            var total = parseInt(totales) + parseInt(iva)
+            $('.totalesreales').text('$' + ' ' + total);
+        },
+        EventoEliminarFra: function () {
+            $('.eliminar').off('click').on('click', function () {
+                var id = $(this).data('id');
+                swal({title: "",
+                    text: "¿La entrada se eliminará, está seguro?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "rgb(174, 222, 244)",
+                    confirmButtonText: "Ok",
+                    closeOnConfirm: false
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        $.ajax({
+                            url: 'PeticionesEntradas.php',
+                            type: 'POST',
+                            data: {
+                                Bandera: "EliminarEntrada",
+                                id: id
+                            },
+                            success: function (resp) {
+                                var resp = $.parseJSON(resp);
+                                console.log(resp);
+                                if (resp.Salida === true && resp.Mensaje === true) {
+                                    swal({title: "",
+                                        text: "La entrada se ha eliminado exitosamente!",
+                                        type: "success",
+                                        showCancelButton: false,
+                                        confirmButtonColor: "rgb(174, 222, 244)",
+                                        confirmButtonText: "Ok",
+                                        closeOnConfirm: false
+                                    }, function (isConfirm) {
+                                        if (isConfirm) {
+                                            window.location.reload();
                                         }
-
                                     });
+                                } else {
+                                    swal("", "Ha ocurrido un error, intenta nuevamente", "error");
                                 }
-                            });
+                            }
 
                         });
                     }
+                });
 
-                }
+            });
+        }
 
-            </script>
-          
+    }
+
+</script>

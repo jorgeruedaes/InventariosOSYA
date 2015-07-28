@@ -152,8 +152,10 @@ include('../RutinaDeLogueo.php');
         include("../Encabezado.php");
         if ($pruebadeinicio == 1) {
             ?>
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2"><br></div>
+           <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h2 style="color:#27AE60;">Listado de salidas</h2><hr>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-8 col-md-offset-2"><br></div>
@@ -223,7 +225,9 @@ include('../RutinaDeLogueo.php');
         } else if ($pruebadeinicio == 2) {
             ?>
             <div class="row">
-                <div class="col-md-8 col-md-offset-2"><br></div>
+                <div class="col-md-8 col-md-offset-2">
+                    <h2 style="color:#27AE60;">Listado de salidas</h2><hr>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-8 col-md-offset-2"><br></div>
