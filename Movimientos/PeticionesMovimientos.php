@@ -248,12 +248,46 @@ tb_entradas.factura=tr_productos_entradas.factura group by proveedor");
                $resultado.='"Mensaje":true';
           }else{
                $resultado.='"Mensaje":false';
-            $resultado.=',"Numero":  "'.$cantidadreal.'" ';
+            $resultado.=',"Numero":  " '.$cantidadreal.'" ';
           }
           
       }
      
     }
+         else if ($Bandera === "TraerDatosEdicionEntrada") {
+        $valor = $_POST['id'];
+        $queryd=  mysql_fetch_array(mysql_query("SELECT tb_productos.proveedor as id,tb_usuarios.nombre as nombre FROM `tb_entradas`,tr_productos_entradas,tb_productos,tb_usuarios WHERE tb_entradas.id_entrada=$valor and tr_productos_entradas.id_entrada=tb_entradas.id_entrada  and  tb_productos.proveedor=cc group by proveedor"));
+             $queryf=  mysql_fetch_array(mysql_query("SELECT fecha,factura,tipo from tb_entradas where id_entrada=$valor"));
+        $query = mysql_query("SELECT tr_productos_entradas.id_producto as id,cantidad,valor,nombre FROM `tb_entradas`,tr_productos_entradas,tb_productos WHERE tr_productos_entradas.id_entrada=tb_entradas.id_entrada and tb_entradas.id_entrada=$valor and  tr_productos_entradas.id_producto=tb_productos.id_producto");
+        $productos = new stdClass();
+        $nombrep=$queryd['nombre'];
+        $id_prove=$queryd['id'];
+        $factura=$queryf['factura'];
+        $fecha=$queryf['fecha'];
+         $Tipo=$queryf['tipo'];
+        $array = array();
+        while ($query1 = mysql_fetch_array($query)) {
+            $id = $query1['id'];
+            $nombre = $query1['nombre'];
+            $valor = $query1['valor'];
+            $cantidad = $query1['cantidad'];
+            $productos = array("id" => $id, "nombre" => $nombre, "valor" => $valor, "cantidad" => $cantidad);
+            array_push($array, $productos);
+        }
+        $json = json_encode($array);
+        if ($query) {
+            $resultado.='"Mensaje":true';
+             $resultado.=',"Factura":"' . $factura . '"';
+              $resultado.=',"Nombre":"' . $nombrep . '"';
+               $resultado.=',"Idproveedor":"' . $id_prove . '"';
+               $resultado.=',"Tipo":"' . $Tipo. '"';
+               $resultado.=',"Fecha":"'. $fecha .'"';
+            $resultado.=',"Productos":' . $json . '';
+        } else {
+            $resultado.='"Mensaje":false';
+    }
+    
+        }
 } else {
     $resultado = '{"Salida":false,';
 }

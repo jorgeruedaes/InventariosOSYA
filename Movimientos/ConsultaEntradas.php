@@ -213,7 +213,8 @@ include('../RutinaDeLogueo.php');
                                         <td>
                                             <button data-id="<?php echo $listaentradas["id_entrada"] ?>" class="btn btn-default consultar" data-toggle="modal">
                                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-
+<!--                                        <button data-id="<?php echo $listaentradas["id_entrada"] ?>" class="btn btn-default editar">
+                                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>-->
                                             <button data-id="<?php echo $listaentradas["id_entrada"] ?>" class="btn btn-default eliminar">
                                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                                         </td>

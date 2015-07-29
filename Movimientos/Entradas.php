@@ -332,13 +332,16 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                     Entrada.EventoParaTipoDeEntrada();
                                                                                                     Entrada.EnviarDatos();
                                                                                                     Entrada.EventosProbarFactura();
+                                                                                                    Entrada.CambioProoveedor();
                                                                                                     $('.facturas').css({display: "none"});
+                                                                                                      
+                                                                                                  
                                                                                                 },
                                                                                                 EventoSeleccionarProvedoor: function () {
                                                                                                     $('.seleccionar').off('click').on('click', function () {
                                                                                                         $('#myModal').modal('show');
                                                                                                             Entrada.EventoAgregarProveedor();
-                                                                                                      
+                                                                                                    
                                                                                                        
                                                                                                     });
 
@@ -363,6 +366,10 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                         }
 
                                                                                                     });
+                                                                                                    $('.dataTables_paginate').off('click').on('click', function () {
+                                                                                                         Entrada.EventoAgregarProductos();
+                                                                                                         
+                                                                                                    });
 
                                                                                                 }, EventoTablaProductos: function () {
                                                                                                     $('#tabla').DataTable({
@@ -383,6 +390,10 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                             }
                                                                                                         }
 
+                                                                                                    });
+                                                                                                    $('.dataTables_paginate').off('click').on('click', function () {
+                                                                                                          Entrada.EventoAgregarProductos();
+                                                                                                         
                                                                                                     });
                                                                                                 }
                                                                                                 ,
@@ -420,6 +431,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                         });
 
                                                                                                     });
+                                                                                                                        Entrada.CambioProoveedor();
                                                                                                 },
                                                                                                 EventoAgregarProducto: function () {
                                                                                                     $('.agregarproducto').off('click').on('click', function () {
@@ -429,7 +441,9 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                                 Entrada.EventoAgregarProductos();
                                                                                                             }
                                                                                                         }
+                                                                                                   
                                                                                                     });
+                                                                                                    
                                                                                                 },
                                                                                                 ValidarProveedor: function () {
                                                                                                     if (/\w/gi.test($('.proveedor').val())) {
@@ -719,8 +733,10 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                                 } else {
                                                                                                                     swal("", "Ha ocurrido un error, intenta nuevamente", "error");
                                                                                                                 }
+                                                                                                                   Entrada.CambioProoveedor();
+                                                                                                               
                                                                                                             }
-
+                                                                                                       
                                                                                                         });
 
                                                                                                  
@@ -754,12 +770,15 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                     });
                                                                                                     });
                                                                                             }
-                                                                                                }
+                                                                                                },
+                                                                                                CambioProoveedor:function(){
+                                                                                                        $('.tablaproductos tbody').html('');
+}
                                                                                             };
                                                                                             $(document).ready(function () {
 
                                                                                                 Entrada.Inicio();
-
+                                                                                                    
                                                                                             });</script>
 
 

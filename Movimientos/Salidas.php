@@ -357,7 +357,11 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                                 "previous": "Anterior"
                                                                                                             }
                                                                                                         }
-
+                                                                                            
+                                                                                                    });
+                                                                                                    $('.dataTables_paginate').off('click').on('click', function () {
+                                                                                      Salida.EventoAgregarProductos();
+                                                                                                         
                                                                                                     });
 
                                                                                                 }, EventoTablaProductos: function () {
@@ -379,6 +383,10 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                             }
                                                                                                         }
 
+                                                                                                    });
+                                                                                                     $('.dataTables_paginate').off('click').on('click', function () {
+                                                                                                        Salida.EventoAgregarProductos();
+                                                                                                         
                                                                                                     });
                                                                                                 },
                                                                                                 EventoAgregarProveedor: function () {
