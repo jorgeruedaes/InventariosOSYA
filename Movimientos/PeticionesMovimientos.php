@@ -190,7 +190,70 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
           
       }
      
-    }   
+    }else if ($Bandera === "PruebaExistenciaF") {
+        $valor = $_POST['id'];
+        $query = mysql_query("SELECT tb_usuarios.nombre,cc,Count(*) as cantidad FROM `tb_entradas`,tr_productos_entradas,tb_productos,tb_usuarios WHERE tb_entradas.tipo='Factura'  and tb_entradas.factura='$valor' and tb_usuarios.tipo='Proveedor' and 
+tb_entradas.factura=tr_productos_entradas.factura group by proveedor");
+        $query1=  mysql_fetch_array($query);
+        
+        if ($query && $query1['cantidad']>0) {
+            $nombre=$query1['nombre'];
+            $id=$query1['cc'];
+            $resultado.='"Mensaje":true';
+            $resultado.=',"Nombre":" '. $nombre .' " ';
+            $resultado.=',"Nit":' . $id . '';
+        } else {
+            $resultado.='"Mensaje":false';
+        }
+    }     else if ($Bandera === "TraerProductosPorEntrada") {
+        $valor = $_POST['id'];
+        $query = mysql_query("SELECT cantidad,tr_productos_entradas.id_producto as id,nombre,valor FROM tb_entradas,tr_productos_entradas,tb_productos WHERE tipo='Factura' and tb_entradas.factura='$valor' and tr_productos_entradas.factura=tb_entradas.factura and tr_productos_entradas.id_entrada=tb_entradas.id_entrada and tr_productos_entradas.id_producto=tb_productos.id_producto");
+        $productos = new stdClass();
+        $array = array();
+        while ($query1 = mysql_fetch_array($query)) {
+            $id = $query1['id'];
+            $nombre = $query1['nombre'];
+            $valor = $query1['valor'];
+            $cantidad = $query1['cantidad'];
+            $productos = array("id" => $id, "nombre" => $nombre, "valor" => $valor, "cantidad" => $cantidad);
+            array_push($array, $productos);
+        }
+        $json = json_encode($array);
+        if ($query) {
+            $resultado.='"Mensaje":true';
+            $resultado.=',"Productos":' . $json . '';
+        } else {
+            $resultado.='"Mensaje":false';
+    }
+    
+        }else if ($Bandera === "PruebaCantidadesEntrada") {
+        $id = $_POST['id'];
+        $cantidad=$_POST['cantidad'];
+        $salida=$_POST['salida'];
+        
+    $query1= mysql_fetch_array(mysql_query("SELECT cantidad FROM `tr_productos_entradas`,tb_productos WHERE factura='$salida' and tb_productos.id_producto=tr_productos_entradas.id_producto and `tr_productos_entradas`.id_producto=$id"));
+        $cantidadreal= $query1['cantidad'];
+      $myquery= mysql_query("SELECT SUM(cantidad)as cantidad FROM `tb_salidas`,tr_productos_salidas WHERE tb_salidas.id_salida='$salida' and tipo='Devolucion'  and tb_salidas.id_salida=tr_productos_salidas.id_salida='$salida' id_producto='$id' group by id_producto");
+      if(mysql_num_rows($myquery)>0){
+            $query2= mysql_fetch_array($myquery);
+       $cantidadesentradas= $query2['cantidad'];
+             if(($cantidadreal-$cantidadesentradas)>=$cantidad){
+                $resultado.='"Mensaje":true';
+             }else{
+                $resultado.='"Mensaje":false';
+            $resultado.=',"Numero":  "'.($cantidadreal-$cantidadesentradas).'"';
+             }
+      }else{
+          if($cantidadreal>=$cantidad){
+               $resultado.='"Mensaje":true';
+          }else{
+               $resultado.='"Mensaje":false';
+            $resultado.=',"Numero":  "'.$cantidadreal.'" ';
+          }
+          
+      }
+     
+    }
 } else {
     $resultado = '{"Salida":false,';
 }

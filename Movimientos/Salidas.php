@@ -84,6 +84,11 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     <label>Factura:</label>
                                                     <input type="text" class="form-control factura" name="codigobarras">
                                                 </div>
+                                                 <div class="col-md-2 botonderemision" style="display:none ;  margin-top: 27px;">
+                                                <button type="button" class="btn btn-default botonremision" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                               </button>    
+                                                </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8 col-md-offset-2">
@@ -324,6 +329,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                     Salida.EventoParaTipoDeSalida();
                                                                                                     Salida.EnviarDatos();
                                                                                                     Salida.EventosProbarFactura();
+                                                                                                    Salida.EventosProbarDe();
                                                                                                     $('.facturas').css({display: "none"});
                                                                                                 },
                                                                                                 EventoSeleccionarProvedoor: function () {
@@ -415,6 +421,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                         if (Salida.ValidarProveedor()) {
                                                                                                             $('#myModal1').modal('show');
                                                                                                             Salida.EventoAgregarProductos();
+                                                                                                            
                                                                                                         }
                                                                                                     });
                                                                                                 },
@@ -494,8 +501,17 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                         if ($(this).val() !== "") {
                                                                                                             $('.facturas').css({display: ""});
                                                                                                             $('.facturas').children().first().text($(this).val() + ':');
-                                                                                                        } else {
+                                                                                                             if ($(this).val() !== "Remision") {
+                                                                                                                  $('.botonderemision').css({display: ""});
+                                                                                                                  $('.seleccionar').css({display: "none"});
+                                                                                                             }else{
+                                                                                                                  $('.seleccionar').css({display: ""});
+                                                                                                            $('.botonderemision').css({display: "none"});
+                                                                                                             }
+                                                                                                             } else {
                                                                                                             $('.facturas').css({display: "none"});
+                                                                                                            $('.botonderemision').css({display: "none"});
+                                                                                                            
                                                                                                         }
 
 
@@ -537,7 +553,15 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                 },
                                                                                                 EnviarDatos: function () {
                                                                                                     $('.guardar').off('click').on('click', function () {
-                                                                                                        Salida.ValidacionFinalSalidasCantidades();
+                                                                                                        if($('tipoentrada').val()=="Remision"){
+                                                                                                              Salida.ValidacionFinalSalidasCantidades();
+                                                                                                        }else{
+                                                                                                        Salida.ValidarCantidadesDeEntradaDevolucion();
+                                                                                                            
+                                                                                                        }
+                                                                                                      
+                                                                                                        
+                                                                                                        
                                                                                                         if (Salida.ValidacionGeneral()) {
                                                                                                             if(Prueba){
                                                                                                                 if(pruebafactura){
@@ -633,6 +657,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                         var numero = cantidad * valor;
                                                                                                         $(this).parent().parent().children().children('.total').val(numero);
                                                                                                         Salida.CargarTotales();
+                                                                                                  if($('.tipoentrada').val()==="Remision"){      
                                                                                                     $.ajax({
                                                                                                         url: 'PeticionesMovimientos.php',
                                                                                                         type: 'POST',
@@ -654,6 +679,29 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                             }
                                                                                                         }
                                                                                                     });
+                                                                                                }else{
+                                                                                                          $.ajax({
+                                                                                                        url: 'PeticionesMovimientos.php',
+                                                                                                        type: 'POST',
+                                                                                                        async:false,
+                                                                                                        data: {
+                                                                                                            Bandera: "PruebaCantidadesEntrada",
+                                                                                                            id: productos,
+                                                                                                            cantidad:valores,
+                                                                                                            salida:$('.factura').val()
+                                                                                                        },
+                                                                                                        success: function (resp) {
+
+                                                                                                            var resp = $.parseJSON(resp);
+                                                                                                            if (resp.Salida === true && resp.Mensaje === true) {
+                                                                                              
+                                                                                                            } else {
+                                                                                                            
+                                                                                                                swal("Importante!", "La cantidad que intenta entrar con corresponde a la entrada, en esta  solo hay :  "+resp.Numero+" unidades. ", "error");
+                                                                                                            }
+                                                                                                        }
+                                                                                                    });
+                                                                                                }
                                                                                                     });
                                                                                                     
                                                                                                 },
@@ -687,6 +735,91 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                         }
                                                                                                     });
                                                                                                     });
+                                                                                                },
+                                                                                                 EventosProbarDe: function () {
+                                                                                                    $('.botonremision').off('click').on('click', function () {
+                                                                                                            $.ajax({
+                                                                                                                url: 'PeticionesMovimientos.php',
+                                                                                                                type: 'POST',
+                                                                                                                data: {
+                                                                                                                    Bandera: "PruebaExistenciaF",
+                                                                                                                    id: $('.factura').val(),
+                                                                                                                },
+                                                                                                                success: function (resp) {
+
+                                                                                                                    var resp = $.parseJSON(resp);
+                                                                                                                    if (resp.Salida === true && resp.Mensaje === true) {
+                                                                                                                        $('.proveedor').val(resp.Nombre);
+                                                                                                                        $('.nit').val(resp.Nit);
+                                                                                                                        Salida.EventoAgregarProductosdelProveedor();
+                                                                                                                    } else {
+                                                                                                                        swal("Importante!", "La factura que has introducido no existe.", "warning");
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            });
+                                                                                                        
+                                                                                                    });
+
+                                                                                                },
+                                                                                                EventoAgregarProductosdelProveedor: function () {    
+                                                                                                        var nit = $('.factura').val();
+                                                                                                        $.ajax({
+                                                                                                            url: 'PeticionesMovimientos.php',
+                                                                                                            type: 'POST',
+                                                                                                            data: {
+                                                                                                                Bandera: "TraerProductosPorEntrada",
+                                                                                                                id: nit
+                                                                                                            },
+                                                                                                            success: function (resp) {
+                                                                                                                var resp = $.parseJSON(resp);
+                                                                                                                if (resp.Salida === true && resp.Mensaje === true) {
+                                                                                                                    $('#tabla tbody').html('');
+                                                                                                                    $.each(resp.Productos, function (i, item) {
+                                                                                                                        var nombre = item.nombre;
+                                                                                                                        var nit = item.id;
+                                                                                                                        var valor = item.valor;
+                                                                                                                        var cantidad = item.cantidad;
+                                                                                                                        $('#tabla tbody').append('<tr class="caja" ><td scope="row" class="seleccionarnit">' + nit + '</td><td class="seleccionarnombre">' + nombre + '</td><input type="hidden" value="' + valor + '" class="valor"/></tr>');
+                                                                                                                    });
+                                                                                                                    Entrada.EventoTablaProductos();
+                                                                                                                    Entrada.EventoAgregarProductos();
+                                                                                                                } else {
+                                                                                                                    swal("", "Ha habido un error,intenta nuevamente", "error");
+                                                                                                                }
+                                                                                                            }
+
+                                                                                                        });
+
+                                                                                                 
+                                                                                                },
+                                                                                                ValidarCantidadesDeEntradaDevolucion:function(){                                                                                    
+                                                                                                    Prueba=true;
+                                                                                                  $('.tablaproductos tbody tr').each(function () {
+                                                                                                     var  productos= $(this).children('.nit').text();
+                                                                                                     var valores =$(this).children().children('.cantidad').val();
+                                                                                                          $.ajax({
+                                                                                                        url: 'PeticionesMovimientos.php',
+                                                                                                        type: 'POST',
+                                                                                                    async:false,
+                                                                                                        data: {
+                                                                                                            Bandera: "PruebaCantidadesEntrada",
+                                                                                                            id: productos,
+                                                                                                            cantidad:valores,
+                                                                                                            salida:$('.factura').val()
+                                                                                                        },
+                                                                                                        success: function (resp) {
+
+                                                                                                            var resp = $.parseJSON(resp);
+                                                                                                            if (resp.Salida === true && resp.Mensaje === true) {
+                                                                                                      
+                                                                                                      
+                                                                                                            } else {
+                                                                                                             Prueba=false;
+                                                                                                            }
+                                                                                                        }
+                                                                                                    });
+                                                                                                    });
+                                                                                            
                                                                                                 }
                                                                                             };
                                                                                             $(document).ready(function () {
