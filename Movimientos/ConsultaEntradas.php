@@ -52,6 +52,7 @@ include('../RutinaDeLogueo.php');
                                     <div class="col-md-8">
                                         <label>Nro. Entrada:</label>
                                         <label class="info" id="entrada"></label>
+                                        <label class="info" id="identrada" hidden></label>
 
                                     </div>
                                 </div>
@@ -85,6 +86,7 @@ include('../RutinaDeLogueo.php');
                                     <div class="col-md-4 col-md-offset-3">
                                         <label>Proveedor:</label>
                                         <label class="info" id="proveedor"></label>
+                                        <label class="info" id="idproveedor" hidden></label>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -136,8 +138,8 @@ include('../RutinaDeLogueo.php');
                         if ($pruebadeinicio == 1) {
                             ?>
                             <input type="hidden" id="identificador"/>
-                            <button type="button" class="btn btn-default">
-                                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>  Pdf
+                            <button type="button" class="btn btn-default pdf">
+                                <span class="glyphicon glyphicon-file" aria-hidden="true" class="identrada"></span> Pdf
                             </button>
                             <?php
                         } else if ($pruebadeinicio == 2) {
@@ -395,6 +397,7 @@ include('../RutinaDeLogueo.php');
         }, recargarEventos: function () {
             Entradas.EventoConsultarFra();
             Entradas.EventoEliminarFra();
+            Entradas.Eventopdf();
 
         },
         EventoConsultarFra: function () {
@@ -418,6 +421,8 @@ include('../RutinaDeLogueo.php');
                                 var factura = item.factura;
                                 var encargado = item.encargado;
                                 var proveedor = item.proveedor;
+                                var idproveedor=item.idproveedor;
+                                var id= item.identrada;
 
 
                                 $('#fecha').text(fecha);
@@ -425,6 +430,8 @@ include('../RutinaDeLogueo.php');
                                 $('#entrada').text(factura);
                                 $('#encargado').text(encargado);
                                 $('#proveedor').text(proveedor);
+                                $('#idproveedor').text(idproveedor);
+                                $('#identrada').text(id);
 
                             });
                             $.each(resp.Productos, function (i, item) {
@@ -510,6 +517,22 @@ include('../RutinaDeLogueo.php');
                 });
 
             });
+        }, Eventopdf: function(){
+            
+             $('.pdf').off('click').on('click', function () {
+                 var id = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#entrada').text();
+                 var fecha = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#fecha').text();
+                 var proveedor = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#proveedor').text();
+                 var idproveedor = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#idproveedor').text();
+                 var tipo = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#tipo').text();
+                 var encargado = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#encargado').text();
+                 var identrada = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#identrada').text();
+                 var totalsiniva = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('.totales').text();
+                 var iva = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('.ivatotales').text();
+                 var totalconiva = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('.totalesreales').text();
+                 
+                  window.open('../Pdf/Entrada.php?id='+id+'&&fecha='+fecha+'&&identrada='+identrada+'&&proveedor='+proveedor+'&&idproveedor='+idproveedor+'&&tipo='+tipo+'&&encargado='+encargado+'&&totalsiniva='+totalsiniva+'&&iva='+iva+'&&totalconiva='+totalconiva+'', "nuevo", "directories=no, location=center, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=800, height=600");
+             });
         }
 
     }
