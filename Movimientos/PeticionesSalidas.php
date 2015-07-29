@@ -15,7 +15,8 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
     if ($Bandera === "ConsultarFra") {
         $id = $_POST["id"];
         $query = mysql_query("SELECT * FROM tb_salidas WHERE id_salida = '$id'");
-        $query2 = mysql_query("SELECT tb_productos.nombre as nombreproducto, cantidad, tr_productos_salidas.id_producto as idproducto,tb_productos.valor as valor "
+        $query2 = mysql_query("SELECT tb_productos.nombre as nombreproducto, cantidad, tr_productos_salidas.id_producto "
+                . "as idproducto,tb_productos.valor as valor "
                 . "from tr_productos_salidas,tb_productos WHERE id_salida='$id' "
                 . "AND tb_productos.id_producto = tr_productos_salidas.id_producto");
 
@@ -43,7 +44,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
             $valor = $datostotales["valor"];
 
             $salidas = array("fecha" => $fecha, "factura" => $fra, "tipo" => $tipo,
-                "encargado" => $encargado, "cliente" => $cliente);
+                "encargado" => $encargado, "cliente" => $cliente, "idcliente" => $idcliente);
             $productos = array("cantidad" => $cantidad, "producto" => $nombreproducto, "id" => $idproducto, "valor" => $valor);
 
             array_push($arrayp, $productos);

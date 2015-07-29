@@ -84,6 +84,7 @@ include('../RutinaDeLogueo.php');
                                     <div class="col-md-4 col-md-offset-3">
                                         <label>Cliente:</label>
                                         <label class="info" id="proveedor"></label>
+                                        <label class="info" id="idcliente"  hidden></label>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -135,8 +136,8 @@ include('../RutinaDeLogueo.php');
                         if ($pruebadeinicio == 1) {
                             ?>
                             <input type="hidden" id="identificador"/>
-                            <button type="button" class="btn btn-default">
-                                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>  Pdf
+                            <button type="button" class="btn btn-default pdf">
+                                <span class="glyphicon glyphicon-file" aria-hidden="true" class="idsalida"></span>  Pdf
                             </button>
                             <?php
                         } else if ($pruebadeinicio == 2) {
@@ -350,6 +351,7 @@ include('../RutinaDeLogueo.php');
         }, recargarEventos: function () {
             Salidas.EventoConsultarFra();
             Salidas.EventoEliminarFra();
+            Salidas.Eventopdf();
 
         },
         EventoConsultarFra: function () {
@@ -365,7 +367,6 @@ include('../RutinaDeLogueo.php');
                     success: function (resp) {
                         $('.modal').modal('show');
                         var resp = $.parseJSON(resp);
-                        console.log(resp);
                         if (resp.Salida === true && resp.Mensaje === true) {
                             $('.tablaproductos tbody').html("");
                             $.each(resp.Salidas, function (i, item) {
@@ -374,6 +375,7 @@ include('../RutinaDeLogueo.php');
                                 var factura = item.factura;
                                 var encargado = item.encargado;
                                 var cliente = item.cliente;
+                                var idcliente = item.idcliente;
 
 
                                 $('#fecha').text(fecha);
@@ -381,6 +383,7 @@ include('../RutinaDeLogueo.php');
                                 $('#entrada').text(factura);
                                 $('#encargado').text(encargado);
                                 $('#proveedor').text(cliente);
+                                $('#idcliente').text(idcliente);
 
                             });
                             $.each(resp.Productos, function (i, item) {
@@ -441,7 +444,6 @@ include('../RutinaDeLogueo.php');
                             },
                             success: function (resp) {
                                 var resp = $.parseJSON(resp);
-                                console.log(resp);
                                 if (resp.Salida === true && resp.Mensaje === true) {
                                     swal({title: "",
                                         text: "La salida se ha eliminado exitosamente!",
@@ -465,7 +467,24 @@ include('../RutinaDeLogueo.php');
                 });
 
             });
+        },Eventopdf: function(){
+            
+             $('.pdf').off('click').on('click', function () {
+                 var id = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#entrada').text();
+                 var fecha = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#fecha').text();
+                 var cliente = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#proveedor').text();
+                 var idcliente = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#idcliente').text();
+                 var tipo = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#tipo').text();
+                 var encargado = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#encargado').text();
+//                 var identrada = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#identrada').text();
+                 var totalsiniva = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('.totales').text();
+                 var iva = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('.ivatotales').text();
+                 var totalconiva = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('.totalesreales').text();
+    
+                  window.open('../Pdf/Salida.php?id='+id+'&&cliente='+cliente+'&&idcliente='+idcliente+'&&fecha='+fecha+'&&tipo='+tipo+'&&encargado='+encargado+'&&totalsiniva='+totalsiniva+'&&iva='+iva+'&&totalconiva='+totalconiva+'', "nuevo", "directories=no, location=center, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=800, height=600");
+             });
         }
+        
     }
 
 
