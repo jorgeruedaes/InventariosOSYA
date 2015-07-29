@@ -191,6 +191,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                     perfil.ComprobarUsuario();
                                                     perfil.EnviarDatos();
                                                     perfil.ProbarCedula();
+                                                    perfil.LimpiarTODO();
                                                 },
                                                 RecargarEventos: function () {
 
@@ -383,6 +384,21 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                         swal("", "El perfil debe tener un usuario valido.", "error");
                                                         return false;
                                                     }
+                                                },
+                                                LimpiarTODO:function(){
+                                                    $('.limpiar').off('click').on('click',function(){
+                                                        $('.usuario').val('');
+                                                    $('.contrasena1').val('');
+                                                    $('.contrasena2').val('');
+                                                    $('.pregunta').val('');
+                                                    $('.respuesta').val('');
+                                                    $('.tipo').val('');
+                                                    $('.email').val('');
+                                                    $('.cc').val('');
+                                                    $('.nombre').val('');
+                                                    $('.apellido').val('');
+                                                    });
+                                                    
                                                 }
                                             };
                                             $(document).ready(function () {
