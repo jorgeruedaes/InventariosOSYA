@@ -17,7 +17,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
 
         $query = mysql_query("SELECT * FROM tb_entradas WHERE id_entrada = '$id'");
         $query2 = mysql_query("SELECT valor,tb_productos.nombre as producto,tb_usuarios.nombre as "
-                . "proveedornombre,cantidad,tr_productos_entradas.id_producto FROM `tr_productos_entradas`,"
+                . "proveedornombre,tb_usuarios.cc as idproveedor,cantidad,tr_productos_entradas.id_producto FROM `tr_productos_entradas`,"
                 . "tb_productos,tb_usuarios WHERE id_entrada='$id' and tr_productos_entradas.id_producto="
                 . "tb_productos.id_producto and proveedor=cc");
         $datos = mysql_fetch_array($query);
@@ -39,9 +39,10 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
             $idproducto = $datostotales["id_producto"];
             $nombreproducto = $datostotales["producto"];
             $valor = $datostotales["valor"];
-
+            $idproveedor  = $datostotales["idproveedor"];
+            
             $entradas = array("fecha" => $fecha, "factura" => $fra, "tipo" => $tipo,
-                "encargado" => $encargado, "proveedor" => $nombreproveedor);
+                "encargado" => $encargado, "proveedor" => $nombreproveedor, "idproveedor" => $idproveedor, "identrada" => $id);
             $productos = array("id" => $idproducto, "nombre" => $nombreproducto, "cantidad" => $cantidad, "valor" => $valor);
 
             array_push($arrayp, $productos);
