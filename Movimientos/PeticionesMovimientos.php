@@ -233,7 +233,7 @@ tb_entradas.factura=tr_productos_entradas.factura group by proveedor");
         
     $query1= mysql_fetch_array(mysql_query("SELECT cantidad FROM `tr_productos_entradas`,tb_productos WHERE factura='$salida' and tb_productos.id_producto=tr_productos_entradas.id_producto and `tr_productos_entradas`.id_producto=$id"));
         $cantidadreal= $query1['cantidad'];
-      $myquery= mysql_query("SELECT SUM(cantidad)as cantidad FROM `tb_salidas`,tr_productos_salidas WHERE tb_salidas.id_salida='$salida' and tipo='Devolucion'  and tb_salidas.id_salida=tr_productos_salidas.id_salida='$salida' id_producto='$id' group by id_producto");
+      $myquery= mysql_query("SELECT SUM(cantidad)as cantidad FROM `tb_salidas`,tr_productos_salidas WHERE tb_salidas.id_salida='$salida' and tipo='Devolucion'  and tb_salidas.id_salida=tr_productos_salidas.id_salida  and  id_producto='$id' group by id_producto");
       if(mysql_num_rows($myquery)>0){
             $query2= mysql_fetch_array($myquery);
        $cantidadesentradas= $query2['cantidad'];

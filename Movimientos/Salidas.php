@@ -625,26 +625,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                     return Salida;
                                                                                                 },
                                                                                                 EventosProbarFactura: function () {
-                                                                                                    $('.factura').off('keyup').on('keyup',function(){
-                                                                                                          $.ajax({
-                                                                                                        url: 'PeticionesMovimientos.php',
-                                                                                                        type: 'POST',
-                                                                                                        data: {
-                                                                                                            Bandera: "PruebaExistenciaSalida",
-                                                                                                            id: $('.factura').val()
-                                                                                                        },
-                                                                                                        success: function (resp) {
-
-                                                                                                            var resp = $.parseJSON(resp);
-                                                                                                            if (resp.Salida === true && resp.Mensaje === true) {
-                                                                                                                pruebafactura=true;
-                                                                                                            } else {
-                                                                                                                pruebafactura=false;
-                                                                                                                swal("Importante!", "El la salida que haz introducido ya existe,ingresa una diferente.", "warning");
-                                                                                                            }
-                                                                                                        }
-                                                                                                    });
-                                                                                                    });
+                                                                                               
                                                                                                   
                                                                                                 },
                                                                                                 ProbarCantidades:function(){
@@ -781,8 +762,8 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                                         var cantidad = item.cantidad;
                                                                                                                         $('#tabla tbody').append('<tr class="caja" ><td scope="row" class="seleccionarnit">' + nit + '</td><td class="seleccionarnombre">' + nombre + '</td><input type="hidden" value="' + valor + '" class="valor"/></tr>');
                                                                                                                     });
-                                                                                                                    Entrada.EventoTablaProductos();
-                                                                                                                    Entrada.EventoAgregarProductos();
+                                                                                                                    Salida.EventoTablaProductos();
+                                                                                                                    Salida.EventoAgregarProductos();
                                                                                                                 } else {
                                                                                                                     swal("", "Ha habido un error,intenta nuevamente", "error");
                                                                                                                 }
