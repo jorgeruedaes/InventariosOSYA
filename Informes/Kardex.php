@@ -259,6 +259,9 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                             $('.fechainicialmostrar').css({display: "none"});
                                                             $('.fechafinalmostrar').css({display: "none"});
                                                             $('.secciontabla').css({display: ""});
+                                                       $('.pruebafecha  option[value="No"]').attr('selected', 'selected');
+                                                        $('#fechaInicio').val('');
+                                                               $('#fechaIfinal').val('');
                                                         } else if (valor === "Proveedor") {
                                                             $('.secciontabla tbody').html('');
                                                             $('.agregar').css({display: ""});
@@ -269,6 +272,9 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                             $('.fechainicialmostrar').css({display: "none"});
                                                             $('.fechafinalmostrar').css({display: "none"});
                                                             $('.secciontabla').css({display: ""});
+                                                             $('.pruebafecha  option[value="No"]').attr('selected', 'selected');
+                                                              $('#fechaInicio').val('');
+                                                               $('#fechaIfinal').val('');
                                                         } else if (valor === "Cliente") {
                                                             $('.secciontabla tbody').html('');
                                                             $('.agregar').css({display: ""});
@@ -279,6 +285,9 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                             $('.fechainicialmostrar').css({display: "none"});
                                                             $('.fechafinalmostrar').css({display: "none"});
                                                             $('.secciontabla').css({display: ""});
+                                                             $('.pruebafecha  option[value="No"]').attr('selected', 'selected');
+                                                              $('#fechaInicio').val('');
+                                                               $('#fechaIfinal').val('');
                                                         } else if (valor === "") {
                                                             $('.rango').css({display: ""});
                                                             $('.agregar').css({display: "none"});
@@ -286,6 +295,9 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                             $('.fechainicialmostrar').css({display: "none"});
                                                             $('.fechafinalmostrar').css({display: "none"});
                                                             $('.secciontabla').css({display: "none"});
+                                                             $('.pruebafecha  option[value="No"]').attr('selected', 'selected');
+                                                              $('#fechaInicio').val('');
+                                                               $('#fechaIfinal').val('');
 
                                                         } else {
                                                             $('.secciontabla tbody').html('');
@@ -295,7 +307,10 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                             $('.fechainicialmostrar').css({display: "none"});
                                                             $('.fechafinalmostrar').css({display: "none"});
                                                             $('.secciontabla').css({display: "none"});
-                                                            Kardex.CargasCasoTodos();
+                                                             $('.pruebafecha  option[value="No"]').attr('selected', 'selected');
+                                                             $('#fechaInicio').val('');
+                                                               $('#fechaIfinal').val('');
+                                                          
                                                         }
                                                         Kardex.AgregarTabla();
 
