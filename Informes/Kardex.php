@@ -597,6 +597,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                         }
                                                                     });
                                                                 }
+                                                                window.open('../Pdf/Kardex_total.php', "nuevo", "directories=no, location=center, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=800, height=600");
                                                             }
                                                         } else {
                                                               if ($('.tipo').val() === "Cliente") {
