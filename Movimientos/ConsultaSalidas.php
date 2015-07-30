@@ -444,6 +444,7 @@ include('../RutinaDeLogueo.php');
                             },
                             success: function (resp) {
                                 var resp = $.parseJSON(resp);
+                                console.log(resp);
                                 if (resp.Salida === true && resp.Mensaje === true) {
                                     swal({title: "",
                                         text: "La salida se ha eliminado exitosamente!",

@@ -319,7 +319,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
 
                                                                                             var Creador = '<?php echo $_SESSION['identificacion']; ?>'  // creador del producto o quien lo agrega
                                                                                             var Prueba=true;
-                                                                                            var pruebafactura=false;
+                                                                                            var pruebafactura=true;
                                                                                                var Salida = {
                                                                                                 Inicio: function () {
                                                                                                     Salida.EventoSeleccionarProvedoor();

@@ -244,7 +244,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                                                     ?>
                                                                                                                                     <tr class="defaultcaja" data-id="$producto">
                                                                                                                                         <th scope="row" class="seleccionarnit"><?php echo $listajugadores["cc"] ?></th> 
-                                                                                                                                        <td class="seleccionarnombre"><?php echo $listajugadores["nombre"]; ?></td>
+                                                                                                                                        <td class="seleccionarnombre"><?php echo utf8_encode($listajugadores["nombre"]); ?></td>
                                                                                                                                     </tr>
 
                                                                                                                                     <?php
@@ -417,10 +417,10 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                                 if (resp.Salida === true && resp.Mensaje === true) {
                                                                                                                     $('#tabla tbody').html('');
                                                                                                                     $.each(resp.Productos, function (i, item) {
-                                                                                                                        var nombre = item.nombre;
+                                                                                                                        var nombre =  item.nombre;
                                                                                                                         var nit = item.id;
                                                                                                                         var valor = item.valor;
-                                                                                                                        $('#tabla tbody').append('<tr class="caja" ><td scope="row" class="seleccionarnit">' + nit + '</td><td class="seleccionarnombre">' + nombre + '</td><input type="hidden" value="' + valor + '" class="valor"/></tr>');
+                                                                                                                        $('#tabla tbody').append('<tr class="caja" ><td scope="row" class="seleccionarnit">' + nit + '</td><td class="seleccionarnombre">' +nombre+ '</td><input type="hidden" value="' + valor + '" class="valor"/></tr>');
                                                                                                                     });
                                                                                                                     Entrada.EventoTablaProductos();
                                                                                                                 } else {

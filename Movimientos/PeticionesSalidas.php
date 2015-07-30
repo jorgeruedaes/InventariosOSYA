@@ -40,7 +40,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
             $tipo = $datos["tipo"];
             $cantidad = $datostotales["cantidad"];
             $idproducto = $datostotales["idproducto"];
-            $nombreproducto = $datostotales["nombreproducto"];
+            $nombreproducto = utf8_encode($datostotales["nombreproducto"]);
             $valor = $datostotales["valor"];
 
             $salidas = array("fecha" => $fecha, "factura" => $fra, "tipo" => $tipo,

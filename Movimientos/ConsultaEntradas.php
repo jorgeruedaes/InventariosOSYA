@@ -207,8 +207,8 @@ include('../RutinaDeLogueo.php');
                                     <tr class="default caja">
                                         <th scope="row"><?php echo $listaentradas["factura"] ?></th> 
                                         <td><?php echo $listaentradas["fecha"]; ?></td>
-                                        <td><?php echo $resultado["nombre"]; ?></td>
-                                        <td><?php echo $cons["nombre"]; ?></td>
+                                        <td><?php echo utf8_encode($resultado["nombre"]); ?></td>
+                                        <td><?php echo utf8_encode($cons["nombre"]); ?></td>
                                         <td><?php echo $listaentradas["tipo"]; ?></td>
                                         <td>
                                             <button data-id="<?php echo $listaentradas["id_entrada"] ?>" class="btn btn-default consultar" data-toggle="modal">
@@ -291,8 +291,8 @@ include('../RutinaDeLogueo.php');
                                     <tr class="default caja">
                                         <th scope="row"><?php echo $listaentradas["factura"] ?></th> 
                                         <td><?php echo $listaentradas["fecha"]; ?></td>
-                                        <td><?php echo $resultado["nombre"]; ?></td>
-                                        <td><?php echo $cons["nombre"]; ?></td>
+                                        <td><?php echo utf8_encode($resultado["nombre"]); ?></td>
+                                        <td><?php echo utf8_encode($cons["nombre"]); ?></td>
                                         <td><?php echo $listaentradas["tipo"]; ?></td>
                                         <td>
                                             <button data-id="<?php echo $listaentradas["id_entrada"] ?>" class="btn btn-default consultar" data-toggle="modal">
@@ -414,6 +414,7 @@ include('../RutinaDeLogueo.php');
                     success: function (resp) {
                         $('.modal').modal('show');
                         var resp = $.parseJSON(resp);
+                        console.log(resp);
                         if (resp.Salida === true && resp.Mensaje === true) {
                             $('.tablaproductos tbody').html("");
                             $.each(resp.Entradas, function (i, item) {

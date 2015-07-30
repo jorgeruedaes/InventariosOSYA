@@ -25,7 +25,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         $consultanombreencargado = mysql_query("SELECT * FROM tb_usuarios WHERE cc =$idencargado");
         $result = mysql_fetch_array($consultanombreencargado);
 
-        $encargado = $result["nombre"];
+        $encargado = utf8_encode($result["nombre"]);
         $entradas = new stdClass();
         $array = array();
         $arrayp = array();
@@ -34,15 +34,14 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
             $fra = $datos["factura"];
             $fecha = $datos["fecha"];
             $tipo = $datos["tipo"];
-            $nombreproveedor = $datostotales["proveedornombre"];
+            $nombreproveedor = utf8_encode($datostotales["proveedornombre"]);
             $cantidad = $datostotales["cantidad"];
             $idproducto = $datostotales["id_producto"];
-            $nombreproducto = $datostotales["producto"];
+            $nombreproducto = utf8_encode($datostotales["producto"]);
             $valor = $datostotales["valor"];
             $idproveedor  = $datostotales["idproveedor"];
             
-            $entradas = array("fecha" => $fecha, "factura" => $fra, "tipo" => $tipo,
-                "encargado" => $encargado, "proveedor" => $nombreproveedor, "idproveedor" => $idproveedor, "identrada" => $id);
+            $entradas = array("fecha" => $fecha, "factura" => $fra, "tipo" => $tipo, "encargado" => $encargado, "proveedor" => $nombreproveedor, "idproveedor" => $idproveedor, "identrada" => $id);
             $productos = array("id" => $idproducto, "nombre" => $nombreproducto, "cantidad" => $cantidad, "valor" => $valor);
 
             array_push($arrayp, $productos);

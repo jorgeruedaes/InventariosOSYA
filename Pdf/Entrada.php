@@ -5,10 +5,10 @@ require('../Conexion.php');
 
 $id = $_GET["id"];
 $fecha = $_GET["fecha"];
-$proveedor = $_GET["proveedor"];
+$proveedor = utf8_decode($_GET["proveedor"]);
 $idproveedor = $_GET["idproveedor"];
 $tipo = $_GET["tipo"];
-$encargado = $_GET["encargado"];
+$encargado = utf8_decode($_GET["encargado"]);
 $identrada = $_GET["identrada"];
 $totalsiniva= $_GET["totalsiniva"];
 $iva = $_GET["iva"];
