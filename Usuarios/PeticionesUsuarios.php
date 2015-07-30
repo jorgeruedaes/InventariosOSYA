@@ -8,7 +8,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
     $Bandera = $_POST['Bandera'];
     if ($Bandera === "AgregarUsuarios") {
         $creador = $_POST['creador'];
-        $nombre = $_POST['nombre'];
+        $nombre = utf8_decode($_POST['nombre']);
         $cc = $_POST['codigo'];
         $email = $_POST['email'];
         $tipo = $_POST['tipo'];
@@ -57,13 +57,13 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         }
     }else if ($Bandera === "CrearPerfil") {
        $cc=$_POST['cc'];
-       $nombre=$_POST['nombre'];
-       $apellido=$_POST['apellido'];
+       $nombre=  utf8_decode($_POST['nombre']);
+       $apellido=  utf8_decode($_POST['apellido']);
        $usuario= md5($_POST['usuario']);
        $pass= md5($_POST['pass']);
        $email=$_POST['email'];
-       $pregunta=$_POST['pregunta'];
-       $respuesta=$_POST['respuesta'];
+       $pregunta=  utf8_decode($_POST['pregunta']);
+       $respuesta=  utf8_decode($_POST['respuesta']);
        $tipo=$_POST['tipo'];
         $query = mysql_query("INSERT INTO `tb_usuarios`(`cc`, `nombre`, `apellido`, `usuario`, `contrasena`, `email`, `pregunta`, `respuesta`, `estado`, `tipo`) VALUES('$cc','$nombre','$apellido','$usuario','$pass','$email','$pregunta','$respuesta','Activo','$tipo')");
         if ($query) {

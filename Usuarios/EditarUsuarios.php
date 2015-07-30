@@ -91,7 +91,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                 ?>
                                                 <tr class="default caja">
                                                     <th scope="row"><?php echo $listajugadores["cc"] ?></th> 
-                                                    <td><?php echo $listajugadores["nombre"]; ?></td>
+                                                    <td><?php echo utf8_encode($listajugadores["nombre"]); ?></td>
                                                     <td> <?php echo $listajugadores["tipo"]; ?> </td>
                                                     <td>
         <!--                                                <button id="editar" type="button" class="btn btn-success editar" data-id="<?php echo $listajugadores["cc"] ?>" 
@@ -143,7 +143,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                 ?>
                                                 <tr class="default caja">
                                                     <th scope="row"><?php echo $listajugadores["cc"] ?></th> 
-                                                    <td><?php echo $listajugadores["nombre"]; ?></td>
+                                                    <td><?php echo utf8_encode($listajugadores["nombre"]); ?></td>
                                                     <td> <?php echo $listajugadores["tipo"]; ?> </td>
                                                     <td>
         <!--                                                <button id="editar" type="button" class="btn btn-success editar" data-id="<?php echo $listajugadores["cc"] ?>" 

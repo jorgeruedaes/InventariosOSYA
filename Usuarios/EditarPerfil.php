@@ -88,7 +88,8 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                         ?>
                                         <tr class="default caja">
                                             <th scope="row"><?php echo $listajugadores["cc"] ?></th> 
-                                            <td><?php echo $listajugadores["nombre"] . " " . $listajugadores["apellido"]; ?></td>
+                                            <?php $nombrecompleto = $listajugadores["nombre"] . " " . $listajugadores["apellido"]; ?>
+                                            <td><?php echo utf8_encode($nombrecompleto) ?></td>
                                             <td>
                                                 <?php echo $listajugadores["tipo"]; ?>
 
