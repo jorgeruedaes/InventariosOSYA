@@ -5,9 +5,9 @@ require('../Conexion.php');
 
 $id = $_GET["id"];
 $fecha = $_GET["fecha"];
-$encargado = $_GET["encargado"];
+$encargado = utf8_decode($_GET["encargado"]);
 $tipo = $_GET["tipo"];
-$cliente = $_GET["cliente"];
+$cliente = utf8_decode($_GET["cliente"]);
 $totalsiniva= $_GET["totalsiniva"];
 $iva = $_GET["iva"];
 $totalconiva = $_GET["totalconiva"];

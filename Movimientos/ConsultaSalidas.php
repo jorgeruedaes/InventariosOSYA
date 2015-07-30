@@ -195,8 +195,8 @@ include('../RutinaDeLogueo.php');
                                 <tr class="default caja">
                                     <th scope="row"><?php echo $idsalida; ?></th> 
                                     <td><?php echo $fecha; ?></td>
-                                    <td><?php echo $resultado["nombre"]; ?></td>
-                                    <td><?php echo $resultados["nombre"]; ?></td>
+                                    <td><?php echo utf8_encode($resultado["nombre"]); ?></td>
+                                    <td><?php echo utf8_encode($resultados["nombre"]); ?></td>
                                     <td><?php echo $tipo; ?></td>
                                     <td>
                                         <button data-id="<?php echo $listasalidas["id_salida"] ?>" class="btn btn-default consultar" data-toggle="modal">
@@ -267,8 +267,8 @@ include('../RutinaDeLogueo.php');
                                 <tr class="default caja">
                                     <th scope="row"><?php echo $idsalida; ?></th> 
                                     <td><?php echo $fecha; ?></td>
-                                    <td><?php echo $resultado["nombre"]; ?></td>
-                                    <td><?php echo $resultados["nombre"]; ?></td>
+                                    <td><?php echo utf8_encode($resultado["nombre"]); ?></td>
+                                    <td><?php echo utf8_encode($resultados["nombre"]); ?></td>
                                     <td><?php echo $tipo; ?></td>
                                     <td>
                                         <button data-id="<?php echo $listasalidas["id_salida"] ?>" class="btn btn-default consultar" data-toggle="modal">
@@ -367,6 +367,7 @@ include('../RutinaDeLogueo.php');
                     success: function (resp) {
                         $('.modal').modal('show');
                         var resp = $.parseJSON(resp);
+                        console.log(resp);
                         if (resp.Salida === true && resp.Mensaje === true) {
                             $('.tablaproductos tbody').html("");
                             $.each(resp.Salidas, function (i, item) {

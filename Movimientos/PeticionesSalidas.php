@@ -28,8 +28,8 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         $result = mysql_fetch_array($consultanombreencargado);
         $results = mysql_fetch_array($consultanombrecliente);
 
-        $encargado = $result["nombre"];
-        $cliente = $results["nombre"];
+        $encargado = utf8_encode($result["nombre"]);
+        $cliente = utf8_encode($results["nombre"]);
         $salidas = new stdClass();
         $array = array();
         $arrayp = array();
@@ -61,34 +61,19 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         }
     }
     else if ($Bandera === "EliminarSalida") {
-
-        $id = $_POST["id"];
-        $consultaproductos = mysql_query("SELECT * FROM tr_productos_salidas WHERE id_salida = '$id'");
-        $bandera = true;
-        while ($resultado1 = mysql_fetch_array($consultaproductos)) {
-            $idproducto = $resultado1["id_producto"];
-            $cantidad = $resultado1["cantidad"];
-            $query1 = mysql_fetch_array(mysql_query("SELECT Sum(cantidad) as cantidad FROM `tr_productos_salidas` WHERE id_producto=$idproducto group by id_producto "));
-            $salidas = $query1['cantidad'];
-            $query2 = mysql_fetch_array(mysql_query("SELECT Sum(cantidad) as cantidad FROM `tr_productos_entradas` WHERE id_producto=$idproducto group by id_producto "));
-            $entradas = $query2['cantidad'];
-            $stock = $entradas - $salidas;
-            if ($stock >= $cantidad) {
-            } else {
-                $bandera = false;
-            }
-        }
-        if ($bandera == true) {
+        $id = $_POST["id"];     
             $query2 = mysql_query("DELETE  FROM tr_productos_salidas WHERE id_salida = '$id'");
-            $query = mysql_query("DELETE  FROM tb_salidas WHERE id_salida = '$id'");
-            if($query2 &&$query){
-                 $resultado.='"Mensaje":true';
+            if($query2 ){
+                   $query = mysql_query("DELETE  FROM tb_salidas WHERE id_salida = '$id'");
+                 if($query){
+                     $resultado.='"Mensaje":true';
+                 }else{
+                     $resultado.='"Mensaje":false';
+                 }
             }else{
                  $resultado.='"Mensaje":false'; 
             }
-        } else {
-            $resultado.='"Mensaje":false';
-        }
+     
     }
 } else {
     $resultado = '{"Salida":false,';

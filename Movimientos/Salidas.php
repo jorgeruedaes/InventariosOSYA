@@ -241,8 +241,8 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                                                     $producto = $listajugadores["cc"];
                                                                                                                                     ?>
                                                                                                                                     <tr class="defaultcaja" data-id="$producto">
-                                                                                                                                        <th scope="row" class="seleccionarnit"><?php echo $listajugadores["cc"] ?></th> 
-                                                                                                                                        <td class="seleccionarnombre"><?php echo $listajugadores["nombre"]; ?></td>
+                                                                                                                                        <th scope="row" class="seleccionarnit"><?php echo utf8_encode($listajugadores["cc"]) ?></th> 
+                                                                                                                                        <td class="seleccionarnombre"><?php echo utf8_encode($listajugadores["nombre"]); ?></td>
                                                                                                                                     </tr>
 
                                                                                                                                     <?php
@@ -317,7 +317,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                         <script src="../datepicker/js/locales/bootstrap-datepicker.es.js" charset="UTF-8"></script>
                                                                                         <script>
 
-                                                                                            var Creador = '<?php echo $_SESSION['identificacion']; ?>'  // creador del producto o quien lo agrega
+                                                                                            var Creador = '<?php echo $_SESSION['identificacion']; ?>' ; // creador del producto o quien lo agrega
                                                                                             var Prueba=true;
                                                                                             var pruebafactura=true;
                                                                                                var Salida = {
@@ -561,16 +561,15 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                 },
                                                                                                 EnviarDatos: function () {
                                                                                                     $('.guardar').off('click').on('click', function () {
-                                                                                                        if($('tipoentrada').val()=="Remision"){
+                                                                                                       
+                                                                                                        if (Salida.ValidacionGeneral()) {
+                                                                                                             Prueba=true;
+                                                                                                        if($('.tipoentrada').val()==="Remision"){
                                                                                                               Salida.ValidacionFinalSalidasCantidades();
                                                                                                         }else{
                                                                                                         Salida.ValidarCantidadesDeEntradaDevolucion();
                                                                                                             
                                                                                                         }
-                                                                                                      
-                                                                                                        
-                                                                                                        
-                                                                                                        if (Salida.ValidacionGeneral()) {
                                                                                                             if(Prueba){
                                                                                                                 if(pruebafactura){
                                                                                                             $.ajax({
@@ -699,6 +698,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                     return date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate();
                                                                                                 },
                                                                                                 ValidacionFinalSalidasCantidades:function(){
+                                                                                                      Prueba=true;
                                                                                                     $('.tablaproductos tbody tr').each(function () {
                                                                                                      var  productos= $(this).children('.nit').text();
                                                                                                      var valores =$(this).children().children('.cantidad').val();
