@@ -91,12 +91,12 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                 ?>
                                                 <tr class="default caja">
                                                     <th scope="row"><?php echo $listajugadores["id_producto"] ?></th> 
-                                                    <td><?php echo $listajugadores["nombre"]; ?></td>
+                                                    <td><?php echo utf8_encode($listajugadores["nombre"]); ?></td>
                                                     <td>
 
                                                         <?php
                                                         $query = mysql_fetch_array(mysql_query("SELECT tb_usuarios.nombre as nombre FROM `tb_productos`,tb_usuarios Where id_producto=$producto and proveedor=cc"));
-                                                        echo $query['nombre'];
+                                                        echo utf8_encode($query['nombre']);
                                                         ?>                                                
 
                                                     </td>
@@ -150,12 +150,12 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                 ?>
                                                 <tr class="default caja">
                                                     <th scope="row"><?php echo $listajugadores["id_producto"] ?></th> 
-                                                    <td><?php echo $listajugadores["nombre"]; ?></td>
+                                                    <td><?php echo utf8_encode($listajugadores["nombre"]); ?></td>
                                                     <td>
 
                                                         <?php
                                                         $query = mysql_fetch_array(mysql_query("SELECT tb_usuarios.nombre as nombre FROM `tb_productos`,tb_usuarios Where id_producto=$producto and proveedor=cc"));
-                                                        echo $query['nombre'];
+                                                        echo utf8_encode($query['nombre']);
                                                         ?>                                                
 
                                                     </td>

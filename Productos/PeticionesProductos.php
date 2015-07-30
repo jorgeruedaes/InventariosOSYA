@@ -11,8 +11,8 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         $valor = $_POST['valor'];
         $proveedor = $_POST['proveedor'];
         $codigo = $_POST['codigo'];
-        $nombre = $_POST['nombre'];
-         $descripcion = $_POST['descripcion'];
+        $nombre = utf8_decode($_POST['nombre']);
+         $descripcion = utf8_decode($_POST['descripcion']);
         $query=  mysql_query("INSERT INTO `tb_productos`(`id_producto`, `nombre`, `descripcion`, `valor`, `creador`, `estado`, `proveedor`)"
                 . " VALUES ('$codigo','$nombre','$descripcion','$valor','$creador','Activo','$proveedor')");
         if ($query) {
@@ -47,8 +47,8 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
     }
      else if ($Bandera === "EditarProducto") {
         $id = $_POST['id'];
-        $nombre= $_POST['nombre'];
-         $descripcion= $_POST['descripcion'];
+        $nombre= utf8_decode($_POST['nombre']);
+         $descripcion= utf8_decode($_POST['descripcion']);
           $estado= $_POST['estado'];
           $valor= $_POST['valor'];
           $query=  mysql_query("UPDATE `tb_productos` SET `nombre`='$nombre',`descripcion`='$descripcion',`valor`='$valor',`estado`='$estado' "
