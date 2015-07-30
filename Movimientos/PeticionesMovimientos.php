@@ -133,7 +133,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         $query1 = mysql_fetch_array($query);
 
         if ($query && $query1['cantidad'] > 0) {
-            $nombre = $query1['nombre'];
+            $nombre = utf8_encode($query1['nombre']);
             $id = $query1['cc'];
             $resultado.='"Mensaje":true';
             $resultado.=',"Nombre":" ' . $nombre . ' " ';
@@ -193,7 +193,7 @@ tb_entradas.factura=tr_productos_entradas.factura group by proveedor");
         $query1 = mysql_fetch_array($query);
 
         if ($query && $query1['cantidad'] > 0) {
-            $nombre = $query1['nombre'];
+            $nombre = utf8_encode($query1['nombre']);
             $id = $query1['cc'];
             $resultado.='"Mensaje":true';
             $resultado.=',"Nombre":" ' . $nombre . ' " ';
