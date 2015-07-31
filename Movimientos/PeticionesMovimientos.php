@@ -272,6 +272,23 @@ tb_entradas.factura=tr_productos_entradas.factura group by proveedor");
                 }
             }
         }
+    }else if ($Bandera === "ValidarExistencia") {
+
+        $factura = $_POST['factura'];
+        $proveedor = $_POST['proveedor'];
+        $consulta = mysql_query("SELECT tb_productos.proveedor,id_entrada FROM tr_productos_entradas, tb_productos "
+                . "WHERE factura = $factura AND tb_productos.id_producto= tr_productos_entradas.id_producto GROUP BY id_entrada");
+        if (mysql_num_rows($consulta) > 0) {
+            $result = mysql_fetch_array($consulta);
+            $nit = $result["proveedor"];
+            if ($nit == $proveedor) {
+                $resultado.='"Existe":true';
+            } else {
+                $resultado.='"Existe":false';
+            }
+        }else{
+            $resultado.='"Existe":false';
+        }
     }
 } else {
     $resultado = '{"Salida":false,';
