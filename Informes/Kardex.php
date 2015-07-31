@@ -571,14 +571,54 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                     }
                                                                 } else if ($('.tipo').val() === "Producto") {
                                                                     if (Kardex.ValidacionGeneral()) {
-                                                                        var tipo = $('.tipo').val();
                                                                         var fechas = $('.pruebafecha').val();
-                                                                        if (tipo === "Producto" && fechas === "No") {
-                                                                            
-                                                                            window.open('../Pdf/Kardex_producto.php', "nuevo", "directories=no, location=center, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=800, height=600");
-                                                                        }
+                                                                        if (fechas === "No") {
+                                                                            if (JSON.stringify(Kardex.TomarDatosNO()) === '{"productos":[]}')
+                                                                            {
+                                                                              
+                                                                                $.ajax({
+                                                                                    url: 'PeticionesKardex.php',
+                                                                                    type: 'POST',
+                                                                                    data: {
+                                                                                     
+                                                                                        Bandera: "ProductosTodos"
+                                                                                    },
+                                                                                    success: function (resp) {
+                                                                                        var resp = $.parseJSON(resp);
+                                                                                        if (resp.Salida === true && resp.Mensaje === true) {
+                                                                                            window.open('../Pdf/Kardex_producto.php', "nuevo", "directories=no, location=center, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=800, height=600");
+
+                                                                                        } else {
+                                                                                            swal("", "Se ha producido un error al intentar generar el kardex de productos, intenta nuevamente..", "error");
+                                                                                        }
+
+                                                                                    }
+                                                                                });
+                                                                            } else {
+
+                                                                                $.ajax({
+                                                                                    url: 'PeticionesKardex.php',
+                                                                                    type: 'POST',
+                                                                                    data: {
+                                                                                        Objeto: JSON.stringify(Kardex.TomarDatosNO()),
+                                                                                        Bandera: "ProductoSinFecha"
+                                                                                    },
+                                                                                    success: function (resp) {
+                                                                                        var resp = $.parseJSON(resp);
+                                                                                        if (resp.Salida === true && resp.Mensaje === true) {
+                                                                                            window.open('../Pdf/Kardex_producto.php', "nuevo", "directories=no, location=center, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=800, height=600");
+
+                                                                                        } else {
+                                                                                            swal("", "Se ha producido un error al intentar generar el kardex de productos, intenta nuevamente..", "error");
+                                                                                        }
+
+                                                                                    }
+                                                                                });
+
+    //                                                                            
+                                                                            }
                                                                     }
-                                                                } else if ($('.tipo').val() === "Total") {
+                                                                }} else if ($('.tipo').val() === "Total") {
                                                                     if (Kardex.ValidacionGeneral()) {
                                                                         $.ajax({
                                                                             url: 'PeticionesMovimientos.php',

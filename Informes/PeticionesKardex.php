@@ -90,6 +90,15 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         } else {
             $resultado.='"Mensaje":false';
         }
+    }else if ($Bandera === "ProductoSinFecha") {
+        
+        $_SESSION["datos"]  = $_POST["Objeto"];
+        $resultado.='"Mensaje":true';
+    }
+    else if ($Bandera === "ProductosTodos") {
+        
+        $_SESSION["datos"]  = true;
+        $resultado.='"Mensaje":true';
     }
 } else {
     $resultado = '{"Salida":false,';
