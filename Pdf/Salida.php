@@ -8,15 +8,16 @@ $fecha = $_GET["fecha"];
 $encargado = utf8_decode($_GET["encargado"]);
 $tipo = $_GET["tipo"];
 $cliente = utf8_decode($_GET["cliente"]);
-$totalsiniva= $_GET["totalsiniva"];
+$totalsiniva = $_GET["totalsiniva"];
 $iva = $_GET["iva"];
 $totalconiva = $_GET["totalconiva"];
 $idcliente = $_GET["idcliente"];
+$idsalida = $_GET["idsalida"];
 
 $consulta = mysql_query("SELECT tb_productos.nombre as nombreproducto, cantidad, tr_productos_salidas.id_producto "
-                . "as idproducto,tb_productos.valor as valor "
-                . "from tr_productos_salidas,tb_productos WHERE id_salida='$id' "
-                . "AND tb_productos.id_producto = tr_productos_salidas.id_producto");
+        . "as idproducto,tb_productos.valor as valor "
+        . "from tr_productos_salidas,tb_productos WHERE id_salida='$id' "
+        . "AND tb_productos.id_producto = tr_productos_salidas.id_producto");
 
 
 $pdf = new FPDF();
@@ -25,10 +26,11 @@ $pdf->SetMargins(30, 25, 30);
 $pdf->SetFont('Arial', '', 10);
 $pdf->Image('../images/aseoblanco.jpg', 30, 30, 70);
 
-$pdf->SetXY(29, 10);
+
+$pdf->SetXY(29, 20);
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(0, 100, 'Cliente:', 0, 0, 'L');
-$pdf->SetXY(50, 10);
+$pdf->SetXY(50, 20);
 $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(0, 100, $cliente, 0, 0, 'L');
 if ($tipo == "Remision") {
@@ -38,26 +40,33 @@ if ($tipo == "Remision") {
     $pdf->Cell(1, 10, 'Fecha', 0, 0, 'R');
     $pdf->SetXY(117, 55);
     $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(1, 10, 'Nit:', 0, 0, 'R');
+    $pdf->Cell(1, 30, 'Nit:', 0, 0, 'R');
     $pdf->SetFont('Arial', '', 10);
+    $pdf->SetXY(135, 30);
+    $pdf->Cell(30, 10, $idsalida, 1, 0, 'C');
 } else {
     $pdf->SetXY(126, 30);
     $pdf->Cell(1, 10, $tipo, 0, 0, 'R');
+    $pdf->SetXY(120, 50);
+    $pdf->Cell(1, 10, 'Factura', 0, 0, 'R');
+    $pdf->SetXY(135, 50);
+    $pdf->Cell(30, 10, $idsalida, 1, 0, 'C');
     $pdf->SetXY(118, 40);
     $pdf->Cell(1, 10, 'Fecha', 0, 0, 'R');
     $pdf->SetXY(114, 55);
     $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(1, 10, 'Nit:', 0, 0, 'R');
+    $pdf->Cell(1, 30, 'Nit:', 0, 0, 'R');
     $pdf->SetFont('Arial', '', 10);
+    $pdf->SetXY(135, 30);
+    $pdf->Cell(30, 10, $id, 1, 0, 'C');
 }
 
-$pdf->SetXY(135, 30);
-$pdf->Cell(30, 10, $id, 1, 0, 'C');
+
 
 $pdf->SetXY(135, 40);
 $pdf->Cell(30, 10, $fecha, 1, 0, 'C');
 
-$pdf->SetXY(144, 55);
+$pdf->SetXY(144, 65);
 $pdf->Cell(1, 10, $idcliente, 0, 0, 'R');
 $pdf->Ln();
 $pdf->Ln();
@@ -80,14 +89,14 @@ while ($resultado = mysql_fetch_array($consulta)) {
     $pdf->Cell(30, 10, $total, 1, 1, 'C');
 }
 $pdf->Ln();
-$pdf->Cell(150,5,'Total: '.$totalsiniva,0,1,'R');
-$pdf->Cell(150,5,'Iva: '.$iva,0,1,'R');
+$pdf->Cell(150, 5, 'Total: ' . $totalsiniva, 0, 1, 'R');
+$pdf->Cell(150, 5, 'Iva: ' . $iva, 0, 1, 'R');
 $pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(150,5,'Total: '.$totalconiva,0,1,'R');
+$pdf->Cell(150, 5, 'Total: ' . $totalconiva, 0, 1, 'R');
 $pdf->SetFont('Arial', '', 10);
 $pdf->Ln();
-$pdf ->Write(6,'Elaborado por: ');
-$pdf ->Write(6,$encargado);
+$pdf->Write(6, 'Elaborado por: ');
+$pdf->Write(6, $encargado);
 
 $pdf->Output();
 ?>

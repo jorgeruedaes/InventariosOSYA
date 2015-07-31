@@ -36,6 +36,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         while ($datostotales = mysql_fetch_array($query2)) {
 
             $fra = $datos["id_salida"];
+            $frasalida = $datos["factura_salida"];
             $fecha = $datos["fecha"];
             $tipo = $datos["tipo"];
             $cantidad = $datostotales["cantidad"];
@@ -43,7 +44,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
             $nombreproducto = utf8_encode($datostotales["nombreproducto"]);
             $valor = $datostotales["valor"];
 
-            $salidas = array("fecha" => $fecha, "factura" => $fra, "tipo" => $tipo,
+            $salidas = array("fecha" => $fecha, "factura" => $fra,"facturasalida" => $frasalida,"tipo" => $tipo,
                 "encargado" => $encargado, "cliente" => $cliente, "idcliente" => $idcliente);
             $productos = array("cantidad" => $cantidad, "producto" => $nombreproducto, "id" => $idproducto, "valor" => $valor);
 

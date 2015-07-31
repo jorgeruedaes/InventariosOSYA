@@ -66,6 +66,13 @@ include('../RutinaDeLogueo.php');
                                         <label class="info" id="tipo"></label>
                                     </div>
                                 </div>
+                                <div class="row" id="frasalida" hidden="">
+                                    <div class="col-md-8">
+                                        <label>Factura:</label>
+                                        <label class="info" id="facturasalida"></label>
+
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-8">
                                         <br>
@@ -153,7 +160,7 @@ include('../RutinaDeLogueo.php');
         include("../Encabezado.php");
         if ($pruebadeinicio == 1) {
             ?>
-           <div class="row">
+            <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <h2 style="color:#27AE60;">Listado de salidas</h2><hr>
                 </div>
@@ -274,7 +281,7 @@ include('../RutinaDeLogueo.php');
                                         <button data-id="<?php echo $listasalidas["id_salida"] ?>" class="btn btn-default consultar" data-toggle="modal">
                                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 
-                                        
+
                                     </td>
 
                                 </tr>
@@ -377,11 +384,22 @@ include('../RutinaDeLogueo.php');
                                 var encargado = item.encargado;
                                 var cliente = item.cliente;
                                 var idcliente = item.idcliente;
+                                var facturasalida = item.facturasalida;
 
 
                                 $('#fecha').text(fecha);
                                 $('#tipo').text(tipo);
-                                $('#entrada').text(factura);
+                                if (tipo === "Devolucion") {
+
+                                    $('#entrada').text(factura);
+                                    $('#facturasalida').text(facturasalida);
+                                      $('#frasalida').css({display:"block"});
+
+                                } else {
+                                    $('#frasalida').css({display:'none'});
+                                    $('#entrada').text(facturasalida);
+                                    $('#facturasalida').text(factura);
+                                }
                                 $('#encargado').text(encargado);
                                 $('#proveedor').text(cliente);
                                 $('#idcliente').text(idcliente);
@@ -398,8 +416,9 @@ include('../RutinaDeLogueo.php');
                             <td>' + cantidad + '</td><td>' + valor + '</td><td class="total">' + total + '</td></tr>');
 
                             });
-                            Salidas.CargarTotales();
 
+                            Salidas.CargarTotales();
+                          
                         } else {
                             swal("", "Ha ocurrido un error, intenta nuevamente", "error");
 
@@ -469,24 +488,31 @@ include('../RutinaDeLogueo.php');
                 });
 
             });
-        },Eventopdf: function(){
-            
-             $('.pdf').off('click').on('click', function () {
-                 var id = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#entrada').text();
-                 var fecha = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#fecha').text();
-                 var cliente = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#proveedor').text();
-                 var idcliente = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#idcliente').text();
-                 var tipo = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#tipo').text();
-                 var encargado = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#encargado').text();
+        }, Eventopdf: function () {
+
+            $('.pdf').off('click').on('click', function () {
+                var tipo = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#tipo').text();
+                if(tipo==="Devolucion"){
+                var id = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#entrada').text();                    
+                var idsalida = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#facturasalida').text();                    
+                }else{
+                 var id = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#facturasalida').text();       
+                 var idsalida = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#entrada').text();       
+                }
+                var fecha = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#fecha').text();
+                var cliente = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#proveedor').text();
+                var idcliente = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#idcliente').text();
+                var tipo = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#tipo').text();
+                var encargado = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#encargado').text();
 //                 var identrada = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('#identrada').text();
-                 var totalsiniva = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('.totales').text();
-                 var iva = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('.ivatotales').text();
-                 var totalconiva = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('.totalesreales').text();
-    
-                  window.open('../Pdf/Salida.php?id='+id+'&&cliente='+cliente+'&&idcliente='+idcliente+'&&fecha='+fecha+'&&tipo='+tipo+'&&encargado='+encargado+'&&totalsiniva='+totalsiniva+'&&iva='+iva+'&&totalconiva='+totalconiva+'', "nuevo", "directories=no, location=center, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=800, height=600");
-             });
+                var totalsiniva = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('.totales').text();
+                var iva = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('.ivatotales').text();
+                var totalconiva = $(this).parents('.modal-dialog').find('.modal-content').find('.modal-body').find('.totalesreales').text();
+
+                window.open('../Pdf/Salida.php?id=' + id +  '&&idsalida=' + idsalida + '&&cliente=' + cliente + '&&idcliente=' + idcliente + '&&fecha=' + fecha + '&&tipo=' + tipo + '&&encargado=' + encargado + '&&totalsiniva=' + totalsiniva + '&&iva=' + iva + '&&totalconiva=' + totalconiva + '', "nuevo", "directories=no, location=center, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=800, height=600");
+            });
         }
-        
+
     }
 
 
