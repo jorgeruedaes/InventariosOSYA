@@ -89,8 +89,8 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         $query = mysql_query("INSERT INTO `tb_salidas`(`id_salida`, `fecha`, `tipo`, `encargado`,cliente,factura_salida)"
                 . " VALUES (NULL,'$fecha','$tipo','$creador','$cliente',$factura)");
         $producto = $datos['productos'];
-         $query1 = mysql_fetch_array(mysql_query("SELECT MAX(id_salida)as salida FROM `tb_salidas` WHERE factura_salida=$factura"));
-            $salida = $query1['salida'];
+        $query1 = mysql_fetch_array(mysql_query("SELECT MAX(id_salida)as salida FROM `tb_salidas` WHERE factura_salida=$factura"));
+        $salida = $query1['salida'];
         if ($query) {
             foreach ($producto as $cosa) {
                 $id = $cosa['id'];
@@ -230,22 +230,46 @@ tb_entradas.factura=tr_productos_entradas.factura group by proveedor");
 
         $query1 = mysql_fetch_array(mysql_query("SELECT cantidad FROM `tr_productos_entradas`,tb_productos WHERE factura='$salida' and tb_productos.id_producto=tr_productos_entradas.id_producto and `tr_productos_entradas`.id_producto=$id"));
         $cantidadreal = $query1['cantidad'];
-        $myquery = mysql_query("SELECT SUM(cantidad)as cantidad FROM `tb_salidas`,tr_productos_salidas WHERE tb_salidas.id_salida='$salida' and tipo='Devolucion'  and tb_salidas.id_salida=tr_productos_salidas.id_salida  and  id_producto='$id' group by id_producto");
+        $myquery = mysql_query("SELECT SUM(cantidad)as cantidad FROM tr_productos_salidas WHERE id_salida IN (SELECT id_salida FROM tb_salidas WHERE factura_salida='$salida' and tipo='Devolucion' ) and   id_producto='$id' group by id_producto");
+        //PRUEBA DE EXIXTENCIAS REALES
+         $query11 = mysql_fetch_array(mysql_query("SELECT Sum(cantidad) as cantidad FROM `tr_productos_salidas` WHERE id_producto=$id group by id_producto "));
+        $salidas = $query11['cantidad'];
+        $query22 = mysql_fetch_array(mysql_query("SELECT Sum(cantidad) as cantidad FROM `tr_productos_entradas` WHERE id_producto=$id group by id_producto "));
+        $entradas = $query22['cantidad'];
+        $totalreal = $entradas - $salidas;
+        // FIN EXITENCIAS REALES
+
         if (mysql_num_rows($myquery) > 0) {
             $query2 = mysql_fetch_array($myquery);
             $cantidadesentradas = $query2['cantidad'];
-            if (($cantidadreal - $cantidadesentradas) >= $cantidad) {
+            if (($cantidadreal - $cantidadesentradas) >= $cantidad && $totalreal >= $cantidad) {
                 $resultado.='"Mensaje":true';
             } else {
-                $resultado.='"Mensaje":false';
-                $resultado.=',"Numero":  "' . ($cantidadreal - $cantidadesentradas) . '"';
+                if (($cantidadreal - $cantidadesentradas) >= $cantidad) {
+                    $resultado.='"Mensaje":false';
+                    $resultado.=',"Numero":  "'.$totalreal.'"';
+                }else if($totalreal >= $cantidad){
+                     $resultado.='"Mensaje":false';
+                    $resultado.=',"Numero":  "'.$cantidadreal - $cantidadesentradas.'"';
+                }  else {
+                    $resultado.='"Mensaje":false';
+                    $resultado.=',"Numero":  "'.$totalreal.'"';
+                }
             }
         } else {
-            if ($cantidadreal >= $cantidad) {
+            if ($cantidadreal >= $cantidad && $totalreal >= $cantidad) {
                 $resultado.='"Mensaje":true';
             } else {
-                $resultado.='"Mensaje":false';
-                $resultado.=',"Numero":  " ' . $cantidadreal . '" ';
+                if ($cantidadreal >= $cantidad) {
+                    $resultado.='"Mensaje":false';
+                    $resultado.=',"Numero":  "'.$totalreal.'"';
+                }else if($totalreal >= $cantidad){
+                     $resultado.='"Mensaje":false';
+                    $resultado.=',"Numero":  "'.$cantidadreal.'"';
+                } else {
+                    $resultado.='"Mensaje":false';
+                    $resultado.=',"Numero":  "' .$totalreal. '"';
+                }
             }
         }
     }
