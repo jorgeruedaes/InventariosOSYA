@@ -706,7 +706,8 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                                                                     $('.proveedor').val(resp.Nombre);
                                                                                                                     $('.nit').val(resp.Nit);
                                                                                                                     Entrada.EventoAgregarProductosdelCliente();
-                                                                                                                } else {
+                                                                                                                } else {$('.proveedor').val('');
+                                                                                                                    $('.nit').val('');
                                                                                                                     swal("Importante!", "La remisión que has ingresado no existe.", "warning");
                                                                                                                 }
                                                                                                             }
