@@ -131,7 +131,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         }
     } else if ($Bandera === "PruebaExistenciaR") {
         $valor = $_POST['id'];
-        $query = mysql_query("SELECT COUNT(*)as cantidad,nombre,cc FROM `tb_salidas`,tb_usuarios WHERE id_salida='$valor' and cliente=cc");
+        $query = mysql_query("SELECT COUNT(*)as cantidad,nombre,cc FROM `tb_salidas`,tb_usuarios  WHERE factura_salida='$valor' and cliente=cc and  tb_salidas.tipo='Remision' ");
         $query1 = mysql_fetch_array($query);
 
         if ($query && $query1['cantidad'] > 0) {
@@ -145,7 +145,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         }
     } else if ($Bandera === "TraerProductosPorSalida") {
         $valor = $_POST['id'];
-        $query = mysql_query("SELECT nombre,cantidad,`tr_productos_salidas`.id_producto as id,valor FROM `tr_productos_salidas`,tb_productos WHERE id_salida='$valor'and tb_productos.id_producto=`tr_productos_salidas`.id_producto");
+        $query = mysql_query("SELECT nombre,cantidad,`tr_productos_salidas`.id_producto as id,valor FROM `tr_productos_salidas`,tb_productos WHERE id_salida IN(SELECT id_salida FROM tb_salidas WHERE factura_salida='$valor' and tipo='Remision') and tb_productos.id_producto=`tr_productos_salidas`.id_producto");
         $productos = new stdClass();
         $array = array();
         while ($query1 = mysql_fetch_array($query)) {
@@ -168,9 +168,19 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         $cantidad = $_POST['cantidad'];
         $salida = $_POST['salida'];
 
-        $query1 = mysql_fetch_array(mysql_query("SELECT cantidad FROM `tr_productos_salidas`,tb_productos WHERE id_salida='$salida' and tb_productos.id_producto=`tr_productos_salidas`.id_producto and `tr_productos_salidas`.id_producto=$id"));
+        $query1 = mysql_fetch_array(mysql_query("SELECT cantidad FROM `tr_productos_salidas`,tb_productos WHERE id_salida IN( SELECT id_salida FROM tb_salidas WHERE factura_salida='$salida'and tipo='Remision') and tb_productos.id_producto=`tr_productos_salidas`.id_producto and `tr_productos_salidas`.id_producto=$id"));
         $cantidadreal = $query1['cantidad'];
         $myquery = mysql_query("SELECT SUM(cantidad)as cantidad FROM tb_entradas,tr_productos_entradas WHERE tipo='Devolucion' and tb_entradas.factura=$salida and id_producto=$id and tb_entradas.id_entrada=tr_productos_entradas.id_entrada group by tr_productos_entradas.factura");
+      
+                //PRUEBA DE EXIXTENCIAS REALES
+         $query11 = mysql_fetch_array(mysql_query("SELECT Sum(cantidad) as cantidad FROM `tr_productos_salidas` WHERE id_producto=$id group by id_producto "));
+        $salidas = $query11['cantidad'];
+        $query22 = mysql_fetch_array(mysql_query("SELECT Sum(cantidad) as cantidad FROM `tr_productos_entradas` WHERE id_producto=$id group by id_producto "));
+        $entradas = $query22['cantidad'];
+        $totalreal = $entradas - $salidas;
+        // FIN EXITENCIAS REALES
+
+        
         if (mysql_num_rows($myquery) > 0) {
             $query2 = mysql_fetch_array($myquery);
             $cantidadesentradas = $query2['cantidad'];
