@@ -86,15 +86,17 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         $tipo = $datos['tipo'];
         $fecha = $datos['fecha'];
         $cliente = $datos['proveedor'];
-        $query = mysql_query("INSERT INTO `tb_salidas`(`id_salida`, `fecha`, `tipo`, `encargado`,cliente)"
-                . " VALUES ($factura,'$fecha','$tipo','$creador','$cliente')");
+        $query = mysql_query("INSERT INTO `tb_salidas`(`id_salida`, `fecha`, `tipo`, `encargado`,cliente,factura_salida)"
+                . " VALUES (NULL,'$fecha','$tipo','$creador','$cliente',$factura)");
         $producto = $datos['productos'];
+         $query1 = mysql_fetch_array(mysql_query("SELECT MAX(id_salida)as salida FROM `tb_salidas` WHERE factura_salida=$factura"));
+            $salida = $query1['salida'];
         if ($query) {
             foreach ($producto as $cosa) {
                 $id = $cosa['id'];
                 $cantidad = $cosa['cantidad'];
                 $query3 = mysql_query("INSERT INTO `tr_productos_salidas`( `id_producto`, `cantidad`, `id_salida`)"
-                        . " VALUES ($id,$cantidad,$factura)");
+                        . " VALUES ($id,$cantidad,$salida)");
             }
             $resultado.='"Mensaje":true';
         } else {
