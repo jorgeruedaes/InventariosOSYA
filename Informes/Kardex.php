@@ -69,7 +69,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                             <select class="form-control tipo" required="required" name="proveedor">
                                                 <option value="" selected></option>
                                                 <option value="Producto" >Producto</option>
-                                                <option value="Proveedor" >Proveedor</option>
+<!--                                                <option value="Proveedor" >Proveedor</option>-->
                                                 <option value="Cliente" >Cliente</option>
                                                 <option value="Total" >Total</option>
                                             </select>
