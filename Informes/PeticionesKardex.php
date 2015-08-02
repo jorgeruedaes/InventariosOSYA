@@ -43,7 +43,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         $array = array();
         while ($query1 = mysql_fetch_array($query)) {
             $id = $query1['id_producto'];
-            $nombre = $query1['nombre'];
+            $nombre = utf8_encode($query1['nombre']);
             $valor = $query1['valor'];
             $productos = array("id" => $id, "nombre" => $nombre, "valor" => $valor);
             array_push($array, $productos);
@@ -62,7 +62,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         $array = array();
         while ($query1 = mysql_fetch_array($query)) {
             $id = $query1['cc'];
-            $nombre = $query1['nombre'];
+            $nombre = utf8_encode($query1['nombre']);
             $productos = array("id" => $id, "nombre" => $nombre);
             array_push($array, $productos);
         }
@@ -79,7 +79,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         $array = array();
         while ($query1 = mysql_fetch_array($query)) {
             $id = $query1['cc'];
-            $nombre = $query1['nombre'];
+            $nombre = utf8_encode($query1['nombre']);
             $productos = array("id" => $id, "nombre" => $nombre);
             array_push($array, $productos);
         }
