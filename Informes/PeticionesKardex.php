@@ -119,6 +119,21 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
 
         $resultado.='"Mensaje":true';
     }
+    else if ($Bandera === "KardexClientesConFechaTodos") {
+
+        $_SESSION["datosclientef"] = true;
+          $_SESSION["fecha1"] = $_POST['fechainicial'];
+        $_SESSION["fecha2"] = $_POST['fechafinal'];
+
+        $resultado.='"Mensaje":true';
+    } else if ($Bandera === "KardexClientesConFecha") {
+
+        $_SESSION["datosclientef"] = $_POST['Objeto'];
+         $_SESSION["fecha1"] = $_POST["fechainicial"];
+        $_SESSION["fecha2"] = $_POST["fechafinal"];
+
+        $resultado.='"Mensaje":true';
+    }
 } else {
     $resultado = '{"Salida":false,';
 }

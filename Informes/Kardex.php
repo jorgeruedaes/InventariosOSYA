@@ -665,27 +665,55 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                             } else {
                                                                 if ($('.tipo').val() === "Cliente") {
                                                                     if (Kardex.ValidacionGeneral()) {
-                                                                        $.ajax({
-                                                                            url: 'PeticionesMovimientos.php',
-                                                                            type: 'POST',
-                                                                            data: {
-                                                                                Bandera: "KardexClientesSinFecha",
-                                                                                datos: JSON.stringify(Kardex.TomarDatosNO()),
-                                                                                fechainicial: $('#fechaInicla').val(),
-                                                                                fechafinal: $('#fechaIfinal').val(),
-                                                                                creador: Creador
+                                                                        if (JSON.stringify(Kardex.TomarDatosNO()) === '{"productos":[]}')
+                                                                        {
+                                                                            $.ajax({
+                                                                                url: 'PeticionesKardex.php',
+                                                                                type: 'POST',
+                                                                                data: {
+                                                                                    Bandera: "KardexClientesConFechaTodos",
+                                                                                    datos: JSON.stringify(Kardex.TomarDatosNO()),
+                                                                                    fechainicial: $('#fechaInicio').val(),
+                                                                                    fechafinal: $('#fechaIfinal').val(),
+                                                                                    creador: Creador
 
-                                                                            },
-                                                                            success: function (resp) {
+                                                                                },
+                                                                                success: function (resp) {
 
-                                                                                var resp = $.parseJSON(resp);
-                                                                                if (resp.Salida === true && resp.Mensaje === true) {
+                                                                                    var resp = $.parseJSON(resp);
+                                                                                    if (resp.Salida === true && resp.Mensaje === true) {
 
-                                                                                } else {
-                                                                                    swal("", "Se ha producido un error al intentar generar el kardex de clientes, intenta nuevamente..", "error");
+                                                                                        window.open('../Pdf/ClientesConFecha_Kardex.php', "nuevo", "directories=no, location=center, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=800, height=600");
+                                                                                    } else {
+                                                                                        swal("", "Se ha producido un error al intentar generar el kardex de clientes, intenta nuevamente..", "error");
+                                                                                    }
                                                                                 }
-                                                                            }
-                                                                        });
+                                                                            });
+                                                                        } else {
+                                                                            $.ajax({
+                                                                                url: 'PeticionesKardex.php',
+                                                                                type: 'POST',
+                                                                                data: {
+                                                                                    Bandera: "KardexClientesConFecha",
+                                                                                    datos: JSON.stringify(Kardex.TomarDatosNO()),
+                                                                                    fechainicial: $('#fechaInicio').val(),
+                                                                                    fechafinal: $('#fechaIfinal').val(),
+                                                                                    creador: Creador
+
+                                                                                },
+                                                                                success: function (resp) {
+
+                                                                                    var resp = $.parseJSON(resp);
+                                                                                    if (resp.Salida === true && resp.Mensaje === true) {
+
+                                                                                        window.open('../Pdf/ClientesConFecha_Kardex.php', "nuevo", "directories=no, location=center, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=800, height=600");
+                                                                                    } else {
+                                                                                        swal("", "Se ha producido un error al intentar generar el kardex de clientes, intenta nuevamente..", "error");
+                                                                                    }
+                                                                                }
+                                                                            });
+                                                                        }
+
                                                                     }
                                                                 } else if ($('.tipo').val() === "Proveedor") {
                                                                     if (Kardex.ValidacionGeneral()) {
@@ -713,53 +741,53 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                     }
                                                                 } else if ($('.tipo').val() === "Producto") {
                                                                     if (Kardex.ValidacionGeneral()) {
-                                                                      if (JSON.stringify(Kardex.TomarDatosNO()) === '{"productos":[]}')
-                                                                            {
+                                                                        if (JSON.stringify(Kardex.TomarDatosNO()) === '{"productos":[]}')
+                                                                        {
 
-                                                                                $.ajax({
-                                                                                    url: 'PeticionesKardex.php',
-                                                                                    type: 'POST',
-                                                                                    data: {
-                                                                                        Bandera: "ProductosTodosFecha",
-                                                                                        Inicio: $('#fechaInicio').val(),
-                                                                                        Fin: $('#fechaIfinal').val()
-                                                                                    },
-                                                                                    success: function (resp) {
-                                                                                        var resp = $.parseJSON(resp);
-                                                                                        if (resp.Salida === true && resp.Mensaje === true) {
-                                                                                            window.open('../Pdf/Kardex_productoFecha.php', "nuevo", "directories=no, location=center, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=800, height=600");
+                                                                            $.ajax({
+                                                                                url: 'PeticionesKardex.php',
+                                                                                type: 'POST',
+                                                                                data: {
+                                                                                    Bandera: "ProductosTodosFecha",
+                                                                                    Inicio: $('#fechaInicio').val(),
+                                                                                    Fin: $('#fechaIfinal').val()
+                                                                                },
+                                                                                success: function (resp) {
+                                                                                    var resp = $.parseJSON(resp);
+                                                                                    if (resp.Salida === true && resp.Mensaje === true) {
+                                                                                        window.open('../Pdf/Kardex_productoFecha.php', "nuevo", "directories=no, location=center, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=800, height=600");
 
-                                                                                        } else {
-                                                                                            swal("", "Se ha producido un error al intentar generar el kardex de productos, intenta nuevamente..", "error");
-                                                                                        }
-
+                                                                                    } else {
+                                                                                        swal("", "Se ha producido un error al intentar generar el kardex de productos, intenta nuevamente..", "error");
                                                                                     }
-                                                                                });
-                                                                            } else {
 
-                                                                                $.ajax({
-                                                                                    url: 'PeticionesKardex.php',
-                                                                                    type: 'POST',
-                                                                                    data: {
-                                                                                        Objeto: JSON.stringify(Kardex.TomarDatosNO()),
-                                                                                        Bandera: "ProductoConFecha",
-                                                                                        Inicio: $('#fechaInicio').val(),
-                                                                                        Fin: $('#fechaIfinal').val()
-                                                                                    },
-                                                                                    success: function (resp) {
-                                                                                        var resp = $.parseJSON(resp);
-                                                                                        if (resp.Salida === true && resp.Mensaje === true) {
-                                                                                            window.open('../Pdf/Kardex_productoFecha.php', "nuevo", "directories=no, location=center, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=800, height=600");
+                                                                                }
+                                                                            });
+                                                                        } else {
 
-                                                                                        } else {
-                                                                                            swal("", "Se ha producido un error al intentar generar el kardex de productos, intenta nuevamente..", "error");
-                                                                                        }
+                                                                            $.ajax({
+                                                                                url: 'PeticionesKardex.php',
+                                                                                type: 'POST',
+                                                                                data: {
+                                                                                    Objeto: JSON.stringify(Kardex.TomarDatosNO()),
+                                                                                    Bandera: "ProductoConFecha",
+                                                                                    Inicio: $('#fechaInicio').val(),
+                                                                                    Fin: $('#fechaIfinal').val()
+                                                                                },
+                                                                                success: function (resp) {
+                                                                                    var resp = $.parseJSON(resp);
+                                                                                    if (resp.Salida === true && resp.Mensaje === true) {
+                                                                                        window.open('../Pdf/Kardex_productoFecha.php', "nuevo", "directories=no, location=center, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=800, height=600");
 
+                                                                                    } else {
+                                                                                        swal("", "Se ha producido un error al intentar generar el kardex de productos, intenta nuevamente..", "error");
                                                                                     }
-                                                                                });
 
-                                                                                //                                                                            
-                                                                            }
+                                                                                }
+                                                                            });
+
+                                                                            //                                                                            
+                                                                        }
                                                                     }
                                                                 } else if ($('.tipo').val() === "Total") {
                                                                     if (Kardex.ValidacionGeneral()) {
