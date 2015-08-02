@@ -10,7 +10,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
     if ($Bandera === "AgregarEntrada") {
         $creador = $_POST['creador'];
         $datos = $_POST['datos'];
-        $datos = json_decode($datos,true);
+        $datos = json_decode($datos, true);
         $factura = $datos['factura'];
         $tipo = $datos['tipo'];
         $fecha = $datos['fecha'];
@@ -36,7 +36,6 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         } else {
             $resultado.='"Mensaje":false';
         }
-    
     } else if ($Bandera === "TraerTodosProductos") {
         $query = mysql_query("SELECT * FROM `tb_productos` WHERE  Estado='Activo' ");
         $productos = new stdClass();
@@ -55,8 +54,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         } else {
             $resultado.='"Mensaje":false';
         }
-    } 
-     else if ($Bandera === "TraerTodosProveedores") {
+    } else if ($Bandera === "TraerTodosProveedores") {
         $query = mysql_query("SELECT * FROM `tb_usuarios` WHERE  Estado='Activo' and tipo='Proveedor' ");
         $productos = new stdClass();
         $array = array();
@@ -73,7 +71,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         } else {
             $resultado.='"Mensaje":false';
         }
-    }else if ($Bandera === "TraerTodoClientes") {
+    } else if ($Bandera === "TraerTodoClientes") {
         $query = mysql_query("SELECT * FROM `tb_usuarios` WHERE  Estado='Activo' and tipo='Cliente' ");
         $productos = new stdClass();
         $array = array();
@@ -90,23 +88,35 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         } else {
             $resultado.='"Mensaje":false';
         }
-    }else if ($Bandera === "ProductoSinFecha") {
-        
-        $_SESSION["datos"]  = $_POST["Objeto"];
+    } else if ($Bandera === "ProductoSinFecha") {
+
+        $_SESSION["datos"] = $_POST["Objeto"];
         $resultado.='"Mensaje":true';
-    }
-    else if ($Bandera === "ProductosTodos") {
-        
-        $_SESSION["datos"]  = true;
+    } else if ($Bandera === "ProductosTodos") {
+
+        $_SESSION["datos"] = true;
         $resultado.='"Mensaje":true';
-    }else if ($Bandera === "KardexClientesSinFecha") {
-        
-        $_SESSION["datosclientes"]  = $_POST['Objeto'];
+    } else if ($Bandera === "KardexClientesSinFecha") {
+
+        $_SESSION["datosclientes"] = $_POST['Objeto'];
         $resultado.='"Mensaje":true';
-    }
-    else if ($Bandera === "KardexClientesTodos") {
-        
-         $_SESSION["datosclientes"]  = true;
+    } else if ($Bandera === "KardexClientesTodos") {
+
+        $_SESSION["datosclientes"] = true;
+        $resultado.='"Mensaje":true';
+    } else if ($Bandera === "ProductosTodosFecha") {
+
+        $_SESSION["datosproductosfecha"] = true;
+        $_SESSION["fechainicio"] = $_POST["Inicio"];
+        $_SESSION["fechafinal"] = $_POST["Fin"];
+
+        $resultado.='"Mensaje":true';
+    } else if ($Bandera === "ProductoConFecha") {
+
+        $_SESSION["datosproductosfecha"] = $_POST['Objeto'];
+         $_SESSION["fechainicio"] = $_POST["Inicio"];
+        $_SESSION["fechafinal"] = $_POST["Fin"];
+
         $resultado.='"Mensaje":true';
     }
 } else {
