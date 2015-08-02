@@ -99,6 +99,15 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
         
         $_SESSION["datos"]  = true;
         $resultado.='"Mensaje":true';
+    }else if ($Bandera === "KardexClientesSinFecha") {
+        
+        $_SESSION["datosclientes"]  = $_POST['Objeto'];
+        $resultado.='"Mensaje":true';
+    }
+    else if ($Bandera === "KardexClientesTodos") {
+        
+         $_SESSION["datosclientes"]  = true;
+        $resultado.='"Mensaje":true';
     }
 } else {
     $resultado = '{"Salida":false,';
