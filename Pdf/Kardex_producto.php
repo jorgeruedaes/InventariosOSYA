@@ -13,7 +13,7 @@ class PDF extends FPDF {
     function Header() {
 
         $this->Image('../images/aseoblanco.jpg', 10, 8, 100);
-        $this->SetFont('Arial', 'B', 14);
+        $this->SetFont('Arial', 'B', 16);
 
         $this->Cell(0, 10, 'Kardex de productos', 0, 0, 'C');
         $this->Ln();
@@ -41,6 +41,39 @@ if ($productos === true) {
                 . "UNION ALL (SELECT fecha,tr_productos_salidas.id_producto,tb_salidas.tipo,cantidad,"
                 . "tb_salidas.factura_salida,'salida' as tipom FROM tr_productos_salidas,tb_salidas "
                 . "WHERE id_producto=$id and tb_salidas.id_salida=tr_productos_salidas.id_salida) ORDER BY fecha asc");
+        while ($resultado = mysql_fetch_array($consulta)) {
+            $idproducto = $resultado["id_producto"];
+            $nombreproducto = mysql_query("SELECT * FROM tb_productos WHERE id_producto=$idproducto");
+            $resultadonombre = mysql_fetch_array($nombreproducto);
+            $nombre = $resultadonombre["nombre"];
+            if ($aux === $idproducto) {
+                
+            } else {
+                $pdf->Ln();
+                $aux = $idproducto;
+                $pdf->SetFont('Arial', 'B', 12);
+                $pdf->Write(6, $nombre);
+                $pdf->SetFont('Arial', '', 10);
+                $pdf->Ln();
+
+                $pdf->Cell(80, 10, 'Fecha', 0, 0, 'C');
+                $pdf->Cell(60, 10, 'Tipo', 0, 0, 'C');
+                $pdf->Cell(60, 10, 'Entrada', 0, 0, 'C');
+                $pdf->Cell(40, 10, 'Salida', 0, 0, 'C');
+            }
+
+
+            $pdf->Ln();
+
+            $pdf->Cell(80, 10, $resultado["fecha"], 0, 0, 'C');
+            $pdf->Cell(60, 10, $resultado["tipo"], 0, 0, 'C');
+            if ($resultado["tipom"] === "entrada") {
+                $pdf->Cell(60, 10, $resultado["cantidad"], 0, 0, 'C');
+            } else {
+
+                $pdf->Cell(160, 10, $resultado["cantidad"], 0, 0, 'C');
+            }
+        }
     }
 } else {
 
@@ -65,13 +98,13 @@ if ($productos === true) {
             if ($aux === $idproducto) {
                 
             } else {
-
-                $aux = $idproducto;
                 $pdf->Ln();
-                $pdf->SetFont('Arial', 'B', 10);
+                $aux = $idproducto;
+                $pdf->SetFont('Arial', 'B', 12);
                 $pdf->Write(6, $nombre);
                 $pdf->SetFont('Arial', '', 10);
                 $pdf->Ln();
+
                 $pdf->Cell(80, 10, 'Fecha', 0, 0, 'C');
                 $pdf->Cell(60, 10, 'Tipo', 0, 0, 'C');
                 $pdf->Cell(60, 10, 'Entrada', 0, 0, 'C');
