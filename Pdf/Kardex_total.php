@@ -18,7 +18,8 @@ class PDF extends FPDF {
 
 $this->SetY(-10);
 
-$this->SetFont('Arial','I',8);
+$this->SetFont('Arial','I',10);
+date_default_timezone_set('America/Bogota');
 $this->Cell(0,10,date("d").'/'.date("m").'/'.date("Y"),0,0,'C');
    }
 
