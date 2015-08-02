@@ -529,7 +529,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                     if (Kardex.ValidacionGeneral()) {
                                                                         if (JSON.stringify(Kardex.TomarDatosNO()) === '{"productos":[]}') {
                                                                             $.ajax({
-                                                                                url: 'PeticionesMovimientos.php',
+                                                                                url: 'PeticionesKardex.php',
                                                                                 type: 'POST',
                                                                                 data: {
                                                                                     Bandera: "KardexClientesTodos",
@@ -548,7 +548,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                                                                             });
                                                                         } else {
                                                                             $.ajax({
-                                                                                url: 'PeticionesMovimientos.php',
+                                                                                url: 'PeticionesKardex.php',
                                                                                 type: 'POST',
                                                                                 data: {
                                                                                     Bandera: "KardexClientesSinFecha",
