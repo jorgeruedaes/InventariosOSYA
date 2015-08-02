@@ -56,8 +56,9 @@ if ($productos === true) {
                 $pdf->SetFont('Arial', '', 10);
                 $pdf->Ln();
 
-                $pdf->Cell(80, 10, 'Fecha', 0, 0, 'C');
-                $pdf->Cell(60, 10, 'Tipo', 0, 0, 'C');
+                $pdf->Cell(70, 10, 'Fecha', 0, 0, 'C');
+                $pdf->Cell(40, 10, 'Codigo', 0, 0, 'C');
+                $pdf->Cell(40, 10, 'Tipo', 0, 0, 'C');
                 $pdf->Cell(60, 10, 'Entrada', 0, 0, 'C');
                 $pdf->Cell(40, 10, 'Salida', 0, 0, 'C');
             }
@@ -65,13 +66,15 @@ if ($productos === true) {
 
             $pdf->Ln();
 
-            $pdf->Cell(80, 10, $resultado["fecha"], 0, 0, 'C');
-            $pdf->Cell(60, 10, $resultado["tipo"], 0, 0, 'C');
+            $pdf->Cell(70, 10, $resultado["fecha"], 0, 0, 'C');
+            $pdf->Cell(120, 10, $resultado["tipo"], 0, 0, 'C');
             if ($resultado["tipom"] === "entrada") {
-                $pdf->Cell(60, 10, $resultado["cantidad"], 0, 0, 'C');
+                $pdf->Cell(-20, 10, $resultado["cantidad"], 0, 0, 'C');
+                $pdf->Cell(-160, 10, $resultado["factura"], 0, 0, 'C');
             } else {
 
-                $pdf->Cell(160, 10, $resultado["cantidad"], 0, 0, 'C');
+                $pdf->Cell(80, 10, $resultado["cantidad"], 0, 0, 'C');
+                $pdf->Cell(-360, 10, $resultado["factura"], 0, 0, 'C');
             }
         }
     }
@@ -105,8 +108,9 @@ if ($productos === true) {
                 $pdf->SetFont('Arial', '', 10);
                 $pdf->Ln();
 
-                $pdf->Cell(80, 10, 'Fecha', 0, 0, 'C');
-                $pdf->Cell(60, 10, 'Tipo', 0, 0, 'C');
+                $pdf->Cell(50, 10, 'Fecha', 0, 0, 'C');
+                $pdf->Cell(40, 10, 'Codigo', 0, 0, 'C');
+                $pdf->Cell(40, 10, 'Tipo', 0, 0, 'C');
                 $pdf->Cell(60, 10, 'Entrada', 0, 0, 'C');
                 $pdf->Cell(40, 10, 'Salida', 0, 0, 'C');
             }
@@ -114,13 +118,15 @@ if ($productos === true) {
 
             $pdf->Ln();
 
-            $pdf->Cell(80, 10, $resultado["fecha"], 0, 0, 'C');
-            $pdf->Cell(60, 10, $resultado["tipo"], 0, 0, 'C');
+            $pdf->Cell(50, 10, $resultado["fecha"], 0, 0, 'C');
+            $pdf->Cell(120, 10, $resultado["tipo"], 0, 0, 'C');
             if ($resultado["tipom"] === "entrada") {
-                $pdf->Cell(60, 10, $resultado["cantidad"], 0, 0, 'C');
+                $pdf->Cell(-20, 10, $resultado["cantidad"], 0, 0, 'C');
+                $pdf->Cell(-160, 10, $resultado["factura"], 0, 0, 'C');
             } else {
 
-                $pdf->Cell(160, 10, $resultado["cantidad"], 0, 0, 'C');
+                $pdf->Cell(80, 10, $resultado["cantidad"], 0, 0, 'C');
+                $pdf->Cell(-360, 10, $resultado["factura"], 0, 0, 'C');
             }
         }
     }
