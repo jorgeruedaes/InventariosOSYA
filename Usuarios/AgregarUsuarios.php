@@ -6,10 +6,10 @@ include('../RutinaDeLogueo.php');
 
 if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
     ?>
-
     <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
             <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+ <link rel="shortcut icon" href="../images/LOGO.png">
             <title>Inventarios ASEO</title>
             <link rel="stylesheet" href="../css/styler.css" type="text/css" media="all" />
             <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>

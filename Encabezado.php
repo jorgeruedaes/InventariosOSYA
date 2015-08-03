@@ -12,6 +12,8 @@
         <link rel="stylesheet" href="../bootstrap/css/bootstrap-theme.css">
         <link rel="stylesheet" href="../DataTables-1.10.7/media/css/dataTables.bootstrap.css">
         <script src="../bootstrap/js/bootstrap.min.js"></script>
+         <link rel="shortcut icon" href="images/LOGO.png">
+        
     </head>
 
     <body>

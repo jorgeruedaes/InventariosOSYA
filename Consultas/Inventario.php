@@ -14,6 +14,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
             <title>Inventarios ASEO</title>
             <link rel="stylesheet" href="../css/styler.css" type="text/css" media="all" />
             <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
+             <link rel="shortcut icon" href="../images/LOGO.png">
             <!--<link rel="stylesheet" type="text/css" href="../../DataTables-1.10.7/media/css/jquery.dataTables.css">-->
 
 

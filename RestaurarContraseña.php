@@ -8,6 +8,7 @@ include('Conexion.php');
         <title>Restaurar contraseña</title>
         <script type="text/javascript" src="js/jquery-1.11.2.js"></script>
 
+         <link rel="shortcut icon" href="images/LOGO.png"></link>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css">
         <script src="bootstrap/js/bootstrap.min.js"></script>

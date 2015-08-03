@@ -16,7 +16,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
             <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
             <!--<link rel="stylesheet" type="text/css" href="../../DataTables-1.10.7/media/css/jquery.dataTables.css">-->
 
-
+ <link rel="shortcut icon" href="../images/LOGO.png">
             <script type="text/javascript" charset="utf8" src="../DataTables-1.10.7/media/js/jquery.js"></script>
             <!-- DataTables -->
             <script type="text/javascript" charset="utf8" src="../DataTables-1.10.7/media/js/jquery.dataTables.js"></script>

@@ -14,7 +14,7 @@ include('../RutinaDeLogueo.php');
         <!-- DataTables -->
         <script type="text/javascript" charset="utf8" src="../DataTables-1.10.7/media/js/jquery.dataTables.js"></script>
         <script type="text/javascript" charset="utf8" src="../DataTables-1.10.7/media/js/dataTables.bootstrap.js"></script>
-
+ <link rel="shortcut icon" href="../images/LOGO.png">
         <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="../bootstrap/css/bootstrap-theme.css">
         <link rel="stylesheet" href="../DataTables-1.10.7/media/css/dataTables.bootstrap.css">

@@ -16,7 +16,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
             <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
             <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
                 <link rel="stylesheet" href="../bootstrap/css/bootstrap-theme.css">
-
+ <link rel="shortcut icon" href="../images/LOGO.png">
                     <script src="../bootstrap/js/bootstrap.min.js"></script>
                     <!-- ALERTS-->
                     <script src="../dist/sweetalert.min.js"></script>

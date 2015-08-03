@@ -21,6 +21,7 @@ if ($pruebadeinicio == 1 or $pruebadeinicio == 2) {
                     <!-- ALERTS-->
                     <script src="../dist/sweetalert.min.js"></script>
                     <link rel="stylesheet" type="text/css" href="../dist/sweetalert.css">
+                         <link rel="shortcut icon" href="../images/LOGO.png">
 
 
                         </head>

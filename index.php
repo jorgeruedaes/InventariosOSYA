@@ -15,7 +15,21 @@ if (isset($_SESSION['admin'])) {
     }
 } else {
     ?>
-    <style type="text/css">
+  
+
+    <html>
+        <head>
+            <meta charset="utf-8" />
+            <title>Inventarios ASEO</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="shortcut icon" href="images/LOGO.png">
+            <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+            <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+            <script src="bootstrap/js/bootstrap.min.js"></script>
+   
+
+        </head>
+  <style type="text/css">
 
         body { 
 
@@ -30,19 +44,6 @@ if (isset($_SESSION['admin'])) {
         }
 
     </style>
-
-    <html>
-        <head>
-            <meta charset="utf-8" />
-            <title>Inventarios ASEO</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-            <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
-            <script src="bootstrap/js/bootstrap.min.js"></script>
-   
-
-        </head>
-
         <body>
             <div class="container">
                 <div class="row">
